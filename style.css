@@ -91,7 +91,6 @@ img {
   background: var(--hover);
 }
 
-
 .btn-blue {
   background: var(--primary-color);
   border: none;
@@ -234,7 +233,9 @@ img {
 
 .can-content .can-name-info {
   margin-bottom: 10px;
+}
 
+.can-name-info-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
