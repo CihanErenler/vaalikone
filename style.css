@@ -420,44 +420,11 @@ img {
 }
 
 /* question page */
-<<<<<<< Updated upstream
-  .question-page {
-    font-style: normal;
-    font-weight: 300;
-  }
 
-  .question-page .wrapper-content {
-    padding: 70px 5px;
-  }
-
-  .question-page .title {
-    color: #3A93C6;
-    text-align: left;
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 42px;
-  }
-
-  .question-page .title span {
-    color: #c9c9c9;
-  }
-
-  .question-page .wrapper-question {
-    font-size: 18px;
-    line-height: 21px;
-  }
-
-  .question-page .wrapper-question::before {
-    content: "";
-    display: block;
-    margin-top: 50px;
-  }
-=======
 .question-page {
   font-style: normal;
   font-weight: 300;
 }
->>>>>>> Stashed changes
 
 .question-page .wrapper-content {
   padding: 70px 5px;
@@ -556,13 +523,12 @@ img {
   background: var(--light-hover);
 }
 
-<<<<<<< Updated upstream
 .dashboard .title {
   margin-top: 105px;
-=======
+}
+
 .card.dashboard {
   min-height: 450px;
->>>>>>> Stashed changes
 }
 .dashboard .underline {
   margin-bottom: 130px;
