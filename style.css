@@ -83,8 +83,11 @@ img {
 }
 
 .btn-thin {
+  font-family: "Roboto", sans-serif;
   height: 45px;
   line-height: 45px;
+  font-size: 18px;
+  font-weight: 300 !important;
 }
 
 .btn:hover {
@@ -523,13 +526,17 @@ img {
   background: var(--light-hover);
 }
 
-.dashboard .title {
-  margin-top: 105px;
+.card.dashboard {
+  min-height: 450px;
+
 }
+
 
 .card.dashboard {
   min-height: 450px;
 }
+
+
 .dashboard .underline {
   margin-bottom: 130px;
 }
@@ -677,16 +684,54 @@ img {
 }
 
 .login-form .btn-thin {
-  font-family: "Roboto", sans-serif;
   background: var(--primary-color);
   width: 400px;
+  height: 45px;
+  border: none;
+}
+
+.login-form .btn-thin:hover {
+  background: var(--light-hover);
+}
+
+/*Add question */
+
+.add-question {
+  margin: 100px auto;
+}
+
+.add-question .card {
+  min-height: 400px;
+}
+
+.question-form {
+  max-width: 600px;
+  margin: auto;
+}
+
+.question-form input {
+  display: block;
+  height: 45px;
+  width: 600px;
+  padding: 0 20px;
+  border: 1px solid #ddd;
+  background: #f4f4f4;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.question-form .btn-thin {
+  font-family: "Roboto", sans-serif;
+  background: var(--primary-color);
+  width: 600px;
   height: 45px;
   border: none;
   font-size: 18px;
   font-weight: 300 !important;
 }
 
-.login-form .btn-thin:hover {
+.question-form .btn-thin:hover {
   background: var(--light-hover);
 }
 
