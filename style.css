@@ -91,6 +91,18 @@ img {
   background: var(--hover);
 }
 
+
+.btn-blue {
+  background: var(--primary-color);
+  border: none;
+}
+.btn-blue:hover {
+  background: var(--light-hover);
+}
+.btn-blue:focus {
+  border: none;
+}
+
 .title {
   color: var(--dark-blue);
   margin-bottom: 5px;
@@ -401,9 +413,95 @@ img {
   border-radius: 5px;
 }
 
+
 .question-btn {
   width: 70px !important;
 }
+
+/* question page */
+  .question-page {
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .question-page .wrapper-content {
+    padding: 70px 5px;
+  }
+
+  .question-page .title {
+    color: #3A93C6;
+    text-align: left;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .question-page .title span {
+    color: #c9c9c9;
+  }
+
+  .question-page .wrapper-question {
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  .question-page .wrapper-question::before {
+    content: "";
+    display: block;
+    margin-top: 50px;
+  }
+
+  .question-page .wrapper-answer {
+    background-color: #FBFAFA;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 50px;
+  }
+
+  /* .question-page .wrapper-answer::before {
+    content: "";
+    display: block;
+    margin-top: 50px;
+  } */
+
+  .question-page .answer {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .question-page .answer ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .question-page .answer ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 75px;
+  }
+
+  .question-page .answer ul li > * {
+    margin: 5px 0;
+  }
+
+  .question-page .answer input[type="radio" i] {
+    width: 20px;
+    height: 20px;
+  }
+
+  .question-page .wrapper-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+
+
+/* end question page */
 
 /*admin dashboard*/
 .card .btn-dashboard {
@@ -544,6 +642,48 @@ img {
   overflow: hidden;
   margin: auto;
   margin-bottom: 20px;
+}
+
+/*Add candidate */
+
+.login {
+  margin: 100px auto;
+}
+
+.login .card{
+  max-width: 650px;
+  min-height: 450px
+}
+
+.login-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.login-form input {
+  display: block;
+  height: 45px;
+  width: 400px;
+  padding: 0 20px;
+  border: 1px solid #ddd;
+  background: #f4f4f4;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.login-form .btn-thin {
+  font-family: "Roboto", sans-serif;
+  background: var(--primary-color);
+  width: 400px;
+  height: 45px;
+  border: none;
+  font-size: 18px;
+  font-weight: 300 !important;
+}
+
+.login-form .btn-thin:hover {
+  background: var(--light-hover);
 }
 
 /* Top 3 */
