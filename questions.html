@@ -13,16 +13,21 @@
       <a class="dark-text" href="login.html">Admin Login</a>
     </nav>
     <div class="question-page container flex-container full-container">
-      <div class="card">
+      <div class="card progress-card">
+        <div class="progress-bar">
+          <div class="bar"></div>
+        </div>
         <div class="wrapper-content">
           <div class="title">
-            <h1>Question 1<span>/20</span></h1>
+            <h1>
+              Question <span class="question-index">1</span><span>/20</span>
+            </h1>
           </div>
           <div class="wrapper-question">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
-            amet egestas leo, et condimentum tortor?
+            <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            amet egestas leo, et condimentum tortor? -->
           </div>
-          <form action="" method="post">
+          <form action="" method="post" id="qustions-form">
             <div class="wrapper-answer">
               <div class="answer">
                 <ul>
@@ -40,7 +45,13 @@
                     <label for="disagree">Disagree</label>
                   </li>
                   <li>
-                    <input type="radio" name="score" id="neutral" value="3" checked />
+                    <input
+                      type="radio"
+                      name="score"
+                      id="neutral"
+                      value="3"
+                      checked
+                    />
                     <label for="neutral">Neutral</label>
                   </li>
                   <li>
@@ -60,11 +71,24 @@
               </div>
             </div>
             <div class="wrapper-btn">
-              <input type="submit" value="Next" class="btn btn-thin btn-blue" />
+              <input
+                id="next"
+                type="submit"
+                value="Next"
+                class="btn btn-thin btn-blue"
+              />
+              <input
+                id="submit"
+                type="submit"
+                value="Submit"
+                class="btn btn-thin btn-blue"
+              />
             </div>
           </form>
         </div>
       </div>
     </div>
+
+    <script src="quesitons.js"></script>
   </body>
 </html>
