@@ -654,7 +654,60 @@ img {
   margin-bottom: 20px;
 }
 
-/*Add candidate */
+/*Candidate's answers*/
+.can-question p{
+  font-size: 14px;
+  font-weight: 300;
+}
+.can-question {
+  margin: 100px auto;
+}
+
+.can-question.card {
+  min-width:900px;
+}
+.can-question .question{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display:flex;
+  justify-content: space-between;
+}
+
+.can-question .question .index{
+  margin-left: 5px;
+  margin-right: 15px;
+  font-size: 30px;
+}
+.can-question .answer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.can-question .answer ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 75px;
+}
+
+.can-question .answer ul li > * {
+  margin: 5px 0;
+}
+
+.can-question .answer input[type="radio" i] {
+  width: 15px;
+  height: 15px;
+}
+
+.can-question .btn-thin{
+  margin-top: 50px;
+}
+
+/*Login form */
 
 .login {
   margin: 100px auto;
