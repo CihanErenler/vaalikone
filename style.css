@@ -448,6 +448,8 @@ img {
 .question-page .wrapper-question {
   font-size: 18px;
   line-height: 21px;
+  font-weight: bold;
+  color: var(--dark-blue);
 }
 
 .question-page .wrapper-question::before {
@@ -528,14 +530,11 @@ img {
 
 .card.dashboard {
   min-height: 450px;
-
 }
-
 
 .card.dashboard {
   min-height: 450px;
 }
-
 
 .dashboard .underline {
   margin-bottom: 130px;
@@ -848,4 +847,36 @@ img {
   margin: 70px auto 0;
   display: flex;
   justify-content: space-between;
+}
+
+/*Progress bar */
+.progress-card {
+  position: absolute;
+  width: 925px;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.bar {
+  height: 10px;
+  width: 5%;
+  background: var(--primary-color);
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+.question-index {
+  color: var(--primary-color) !important;
+}
+
+#submit {
+  display: none;
 }
