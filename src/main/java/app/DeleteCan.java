@@ -27,6 +27,8 @@ public class DeleteCan extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    // THIS IS TEST COMMIT 
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
