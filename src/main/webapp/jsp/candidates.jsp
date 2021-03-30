@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <<%@ include file="../html/navbar.html" %>
+    <%@ include file="../html/navbar.html" %>
     <div class="candidates container">
       <h1 class="title">Candidates</h1>
       <div class="underline"></div>
