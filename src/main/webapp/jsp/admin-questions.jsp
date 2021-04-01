@@ -40,10 +40,10 @@
               ${question.text}
             </p>
             <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
+              <a href="/edit?id=<c:out value='${question.id}' />" class="edit-btn question-btn">
                 <i class="fas fa-pen"></i>
               </a>
-              <a href="#" class="delete-btn question-btn">
+              <a href="/delete?id=<c:out value='${question.id}' />" class="delete-btn question-btn">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>
