@@ -29,7 +29,7 @@
           <div class="underline"></div>
           <div class="admin btn-wrapper">
             <a href="admin-dashboard.jsp" class="btn btn-thin">Back</a>
-            <a href="add-question.jsp" class="btn btn-thin">Add Question</a>
+            <a href="/jsp/ReadToUpdateQue?addNew=1" class="btn btn-thin">Add Question</a>
           </div>
         </div>
         <div class="admin-content">

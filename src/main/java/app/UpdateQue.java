@@ -39,7 +39,7 @@ public class UpdateQue extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-    	response.sendRedirect("admin-questions");
+//    	response.sendRedirect("admin-questions");
 	}
 
 	/**
@@ -48,19 +48,35 @@ public class UpdateQue extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
-        String text = request.getParameter("question");
-   
-        Question q = new Question(id, text);
+        String text = request.getParameter("question");    
         
-		
-		ArrayList<Question> list=null;
-		if (dao.getConnection()) {
-			list=dao.updateQuestion(q);
-		}
-		
-		request.setAttribute("listQuestion", list);
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/admin-questions.jsp");
-		rd.forward(request, response);
+        if (request.getParameter("addNew") != null ) {
+        	System.out.println("new question");
+        	Question q = new Question();
+        	q.setText(text);
+        	
+        	ArrayList<Question> list=null;
+     		if (dao.getConnection()) {
+     			list=dao.addQuestion(q);
+     		}
+     		
+     		request.setAttribute("listQuestion", list);
+     		RequestDispatcher rd=request.getRequestDispatcher("/jsp/admin-questions.jsp");
+     		rd.forward(request, response);
+        }
+        else {
+        	Question q = new Question(id, text);
+     		
+     		ArrayList<Question> list=null;
+     		if (dao.getConnection()) {
+     			list=dao.updateQuestion(q);
+     		}
+     		
+     		request.setAttribute("listQuestion", list);
+     		RequestDispatcher rd=request.getRequestDispatcher("/jsp/admin-questions.jsp");
+     		rd.forward(request, response);
+        }
+       
         
         
 	}

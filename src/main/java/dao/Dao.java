@@ -195,19 +195,18 @@ public class Dao {
 	}
 
 
-	public boolean addQuestion(Question q) {
+	public ArrayList<Question> addQuestion(Question q) {
 		String sql = "INSERT INTO question (question) VALUES (?)";
 		try {
 
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, q.getText());
 
-			boolean rowInserted = statement.executeUpdate() > 0;
-			statement.close();
-			return rowInserted;
-
-		} catch (Exception e) {
-			return false;
+			statement.executeUpdate();
+			return readAllQuestions();
+		}
+		catch(SQLException e) {
+			return null;
 		}
 
 	}

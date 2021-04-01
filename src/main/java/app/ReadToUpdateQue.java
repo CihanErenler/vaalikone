@@ -38,13 +38,22 @@ public class ReadToUpdateQue extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id=request.getParameter("id");
-		Question q=null;
-		if (dao.getConnection()) {
-			q=dao.getQuestions(id);
-		}
-		request.setAttribute("question", q);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/add-question.jsp");
-		rd.forward(request, response);
+		if(request.getParameter("addNew") != null) {
+			request.setAttribute("addNew", "1");
+			RequestDispatcher rd=request.getRequestDispatcher("/jsp/add-question.jsp");
+			rd.forward(request, response);
+		}
+		else {
+			Question q= null;
+			if (dao.getConnection()) {
+				q=dao.getQuestions(id);
+			}
+			request.setAttribute("question", q);
+			
+			RequestDispatcher rd=request.getRequestDispatcher("/jsp/add-question.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 }

@@ -24,6 +24,17 @@
 	        <i class="fas fa-chevron-left"></i> Back</a>
 	        <h1 class="title">Edit Question</h1>
 	        <div class="underline"></div>
+	        
+	        <c:if test="${requestScope.addNew == '1'}">
+	        	<form method="post" action="updateque" class="question-form">
+					<input type="hidden" name="addNew" value="1" />
+			        <input type="text" name="question" value="" />
+				    <button name="submit" type="submit" class="btn btn-thin">
+				        	Submit
+				    </button>
+	       		 </form>
+			</c:if>
+			<c:if test="${requestScope.addNew == null}">
             	<form method="post" action="updateque" class="question-form">
 					<input type="hidden" name="id" value="<c:out value='${question.id}' />" />
 			        <input type="text" name="question" value="<c:out value='${question.text}' />" />
@@ -31,6 +42,8 @@
 				        	Submit
 				    </button>
 	       		 </form>
+       		 </c:if>
+       		 
       </div>
     </div>
   </body>
