@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="data.Candidate" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,52 +33,22 @@
           </div>
         </div>
         <div class="admin-content">
-          <div class="can-card">
-            <div class="img-wrap">
-              <img src="../img/rubeus-hagrid.jpg" alt="candidate" />
-            </div>
-            <div class="can-content">
-              <div class="can-name-info can-name-info-flex">
-                <h3>Rubeus Hagrid</h3>
-                <h4><span class="age">Age :</span> 72</h4>
-                <h4>
-                  <i class="fas fa-map-marker"></i>
-                  Hogwarts
-                </h4>
-                <div class="edit-buttons">
-                  <a href="#" class="edit-btn">
-                    <i class="fas fa-pen"></i>
-                  </a>
-                  <a href="#" class="delete-btn">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="party">Gryffindor</div>
-              <div class="short-about">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Placeat, corporis. Error quidem aperiam dignissimos, voluptatem,
-                quae quo vitae distinctio nulla praesentium temporibus, quis
-                accusantium doloribus omnis. Quibusdam soluta aliquid
-                temporibus?
-              </div>
-            </div>
-          </div>
 
+		<c:forEach var="candidate" items="${requestScope.candidatelist}" >
           <div class="can-card">
             <div class="img-wrap">
-              <img src="../img/rubeus-hagrid.jpg" alt="candidate" />
+              <img src="../img/${candidate.profilePic}" alt="candidate" />
             </div>
             <div class="can-content">
               <div class="can-name-info can-name-info-flex">
-                <h3>Rubeus Hagrid</h3>
-                <h4><span class="age">Age :</span> 72</h4>
+                <h3>${candidate.fname} ${candidate.lname}</h3>
+                <h4><span class="age">Age :</span> ${candidate.age}</h4>
                 <h4>
                   <i class="fas fa-map-marker"></i>
-                  Hogwarts
+                  ${candidate.city}
                 </h4>
                 <div class="edit-buttons">
-                  <a href="#" class="edit-btn">
+                  <a href="update-candidate" class="edit-btn">
                     <i class="fas fa-pen"></i>
                   </a>
                   <a href="#" class="delete-btn">
@@ -82,16 +56,14 @@
                   </a>
                 </div>
               </div>
-              <div class="party">Gryffindor</div>
+              <div class="party">${candidate.politicalParty}</div>
               <div class="short-about">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Placeat, corporis. Error quidem aperiam dignissimos, voluptatem,
-                quae quo vitae distinctio nulla praesentium temporibus, quis
-                accusantium doloribus omnis. Quibusdam soluta aliquid
-                temporibus?
+				${candidate.about}
               </div>
             </div>
           </div>
+          </c:forEach>
+          
         </div>
       </div>
     </div>

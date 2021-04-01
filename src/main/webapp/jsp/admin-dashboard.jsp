@@ -16,8 +16,8 @@
         <h1 class="title">Admin Dashboard</h1>
         <div class="underline"></div>
         <div class="btn-dashboard">
-          <a href="admin-candidate.jsp" class="btn btn-thin">Candidates</a>
-          <a href="admin-questions.jsp" class="btn btn-thin">Questions</a>
+          <a href="admin-candidate" class="btn btn-thin">Candidates</a>
+          <a href="admin-questions" class="btn btn-thin">Questions</a>
         </div>
       </div>
     </div>
