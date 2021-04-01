@@ -1,6 +1,7 @@
 package app;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,33 +10,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import dao.Dao;
 import data.Candidate;
 
-@WebServlet("/ShowCan")
-public class ShowCan extends HttpServlet {
+@WebServlet("/jsp/candidates")
+public class ShowCan extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
-	private Dao dao;
-	public void init() {
-		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+	private Dao dao=null;
+       
+	@Override
+	public void init() 
+	{
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone","root","Password1");
 	}
-    
-    public ShowCan() {
+	
+	
+    public ShowCan() 
+    {
         super();
-        
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		Candidate c = null;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		ArrayList<Candidate> list = null;
 		
+		if(dao.getConnection()) 
+		{
+			list = dao.readAllCandidate();
+		} else 
+		{
+			System.out.println("No connection to database");
+		}
+		request.setAttribute("candidatelist", list);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidates.jsp");
+		rd.forward(request, response);
+
+
+		/*
+		* 		String id = request.getParameter("id");
+		Candidate c = null;
+
 		if(dao.getConnection()) {
 			c = dao.getCandidate(id);
 		}
-		
+
 		request.setAttribute("profile", c);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/profile.jsp");
 		rd.forward(request, response);
+		* */
+
 	}
 
 }
