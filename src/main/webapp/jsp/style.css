@@ -398,6 +398,8 @@ img {
   border-radius: 10px;
   display: grid;
   grid-template-columns: 50px 1fr 170px;
+  grid-gap: 10px;
+  align-items: center;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -416,6 +418,7 @@ img {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  height: 100%;
 }
 
 .question-btn {
