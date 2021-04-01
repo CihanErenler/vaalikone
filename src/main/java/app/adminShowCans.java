@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Candidate;
 
-@WebServlet("/jsp/candidates")
-public class ShowCan extends HttpServlet 
+@WebServlet("/jsp/admin-candidate")
+public class adminShowCans extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
@@ -27,7 +27,7 @@ public class ShowCan extends HttpServlet
 	}
 	
 	
-    public ShowCan() 
+    public adminShowCans() 
     {
         super();
     }
@@ -45,7 +45,7 @@ public class ShowCan extends HttpServlet
 			System.out.println("No connection to database");
 		}
 		request.setAttribute("candidatelist", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidates.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
 		rd.forward(request, response);
 	}
 

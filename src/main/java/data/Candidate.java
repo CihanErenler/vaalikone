@@ -16,7 +16,8 @@ public class Candidate {
 	String pic_path = "../img/";
 	ArrayList<Answer> answers;
 	
-	public Candidate() {
+	public Candidate() 
+	{
 		
 	}
 	

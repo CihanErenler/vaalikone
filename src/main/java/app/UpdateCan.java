@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Candidate;
 
-@WebServlet("/update-candidate")
+@WebServlet(
+	    name = "Update",
+	    urlPatterns = {"/update"}
+	)
 public class UpdateCan extends HttpServlet 
 {
 	private Dao dao;
@@ -38,13 +41,13 @@ public class UpdateCan extends HttpServlet
 		String city=request.getParameter("city");
 		String age=request.getParameter("age");
 		String profession=request.getParameter("profession");
-		String politicalParty=request.getParameter("politicalParty");
-		String whyCandidate=request.getParameter("whyCandidate");
+		String political_party=request.getParameter("political_party");
+		String why_candidate=request.getParameter("why_candidate");
 		String about=request.getParameter("about");
-		String profilePic=request.getParameter("profilePic");
+		String profile_pic=request.getParameter("profile_pic");
 		
 		
-		Candidate c =new Candidate(id, fname, lname, city, age, profession, politicalParty, whyCandidate, about, profilePic);
+		Candidate c =new Candidate(id, fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
 		
 		ArrayList<Candidate> list = null;
 		if(dao.getConnection()) 
@@ -53,7 +56,7 @@ public class UpdateCan extends HttpServlet
 		}
 		
 		request.setAttribute("candidatelist", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/update-candidate.jsp");
 		rd.forward(request, response);
 	}
 

@@ -37,7 +37,7 @@
 		<c:forEach var="candidate" items="${requestScope.candidatelist}" >
           <div class="can-card">
             <div class="img-wrap">
-              <img src="../img/${candidate.profilePic}" alt="candidate" />
+              <img src="../img/${candidate.profile_pic}" alt="candidate" />
             </div>
             <div class="can-content">
               <div class="can-name-info can-name-info-flex">
@@ -48,15 +48,15 @@
                   ${candidate.city}
                 </h4>
                 <div class="edit-buttons">
-                  <a href="update-candidate" class="edit-btn">
+                  <a href="/readToUpdateCan?id=${candidate.id}" class="edit-btn">
                     <i class="fas fa-pen"></i>
                   </a>
-                  <a href="#" class="delete-btn">
+                  <a href="/delete?id=${candidate.id}" class="delete-btn">
                     <i class="fas fa-trash-alt"></i>
                   </a>
                 </div>
               </div>
-              <div class="party">${candidate.politicalParty}</div>
+              <div class="party">${candidate.political_party}</div>
               <div class="short-about">
 				${candidate.about}
               </div>
