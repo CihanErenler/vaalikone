@@ -52,8 +52,16 @@ public class Dao {
 			ResultSet RS=stmt.executeQuery("select * from candidate");
 			while (RS.next()){
 				Candidate c=new Candidate();
-				//c.setId(RS.getInt("id"));
-				//c.setBreed(RS.getString("breed"));
+				c.setId(RS.getInt("id"));
+				c.setFname(RS.getString("fname"));
+				c.setLname(RS.getString("lname"));
+				c.setCity(RS.getString("city"));
+				c.setAge(RS.getString("age"));
+				c.setProfession(RS.getString("profession"));
+				c.setPoliticalParty(RS.getString("political_party"));
+				c.setWhyCandidate(RS.getString("why_candidate"));
+				c.setAbout(RS.getString("about"));
+				c.setProfilePic(RS.getString("profile_pic"));
 				list.add(c);
 			}
 			return list;
@@ -62,19 +70,34 @@ public class Dao {
 			return null;
 		}
 	}
-	/*public ArrayList<Candidate> updateFish(Candidate c) {
-		try {
-			String sql="update fish set breed=? where id=?";
+	
+	public ArrayList<Candidate> updateCandidate(Candidate c) 
+	{
+		try 
+		{
+			String sql="update candidate set fname=? lname=? city=? age=? profession=? political_party=? why_candidate=?"
+					+ "about=? profile_pic=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, f.getBreed());
-			pstmt.setInt(2, f.getId());
+			pstmt.setString(1, c.getFname());
+			pstmt.setString(2, c.getLname());
+			pstmt.setString(3, c.getCity());
+			pstmt.setString(4, c.getAge());
+			pstmt.setString(5, c.getProfession());
+			pstmt.setString(6, c.getPoliticalParty());
+			pstmt.setString(7, c.getWhyCandidate());
+			pstmt.setString(8, c.getAbout());
+			pstmt.setString(9, c.getProfilePic());
+			pstmt.setInt(10, c.getId());
 			pstmt.executeUpdate();
-			return readAllFish();
+			return readAllCandidate();
 		}
-		catch(SQLException e) {
+		catch(SQLException e) 
+		{
 			return null;
 		}
 	}
+	
+/*	
 	public ArrayList<Fish> deleteFish(String id) {
 		try {
 			String sql="delete from fish where id=?";
