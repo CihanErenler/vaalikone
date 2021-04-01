@@ -1,5 +1,7 @@
+<%@page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +18,7 @@
       <div class="card">
         <h1 class="title">Admin Login</h1>
         <div class="underline"></div>
-        <form method="post" action="" class="login-form">
+        <form method="post" action="../login" class="login-form">
           <input type="text" name="email" id="email" placeholder="Email" />
           <input
             type="password"
@@ -30,6 +32,16 @@
         </form>
       </div>
     </div>
+    
+    <% try {
+    	if((boolean) session.getAttribute("loginError")) {
+        	out.print("Wrong username or password");
+        }
+    } catch (Exception e) {
+        
+     }
+    
+    %>
 
     <script src="add-candidate.js"></script>
   </body>

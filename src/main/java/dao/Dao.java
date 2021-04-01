@@ -219,4 +219,68 @@ public class Dao {
 		}
 	}
 
+	public boolean adminLogin(Admin adm) {
+		try {
+			int c = 0;
+			String sql="select * from admin where email=? and pwd=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, adm.getEmail());
+			pstmt.setString(2, adm.getPass());
+			ResultSet RS = pstmt.executeQuery();
+			while (RS.next()) {
+				c++;
+			}
+			if (c>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	public ArrayList<Admin> matchedAdmin(Admin adm) {
+		ArrayList<Admin> list=new ArrayList<>();
+		try {
+			String sql="select * from admin where email=? and pwd=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, adm.getEmail());
+			pstmt.setString(2, adm.getPass());
+			ResultSet RS = pstmt.executeQuery();
+			while (RS.next()){
+				Admin ad=new Admin();
+				ad.setId(RS.getString("id"));
+				ad.setEmail(RS.getString("email"));
+				list.add(ad);
+			}
+			System.out.println(RS.getFetchSize());
+			return list;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+
+	public int matchedAdminInt(Admin adm) {
+		try {
+			int c=0;
+			String sql="select * from admin where email=? and pwd=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, adm.getEmail());
+			pstmt.setString(2, adm.getPass());
+			ResultSet RS = pstmt.executeQuery();
+			while (RS.next()) {
+				c++;
+
+			}
+			return c;
+		}
+		catch(SQLException e) {
+			return 100;
+		}
+	}
+
 }
