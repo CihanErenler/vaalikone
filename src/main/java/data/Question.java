@@ -1,24 +1,34 @@
 package data;
 
 public class Question {
-	String id;
-	String question;
-	public Question(String id, String question) {
+	private int id;
+	private String text;
+	public Question(String id, String text) {
+		// TODO Auto-generated constructor stub
 		setId(id);
-		this.question = question;
+		this.text=text;
 	}
-	public String getId() {
+	public Question() {
+		// TODO Auto-generated constructor stub
+	}
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public String getQuestion() {
-		return question;
+	public void setId(String id) {
+		try {
+			this.id = Integer.parseInt(id);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+			//Do nothing - the value of id won't be changed
+		}
 	}
-	public void setQuestion(String question) {
-		this.question = question;
+	public String getText() {
+		return text;
 	}
-	
-	
+	public void setText(String text) {
+		this.text = text;
+	}
 }

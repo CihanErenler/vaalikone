@@ -17,7 +17,7 @@
         <div class="underline"></div>
         <div class="btn-dashboard">
           <a href="admin-candidate" class="btn btn-thin">Candidates</a>
-          <a href="admin-questions.jsp" class="btn btn-thin">Questions</a>
+          <a href="admin-questions" class="btn btn-thin">Questions</a>
         </div>
       </div>
     </div>

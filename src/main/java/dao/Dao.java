@@ -167,4 +167,56 @@ public class Dao {
 			return null;
 		}
 	}
+
+	public ArrayList<Question> readAllQuestions() {
+		ArrayList<Question> listQuestion = new ArrayList<>();
+		try {
+			String sql = "SELECT * FROM question";
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery(sql);
+
+			while (RS.next()){
+				Question q = new Question();
+				q.setId(RS.getInt("id"));
+				q.setText(RS.getString("question"));
+				listQuestion.add(q);
+			}
+			return listQuestion;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+
+
+	public boolean addQuestion(Question q) {
+		String sql = "INSERT INTO question (question) VALUES (?)";
+		try {
+
+			PreparedStatement statement=conn.prepareStatement(sql);
+			statement.setString(1, q.getText());
+
+			boolean rowInserted = statement.executeUpdate() > 0;
+			statement.close();
+			return rowInserted;
+
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
+	public ArrayList<Question> updateQuestion(Question q) {
+		try {
+			String sql="update question set question=? where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, q.getText());
+			pstmt.executeUpdate();
+			return readAllQuestions();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+
 }
