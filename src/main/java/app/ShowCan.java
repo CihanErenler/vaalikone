@@ -45,9 +45,23 @@ public class ShowCan extends HttpServlet
 			System.out.println("No connection to database");
 		}
 		request.setAttribute("candidatelist", list);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidates.jsp");
 		rd.forward(request, response);
+
+
+		/*
+		* 		String id = request.getParameter("id");
+		Candidate c = null;
+
+		if(dao.getConnection()) {
+			c = dao.getCandidate(id);
+		}
+
+		request.setAttribute("profile", c);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/profile.jsp");
+		rd.forward(request, response);
+		* */
+
 	}
 
 }

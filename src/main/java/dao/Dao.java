@@ -70,10 +70,10 @@ public class Dao {
 			return null;
 		}
 	}
-	
-	public ArrayList<Candidate> updateCandidate(Candidate c) 
+
+	public ArrayList<Candidate> updateCandidate(Candidate c)
 	{
-		try 
+		try
 		{
 			String sql="update candidate set fname=? lname=? city=? age=? profession=? political_party=? why_candidate=?"
 					+ "about=? profile_pic=? where id=?";
@@ -91,42 +91,80 @@ public class Dao {
 			pstmt.executeUpdate();
 			return readAllCandidate();
 		}
-		catch(SQLException e) 
+		catch(SQLException e)
 		{
 			return null;
 		}
 	}
-	
-/*	
-	public ArrayList<Fish> deleteFish(String id) {
+
+	public Candidate getCandidate(String id) {
+		Candidate c = null;
 		try {
-			String sql="delete from fish where id=?";
-			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.executeUpdate();
-			return readAllFish();
-		}
-		catch(SQLException e) {
+
+			ArrayList<Answer> list = getCanAnswerList(id);
+
+			String sql = "select * from candidate where id=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				c=new Candidate(String.valueOf(rs.getInt("id")), rs.getString("fname"),
+						rs.getString("lname"), rs.getString("city"), rs.getString("age"),
+						rs.getString("profession"), rs.getString("political_party"),
+						rs.getString("why_candidate"), rs.getString("about"),
+						rs.getString("profile_pic"), list);
+			}
+
+			return c;
+
+		}catch(SQLException e) {
 			return null;
 		}
 	}
 
-	public Fish readFish(String id) {
-		Fish f=null;
+	public ArrayList<Answer> getCanAnswerList(String id){
+		ArrayList<Answer> list = new ArrayList<>();
+
 		try {
-			String sql="select * from fish where id=?";
+			String sql = "select * from answer where can_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			ResultSet RS=pstmt.executeQuery();
-			while (RS.next()){
-				f=new Fish();
-				f.setId(RS.getInt("id"));
-				f.setBreed(RS.getString("breed"));
+			pstmt.setString(1,id);
+			ResultSet rs = pstmt.executeQuery();
+
+
+			while(rs.next()) {
+
+				list.add(new Answer(String.valueOf(rs.getInt("id")),
+						rs.getString("can_id"),
+						rs.getString("question_id"),
+						rs.getString("answer"),
+						getQuestions(rs.getString("question_id")).getQuestion()));
 			}
-			return f;
-		}
-		catch(SQLException e) {
+
+			return list;
+
+		}catch(SQLException e) {
 			return null;
 		}
-	}*/
+	}
+
+	public Question getQuestions(String id) {
+		Question q = null;
+
+		try{
+			String sql = "select * from question where id=?";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				q = new Question(String.valueOf(rs.getInt("id")), rs.getString("question"));
+			}
+
+			return q;
+
+		}catch(SQLException e) {
+			return null;
+		}
+	}
 }
