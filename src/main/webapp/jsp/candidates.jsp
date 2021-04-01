@@ -47,7 +47,7 @@
           </div>
         </a>
 
-        <a href="/DeleteCan">
+        <a href="/ShowCan?id=2">
           <div class="can-card">
             <div class="img-wrap">
               <img src="../img/rubeus-hagrid.jpg" alt="candidate" />
@@ -73,7 +73,7 @@
           </div>
         </a>
 
-        <a href="profile.jsp">
+        <a href="/ShowCan?id=3">
           <div class="can-card">
             <div class="img-wrap">
               <img src="../img/kratos.jpg" alt="candidate" />

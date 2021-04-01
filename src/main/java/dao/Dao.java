@@ -83,9 +83,7 @@ public class Dao {
 			
 			
 			while(rs.next()) {
-				
-				
-				
+			
 				list.add(new Answer(String.valueOf(rs.getInt("id")), 
 						rs.getString("can_id"),
 						rs.getString("question_id"),

@@ -25,6 +25,10 @@
     <%@ include file="../html/navbar.html" %>
     <div class="container flex-container">
       <div class="card profile p-x-11">
+       <a href="/jsp/candidates.jsp" class="btn btn-back">
+          <i class="fas fa-chevron-left"></i>
+          Back</a
+        >
         <div class="profile-info">
           <div class="profile-img-wrapper">
             <img src="${requestScope.profile.profile_pic}" alt="prfile-img" />
@@ -32,8 +36,10 @@
           <div class="profile-name-info">
             <div class="first-line">
               <h2>${requestScope.profile.fname} ${requestScope.profile.lname}</h2>
-              <h4><span class="age">Age :</span> ${requestScope.profile.age}</h4>
+              <div class="firs-line-2">
+              <h4><span class="age">Age :</span> ${requestScope.profile.age}</h4>         
               <h4>${requestScope.profile.profession}</h4>
+              </div>
             </div>
             <div class="second-line">
               <h4>
@@ -69,9 +75,11 @@
 		ArrayList<Answer> list= person.getAnswers();	
 		
 		
+		
 		for (int i = 0; list != null && i < list.size(); i++){
+			int number = i+1;  
 			Answer a = list.get(i);
-			out.println("<div class='question'> <h2 class='index'>"+ a.getId() + "</h2> <p class = 'question-text' >" + a.getAnswer_text() +"</p> <div class='question-answer'>" + a.getAnswer_value() +"</div> </div>");
+			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getAnswer_text() +"</p> <div class='question-answer'>" + a.getAnswer_value() +"</div> </div>");
 		}
 		%>
  		</div>

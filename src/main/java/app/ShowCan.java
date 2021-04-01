@@ -17,7 +17,7 @@ public class ShowCan extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao;
 	public void init() {
-		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "123456");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
 	}
     
     public ShowCan() {
