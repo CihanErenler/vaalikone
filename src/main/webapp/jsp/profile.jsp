@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    <%@ page import="data.Candidate" %> 
+     <%@ page import="data.Answer" %> 
+    <%@ page import="java.util.*" %> 
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,28 +19,34 @@
       crossorigin="anonymous"
     />
     <title>Profile</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/jsp/style.css" />
   </head>
   <body>
     <%@ include file="../html/navbar.html" %>
     <div class="container flex-container">
       <div class="card profile p-x-11">
+       <a href="/jsp/candidates.jsp" class="btn btn-back">
+          <i class="fas fa-chevron-left"></i>
+          Back</a
+        >
         <div class="profile-info">
           <div class="profile-img-wrapper">
-            <img src="../img/rubeus-hagrid.jpg" alt="prfile-img" />
+            <img src="${requestScope.profile.profile_pic}" alt="prfile-img" />
           </div>
           <div class="profile-name-info">
             <div class="first-line">
-              <h2>Rubeus Hagrid</h2>
-              <h4><span class="age">Age :</span> 72</h4>
-              <h4>Teacher</h4>
+              <h2>${requestScope.profile.fname} ${requestScope.profile.lname}</h2>
+              <div class="firs-line-2">
+              <h4><span class="age">Age :</span> ${requestScope.profile.age}</h4>         
+              <h4>${requestScope.profile.profession}</h4>
+              </div>
             </div>
             <div class="second-line">
               <h4>
                 <i class="fas fa-map-marker"></i>
-                Hogwarts
+                ${requestScope.profile.city}
               </h4>
-              <div class="party">Gryffindor</div>
+              <div class="party">${requestScope.profile.political_party}</div>
             </div>
           </div>
         </div>
@@ -44,19 +55,13 @@
           <div class="about-text">
             <h2>About</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
-              eius nam maxime vero saepe perferendis! Aspernatur, rerum
-              exercitationem odit ex assumenda incidunt nemo sunt eveniet
-              voluptate dolorem facilis numquam minima.
+             ${requestScope.profile.about}
             </p>
           </div>
           <div class="why-text">
             <h2>Why did you became a candidate?</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus pariatur voluptate repudiandae aut quidem modi animi
-              amet fuga quisquam at sunt illo commodi, vitae numquam id
-              reprehenderit consectetur quod ullam.
+              ${requestScope.profile.why_candidate}
             </p>
           </div>
         </div>
@@ -64,60 +69,20 @@
         <h1 class="title">Questionnaire Answers</h1>
         <div class="underline"></div>
 
-        <div class="questions">
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="question-answer">Agree</div>
-          </div>
-        </div>
-
-        <div class="questions">
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="question-answer">Agree</div>
-          </div>
-        </div>
-
-        <div class="questions">
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="question-answer">Agree</div>
-          </div>
-        </div>
-
-        <div class="questions">
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="question-answer">Agree</div>
-          </div>
-        </div>
-
-        <div class="questions">
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="question-answer">Agree</div>
-          </div>
-        </div>
+		<div class="questions">
+		<%
+		Candidate person = (Candidate)request.getAttribute("profile");
+		ArrayList<Answer> list= person.getAnswers();	
+		
+		
+		
+		for (int i = 0; list != null && i < list.size(); i++){
+			int number = i+1;  
+			Answer a = list.get(i);
+			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getAnswer_text() +"</p> <div class='question-answer'>" + a.getAnswer_value() +"</div> </div>");
+		}
+		%>
+ 		</div>
       </div>
     </div>
   </body>
