@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.ArrayList" %>   
+<%@ page import="data.Question" %>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +33,24 @@
           </div>
         </div>
         <div class="admin-content">
-          <div class="question">
+        <c:forEach var="question" items="${requestScope.listQuestion}" >
+          <div class="question question-ad">
+            <h2 class="index">${question.id}</h2>
+            <p class="question-text">
+              ${question.text}
+            </p>
+            <div class="edit-buttons">
+              <a href="#" class="edit-btn question-btn">
+                <i class="fas fa-pen"></i>
+              </a>
+              <a href="#" class="delete-btn question-btn">
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </div>
+          </div>
+          </c:forEach>
+	    
+         <!--  <div class="question">
             <h2 class="index">1</h2>
             <p class="question-text">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
@@ -89,24 +111,8 @@
               <a href="#" class="delete-btn question-btn">
                 <i class="fas fa-trash-alt"></i>
               </a>
-            </div>
-          </div>
-
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
-                <i class="fas fa-pen"></i>
-              </a>
-              <a href="#" class="delete-btn question-btn">
-                <i class="fas fa-trash-alt"></i>
-              </a>
-            </div>
-          </div>
+            </div> 
+          </div>-->
         </div>
       </div>
     </div>

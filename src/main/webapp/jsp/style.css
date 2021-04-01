@@ -566,6 +566,13 @@ img {
   display: block;
 }
 
+/*admin - question page */
+.question-ad .question-text{
+	display: flex;
+	align-items: center;
+    font-weight: 300;
+}
+
 /*Add candidate */
 
 .add-can {
