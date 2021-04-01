@@ -16,6 +16,25 @@ public class Candidate {
 	String pic_path = "../img/";
 	ArrayList<Answer> answers;
 	
+	public Candidate() {
+		
+	}
+	
+	public Candidate(String id, String fname, String lname, String city, String age, String profession,
+			String political_party, String why_candidate, String about, String profile_pic) {
+		super();
+		setId(id);
+		this.fname = fname;
+		this.lname = lname;
+		this.city = city;
+		this.age = age;
+		this.profession = profession;
+		this.political_party = political_party;
+		this.why_candidate = why_candidate;
+		this.about = about;
+		this.profile_pic = this.pic_path + profile_pic;
+	}
+	
 	public Candidate(String id, String fname, String lname, String city, String age, String profession,
 			String political_party, String why_candidate, String about, String profile_pic, ArrayList<Answer> answers) {
 		super();
@@ -31,6 +50,7 @@ public class Candidate {
 		this.profile_pic = this.pic_path + profile_pic;
 		this.answers = answers;
 	}
+	
 	
 	public String getId() {
 		return id;

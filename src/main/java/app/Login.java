@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
 	
 	@Override
 	public void init() {
-		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Mysq123!");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
 	}
        
     /**

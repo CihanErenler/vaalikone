@@ -29,10 +29,10 @@
 	      
 			  <c:forEach var="candidate" items="${requestScope.candidatelist}" >
 			      <div class="candidates-wrapper">
-				   <a href="profile.jsp/${candidate.id}">
+				   <a href="/ShowProfile?id=${candidate.id}">
 				          <div class="can-card">
 				            <div class="img-wrap">
-				              <img src="../img/${candidate.profilePic}" alt="candidate" />
+				              <img src="../img/${candidate.profile_pic}" alt="candidate" />
 				            </div>
 				            
 				            <div class="can-content">
@@ -44,7 +44,7 @@
 				                  ${candidate.city}
 				                </h4>
 				              </div>
-				              <div class="party">${candidate.politicalParty}</div>
+				              <div class="party">${candidate.political_party}</div>
 				              <div class="short-about">
 								${candidate.about}
 				              </div>

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.Admin;
+import data.Answer;
 import data.Candidate;
 import data.Question;
 import data.Voter;
@@ -26,6 +27,7 @@ public class Dao {
 		this.pass=pass;
 	}
 	
+	// Connection method
 	public boolean getConnection() {
 		try {
 	        if (conn == null || conn.isClosed()) {
@@ -45,6 +47,8 @@ public class Dao {
 			return false;
 		}
 	}
+	
+	// Candidate - related 
 	public ArrayList<Candidate> readAllCandidate() {
 		ArrayList<Candidate> list=new ArrayList<>();
 		try {
@@ -52,16 +56,16 @@ public class Dao {
 			ResultSet RS=stmt.executeQuery("select * from candidate");
 			while (RS.next()){
 				Candidate c=new Candidate();
-				c.setId(RS.getInt("id"));
+				c.setId(RS.getString("id"));
 				c.setFname(RS.getString("fname"));
 				c.setLname(RS.getString("lname"));
 				c.setCity(RS.getString("city"));
 				c.setAge(RS.getString("age"));
 				c.setProfession(RS.getString("profession"));
-				c.setPoliticalParty(RS.getString("political_party"));
-				c.setWhyCandidate(RS.getString("why_candidate"));
+				c.setPolitical_party(RS.getString("political_party"));
+				c.setWhy_candidate(RS.getString("why_candidate"));
 				c.setAbout(RS.getString("about"));
-				c.setProfilePic(RS.getString("profile_pic"));
+				c.setProfile_pic(RS.getString("profile_pic"));
 				list.add(c);
 			}
 			return list;
@@ -83,11 +87,11 @@ public class Dao {
 			pstmt.setString(3, c.getCity());
 			pstmt.setString(4, c.getAge());
 			pstmt.setString(5, c.getProfession());
-			pstmt.setString(6, c.getPoliticalParty());
-			pstmt.setString(7, c.getWhyCandidate());
+			pstmt.setString(6, c.getPolitical_party());
+			pstmt.setString(7, c.getWhy_candidate());
 			pstmt.setString(8, c.getAbout());
-			pstmt.setString(9, c.getProfilePic());
-			pstmt.setInt(10, c.getId());
+			pstmt.setString(9, c.getProfile_pic());
+			pstmt.setString(10, c.getId());
 			pstmt.executeUpdate();
 			return readAllCandidate();
 		}
@@ -138,7 +142,7 @@ public class Dao {
 						rs.getString("can_id"),
 						rs.getString("question_id"),
 						rs.getString("answer"),
-						getQuestions(rs.getString("question_id")).getQuestion()));
+						getQuestions(rs.getString("question_id")).getText()));
 			}
 
 			return list;
@@ -147,7 +151,9 @@ public class Dao {
 			return null;
 		}
 	}
-
+	
+	// Questions related
+	
 	public Question getQuestions(String id) {
 		Question q = null;
 
@@ -219,6 +225,7 @@ public class Dao {
 		}
 	}
 
+	// Login/admin related
 	public boolean adminLogin(Admin adm) {
 		try {
 			int c = 0;
