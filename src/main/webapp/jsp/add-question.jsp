@@ -22,24 +22,11 @@
       <div class="card">
 	        <a href="admin-questions" class="btn btn-back">
 	        <i class="fas fa-chevron-left"></i> Back</a>
-	        <c:if test="${existingquestion != null}">
 	        <h1 class="title">Edit Question</h1>
-	        </c:if>
-	        <c:if test="${existingquestion == null}">
-	        <h1 class="title">Add Question</h1>
-	        </c:if>
 	        <div class="underline"></div>
-        	<c:if test="${existingquestion != null}">
-            	<form method="post" action="update" class="question-form">
-		    </c:if>
-		    <c:if test="${existingquestion == null}">
-		    	<form method="post" action="insert" class="question-form">
-				    </c:if>
-				    <c:if test="${existingquestion != null}">
-				        <input type="hidden" name="id" value="<c:out value='${existingquestion.id}' />" />
-				    </c:if> 
-				        <input type="text" name="question" value="<c:out value='${existingquestion.text}' />" />
-				        
+            	<form method="post" action="updateque" class="question-form">
+					<input type="hidden" name="id" value="<c:out value='${question.id}' />" />
+			        <input type="text" name="question" value="<c:out value='${question.text}' />" />
 				    <button name="submit" type="submit" class="btn btn-thin">
 				        	Submit
 				    </button>

@@ -40,7 +40,7 @@
               ${question.text}
             </p>
             <div class="edit-buttons">
-              <a href="/edit?id=<c:out value='${question.id}' />" class="edit-btn question-btn">
+              <a href="/jsp/ReadToUpdateQue?id=${question.id}" class="edit-btn question-btn">
                 <i class="fas fa-pen"></i>
               </a>
               <a href="/delete?id=<c:out value='${question.id}' />" class="delete-btn question-btn">

@@ -211,12 +211,13 @@ public class Dao {
 		}
 
 	}
-
+	
 	public ArrayList<Question> updateQuestion(Question q) {
 		try {
 			String sql="update question set question=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, q.getText());
+			pstmt.setInt(2, q.getId());
 			pstmt.executeUpdate();
 			return readAllQuestions();
 		}
@@ -224,7 +225,7 @@ public class Dao {
 			return null;
 		}
 	}
-
+	
 	// Login/admin related
 	public boolean adminLogin(Admin adm) {
 		try {
