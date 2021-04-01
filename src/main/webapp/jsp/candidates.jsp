@@ -21,7 +21,7 @@
       <h1 class="title">Candidates</h1>
       <div class="underline"></div>
       <div class="candidates-wrapper">
-        <a href="profile.jsp">
+        <a href="/ShowCan?id=1">
           <div class="can-card">
             <div class="img-wrap">
               <img src="../img/batman.jpg" alt="candidate" />
@@ -47,7 +47,7 @@
           </div>
         </a>
 
-        <a href="profile.jsp">
+        <a href="/ShowCan?id=2">
           <div class="can-card">
             <div class="img-wrap">
               <img src="../img/rubeus-hagrid.jpg" alt="candidate" />
@@ -73,7 +73,7 @@
           </div>
         </a>
 
-        <a href="profile.jsp">
+        <a href="/ShowCan?id=3">
           <div class="can-card">
             <div class="img-wrap">
               <img src="../img/kratos.jpg" alt="candidate" />

@@ -10,6 +10,7 @@
   --answer-bg: #87c1e1;
   --primary-color: #3a93c6;
   --light-gray: #c4c4c4;
+  --light-gray-2: #aaaaaa;
   --light-blue-bg: #d7e9ff;
   --light-hover: #3fa2db;
 }
@@ -126,7 +127,6 @@ img {
   color: var(--dark-blue);
   border-radius: 5px;
   padding: 3px 7px;
-  margin-bottom: 10px;
 }
 
 .dark-text {
@@ -307,11 +307,12 @@ img {
 
 /* Profile */
 .profile-info {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-bottom: 1px solid var(--light-gray);
   padding-bottom: 20px;
-  margin-bottom: 40px;
+  margin: 40px 0;
 }
 
 .profile {
@@ -327,8 +328,8 @@ img {
 }
 
 .profile-info .profile-img-wrapper {
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -342,31 +343,36 @@ img {
 
 .profile-name-info .first-line {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   align-items: center;
 }
 
+
 .profile-name-info .first-line h2 {
-  line-height: 43px;
+  line-height: 46px;
   display: inline-block;
-  font-size: 36px;
+  font-size: 40px;
   font-weight: bold;
   padding-right: 15px;
+  margin-bottom: 10px;
 }
 
 .profile-name-info .first-line h4 {
   font-size: 18px;
   padding: 0 15px;
   display: inline-block;
-  border-left: 1px solid var(--light-gray);
 }
 
 .profile-name-info .first-line .age {
-  color: var(--light-gray);
+  color: var(--light-gray-2);
   font-weight: 300;
 }
 
 .profile-name-info .second-line {
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 10px;
 }
 
@@ -377,12 +383,12 @@ img {
 .profile-name-info .second-line h4 {
   color: var(--dark-blue-2);
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   margin-right: 15px;
 }
 
 .about-text-sec h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   padding-bottom: 20px;
 }
@@ -398,6 +404,8 @@ img {
   border-radius: 10px;
   display: grid;
   grid-template-columns: 50px 1fr 170px;
+  grid-gap: 10px;
+  align-items: center;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -416,6 +424,7 @@ img {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  height: 100%;
 }
 
 .question-btn {
