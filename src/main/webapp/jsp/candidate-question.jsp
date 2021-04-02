@@ -119,7 +119,7 @@
           <div class="canque-btnwrap">
           <button name="submit-can-question" type="submit" class="btn btn-thin">
             Submit
-          </button>
+          </button>	
        	</div>
           <!-- <div class="question">
             <h2 class="index">2</h2>
