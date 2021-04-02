@@ -26,7 +26,7 @@ public class ShowQue extends HttpServlet {
 		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
 	}
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see HttpServlet#HttpServlet()	
      */
     public ShowQue() {
         super();
