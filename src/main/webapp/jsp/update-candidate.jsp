@@ -22,7 +22,7 @@
         <div class="add-img">
             <img class="output-img" src="${requestScope.profile.profile_pic}" alt="candidate" />
         </div>
-            <form action="updateCan" method="POST"  class="candidate-form">
+            <form action="updateCan" method="POST" enctype="multipart/form-data"  class="candidate-form">
                 <label for="img-file" class="upload"></i>Add Picture</label>
                 <input type="file" name="profile_pic" id="img-file" >	
                 <input type="hidden" name="id" id="fname" placeholder="First Name" value="${requestScope.profile.getId()}"/>

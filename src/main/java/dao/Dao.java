@@ -102,6 +102,7 @@ public class Dao {
 		}
 	}
 
+	//Get Candidate
 	public Candidate getCandidate(String id) {
 		Candidate c = null;
 		try {
@@ -126,8 +127,40 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	//Add Candidate
+	public boolean addCandidate(Candidate c) {
+		String sql = "INSERT INTO candidate (fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic) VALUES (?,?,?,?,?,?,?,?,?)";
+		try {
+			
+			System.out.println(c);
+			
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, c.getFname());
+			pstmt.setString(2, c.getLname());
+			pstmt.setString(3, c.getCity());
+			pstmt.setString(4, c.getAge());
+			pstmt.setString(5, c.getProfession());
+			pstmt.setString(6, c.getPolitical_party());
+			pstmt.setString(7, c.getWhy_candidate());
+			pstmt.setString(8, c.getAbout());
+			pstmt.setString(9, c.getProfile_pic());
+			
+			System.out.println(pstmt);
 
-	//Get Candidate
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(SQLException e) {
+			return false;
+		}
+
+	}
+
 	public ArrayList<Answer> getCanAnswerList(String id){
 		ArrayList<Answer> list = new ArrayList<>();
 

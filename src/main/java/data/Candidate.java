@@ -33,7 +33,7 @@ public class Candidate {
 		this.political_party = political_party;
 		this.why_candidate = why_candidate;
 		this.about = about;
-		this.profile_pic = getPic_path() + profile_pic;
+		this.profile_pic =  profile_pic;
 	}
 	
 	public Candidate(String id, String fname, String lname, String city, String age, String profession,
@@ -48,7 +48,7 @@ public class Candidate {
 		this.political_party = political_party;
 		this.why_candidate = why_candidate;
 		this.about = about;
-		this.profile_pic = getPic_path() + profile_pic;
+		this.profile_pic = profile_pic;
 		this.answers = answers;
 	}
 	
