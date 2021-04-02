@@ -1,6 +1,8 @@
 package app;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +21,7 @@ import dao.Dao;
 import data.Candidate;
 
 
-@WebServlet(name = "FileUploadServlet", urlPatterns = { "/jsp/addCan" })
+@WebServlet(name = "AddCandidate", urlPatterns = { "/jsp/addCan" })
 @MultipartConfig(
   fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
   maxFileSize = 1024 * 1024 * 10,      // 10 MB
@@ -48,18 +50,21 @@ public class addCan extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("image/jpeg");  
-	
 
-	   PrintWriter out = response.getWriter();
-	   
-	   Part part = request.getPart("profile_pic");
-	   String filename = extractFileName(part);
-	   String savePath = "/Vaalikone-CARR/src/main/webapp/img/";
-	   //File fileSaveDir = new File(savePath);
-	   System.out.println(savePath);
-	   
-	   part.write(savePath);
+		//get the file chosen by the user
+		Part filePart = request.getPart("profile_pic");
+		
+		//get the InputStream to store the file somewhere
+	    InputStream fileInputStream = filePart.getInputStream();
+	    
+	    //for example, you can copy the uploaded file to the server
+	    //note that you probably don't want to do this in real life!
+	    //upload it to a file host like S3 or GCS instead
+	    File fileToSave = new File("C:\\Users\\Connor\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
+		Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		
+		System.out.println(request.getParameter("profile_pic"));
+		
 		
 		String fname=request.getParameter("fname");
 		String lname=request.getParameter("lname");
@@ -69,8 +74,7 @@ public class addCan extends HttpServlet {
 		String political_party=request.getParameter("political_party");
 		String why_candidate=request.getParameter("why_candidate");
 		String about=request.getParameter("about");
-		String profile_pic=savePath;
-		
+		String profile_pic=request.getParameter("profile_pic");
 		
 		Candidate c =new Candidate(fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
 		
@@ -82,18 +86,4 @@ public class addCan extends HttpServlet {
 		
 		
 	}
-	
-	private String extractFileName(Part part) {
-		String contentDist = part.getHeader("content-disposition");
-		String[] items = contentDist.split(";");
-		for (String s : items) {
-			if(s.trim().startsWith("filename")) {
-				return s.substring(s.indexOf("=") + 2, s.length() - 1 );
-			}
-		}
-		
-		return "";
-	}
-	
-
 }
