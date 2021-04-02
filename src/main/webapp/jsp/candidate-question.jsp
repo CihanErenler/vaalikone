@@ -66,11 +66,61 @@
               </li>
             </ul>
           </div>
-         
+          </form>
+          <form method="post" action="" class="question-form">
+        <div class="question">
+            <h2 class="index">1</h2>
+            <p class="question-text">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
+                aliquam recusandae ab, earum cum similique.
+            </p>
+        </div>
+          <div class="answer">
+            <ul>
+              <li>
+                <input
+                  type="radio"
+                  name="score"
+                  id="strongly-disagree"
+                  value="1"
+                />
+                <label for="strongly-disagree">Strongly Disagree</label>
+              </li>
+              <li>
+                <input type="radio" name="score" id="disagree" value="2" />
+                <label for="disagree">Disagree</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="score"
+                  id="neutral"
+                  value="3"
+                  checked
+                />
+                <label for="neutral">Neutral</label>
+              </li>
+              <li>
+                <input type="radio" name="score" id="agree" value="4" />
+                <label for="agree">Agree</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="score"
+                  id="strongly-agree"
+                  value="5"
+                />
+                <label for="strongly-agree">Strongly Agree</label>
+              </li>
+            </ul>
+          </div>
+          </form>
+          <div class="canque-btnwrap">
           <button name="submit-can-question" type="submit" class="btn btn-thin">
             Submit
           </button>
-         </form>
+       	</div>
           <!-- <div class="question">
             <h2 class="index">2</h2>
             <p class="question-text">
