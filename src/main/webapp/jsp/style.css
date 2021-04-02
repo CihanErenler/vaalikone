@@ -208,7 +208,6 @@ img {
   justify-content: space-between;
 }
 
-/* Candidate */
 .candidates.container {
   padding-top: 87px;
 }
@@ -580,6 +579,23 @@ img {
 	display: flex;
 	align-items: center;
     font-weight: 300;
+}
+
+.can-question .btn-thin{
+  background: var(--primary-color);
+  min-width: 600px;
+  font-size: 18px;
+  font-weight: normal;
+  border: none;
+  margin: 0 auto;
+}
+
+.can-question .btn-thin:hover {
+  background: var(--light-hover);
+}
+
+.canque-btnwrap{
+	display:flex;
 }
 
 /*Add candidate */

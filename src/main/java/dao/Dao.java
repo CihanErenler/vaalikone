@@ -193,38 +193,63 @@ public class Dao {
 			return null;
 		}
 	}
-
-
+	
 	public boolean addQuestion(Question q) {
 		String sql = "INSERT INTO question (question) VALUES (?)";
 		try {
 
-			PreparedStatement statement=conn.prepareStatement(sql);
-			statement.setString(1, q.getText());
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, q.getText());
 
-			boolean rowInserted = statement.executeUpdate() > 0;
-			statement.close();
-			return rowInserted;
-
-		} catch (Exception e) {
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(SQLException e) {
 			return false;
 		}
 
 	}
-
-	public ArrayList<Question> updateQuestion(Question q) {
+	
+	public boolean updateQuestion(Question q) {
 		try {
 			String sql="update question set question=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, q.getText());
-			pstmt.executeUpdate();
-			return readAllQuestions();
+			pstmt.setInt(2, q.getId());
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		catch(SQLException e) {
-			return null;
+			return false;
 		}
 	}
-
+	
+	public boolean deleteQuestion(Question q) {
+		try {
+			String sql="delete from question where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//pstmt.setString(1, q.getText());
+			pstmt.setInt(1, q.getId());
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(SQLException e) {
+			return false;
+		}
+	}
+	
 	// Login/admin related
 	public boolean adminLogin(Admin adm) {
 		try {

@@ -7,13 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Dao;
+import data.Question;
+
 /**
  * Servlet implementation class DeleteQue
  */
 @WebServlet("/DeleteQue")
 public class DeleteQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private Dao dao = null;
+	
+	@Override
+	public void init() {
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,9 +35,15 @@ public class DeleteQue extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Question q = new Question();
+		String id = request.getParameter("id");
+    	q.setId(id);
+    	if (dao.getConnection()) {
+ 			if(dao.deleteQuestion(q)) {
+ 				response.sendRedirect("/jsp/admin-questions");
+ 			}
+    	}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
