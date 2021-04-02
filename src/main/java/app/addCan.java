@@ -1,6 +1,5 @@
 package app;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -50,21 +49,30 @@ public class addCan extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String img = "";
+		
 		//get the file chosen by the user
 		Part filePart = request.getPart("profile_pic");
 		
-		//get the InputStream to store the file somewhere
-	    InputStream fileInputStream = filePart.getInputStream();
-	    
-	    //for example, you can copy the uploaded file to the server
-	    //note that you probably don't want to do this in real life!
-	    //upload it to a file host like S3 or GCS instead
-	    File fileToSave = new File("C:\\Users\\Connor\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
-		Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		
-		System.out.println(request.getParameter("profile_pic"));
-		
+		boolean isthereafile = false;
+		if(request.getPart("profile_pic").getSize()>0){
+		isthereafile = true;
+		}
+
+		if(isthereafile) {
+			//get the InputStream to store the file somewhere
+		    InputStream fileInputStream = filePart.getInputStream();
+		    
+		    //for example, you can copy the uploaded file to the server
+		    //note that you probably don't want to do this in real life!
+		    //upload it to a file host like S3 or GCS instead
+		    File fileToSave = new File("C:\\Users\\Cihan\\Desktop\\web programming\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
+			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			
+			System.out.println(request.getParameter("profile_pic"));
+		}else {
+			img = "placeholder.jpg";
+		}
 		
 		String fname=request.getParameter("fname");
 		String lname=request.getParameter("lname");
@@ -74,7 +82,7 @@ public class addCan extends HttpServlet {
 		String political_party=request.getParameter("political_party");
 		String why_candidate=request.getParameter("why_candidate");
 		String about=request.getParameter("about");
-		String profile_pic=request.getParameter("profile_pic");
+		String profile_pic= isthereafile ? filePart.getSubmittedFileName() : img;
 		
 		Candidate c =new Candidate(fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
 		

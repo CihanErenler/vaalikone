@@ -101,6 +101,25 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	//Get img
+	public String getPic(String id)  {
+		String img="";
+		
+		try {
+			String sql = "select profile_pic from candidate where id=?";
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery(sql);
+			
+			img = RS.getString("profile_pic");
+			
+		}catch(SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return img;
+		
+	}
 
 	//Get Candidate
 	public Candidate getCandidate(String id) {
@@ -159,6 +178,28 @@ public class Dao {
 			return false;
 		}
 
+	}
+	
+	//Delete Candidate
+	public ArrayList<Candidate> deleteCandidate (String id) {
+		ArrayList<Candidate> a = new ArrayList<>();
+		try {
+			String sql="delete from candidate where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//pstmt.setString(1, q.getText());
+			pstmt.setString(1, id);
+			if(pstmt.executeUpdate()>0) {
+				a = readAllCandidate();
+			}
+			else {
+				System.out.println("hmm");
+			}
+		}
+		catch(SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return a;
 	}
 
 	public ArrayList<Answer> getCanAnswerList(String id){

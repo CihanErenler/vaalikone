@@ -26,6 +26,7 @@
                 <label for="img-file" class="upload"></i>Add Picture</label>
                 <input type="file" name="profile_pic" id="img-file" >	
                 <input type="hidden" name="id" id="fname" placeholder="First Name" value="${requestScope.profile.getId()}"/>
+                 <input type="hidden" name="img" id="fname" placeholder="First Name" value="${requestScope.profile.getProfile_pic()}"/>
                 <input type="text" name="fname" id="fname" placeholder="First Name" value="${requestScope.profile.fname}"/>
                 <input type="text" name="lname" id="lname" placeholder="Last Name" value="${requestScope.profile.lname}"/>
                 <input type="text" name="city" id="city" placeholder="City" value="${requestScope.profile.city}"/>

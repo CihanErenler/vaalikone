@@ -28,8 +28,8 @@
           <h1 class="title">Candidates</h1>
           <div class="underline"></div>
           <div class="admin btn-wrapper">
-            <a href="admin-dashboard.jsp" class="btn btn-thin">Back</a>
-            <a href="add-candidate.jsp" class="btn btn-thin">Add Candidate</a>
+            <a href="/jsp/admin-dashboard.jsp" class="btn btn-thin">Back</a>
+            <a href="/jsp/add-candidate.jsp" class="btn btn-thin">Add Candidate</a>
           </div>
         </div>
         <div class="admin-content">
@@ -51,7 +51,7 @@
                   <a href="/readToUpdateCan?id=${candidate.id}" class="edit-btn">
                     <i class="fas fa-pen"></i>
                   </a>
-                  <a href="/delete?id=${candidate.id}" class="delete-btn">
+                  <a href="/deleteCan?id=${candidate.id}" class="delete-btn">
                     <i class="fas fa-trash-alt"></i>
                   </a>
                 </div>
