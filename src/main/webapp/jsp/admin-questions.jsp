@@ -29,90 +29,26 @@
           <div class="underline"></div>
           <div class="admin btn-wrapper">
             <a href="admin-dashboard.jsp" class="btn btn-thin">Back</a>
-            <a href="add-question.jsp" class="btn btn-thin">Add Question</a>
+            <a href="/jsp/ReadToUpdateQue?addNew=1" class="btn btn-thin">Add Question</a>
           </div>
         </div>
         <div class="admin-content">
-        <c:forEach var="question" items="${requestScope.listQuestion}" >
+        <c:forEach var="question" items="${requestScope.listQuestion}" varStatus="counter">
           <div class="question question-ad">
-            <h2 class="index">${question.id}</h2>
+            <h2 class="index">${counter.index+1}</h2> 
             <p class="question-text">
               ${question.text}
             </p>
             <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
+              <a href="/jsp/ReadToUpdateQue?id=${question.id}" class="edit-btn question-btn">
                 <i class="fas fa-pen"></i>
               </a>
-              <a href="#" class="delete-btn question-btn">
+              <a href="/DeleteQue?id=<c:out value='${question.id}' />" class="delete-btn question-btn">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>
           </div>
           </c:forEach>
-	    
-         <!--  <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
-                <i class="fas fa-pen"></i>
-              </a>
-              <a href="#" class="delete-btn question-btn">
-                <i class="fas fa-trash-alt"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
-                <i class="fas fa-pen"></i>
-              </a>
-              <a href="#" class="delete-btn question-btn">
-                <i class="fas fa-trash-alt"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
-                <i class="fas fa-pen"></i>
-              </a>
-              <a href="#" class="delete-btn question-btn">
-                <i class="fas fa-trash-alt"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="question">
-            <h2 class="index">1</h2>
-            <p class="question-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
-              aliquam recusandae ab, earum cum similique.
-            </p>
-            <div class="edit-buttons">
-              <a href="#" class="edit-btn question-btn">
-                <i class="fas fa-pen"></i>
-              </a>
-              <a href="#" class="delete-btn question-btn">
-                <i class="fas fa-trash-alt"></i>
-              </a>
-            </div> 
-          </div>-->
         </div>
       </div>
     </div>
