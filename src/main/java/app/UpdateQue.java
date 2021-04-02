@@ -39,7 +39,6 @@ public class UpdateQue extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//    	response.sendRedirect("admin-questions");
 	}
 
 	/**
@@ -55,29 +54,21 @@ public class UpdateQue extends HttpServlet {
         	Question q = new Question();
         	q.setText(text);
         	
-        	ArrayList<Question> list=null;
-     		if (dao.getConnection()) {
-     			list=dao.addQuestion(q);
+        	if (dao.getConnection()) {
+     			if(dao.addQuestion(q)) {
+     				response.sendRedirect("/jsp/admin-questions");
+     			}
      		}
-     		
-     		request.setAttribute("listQuestion", list);
-     		RequestDispatcher rd=request.getRequestDispatcher("/jsp/admin-questions.jsp");
-     		rd.forward(request, response);
         }
         else {
         	Question q = new Question(id, text);
-     		
-     		ArrayList<Question> list=null;
-     		if (dao.getConnection()) {
-     			list=dao.updateQuestion(q);
+        	
+        	if (dao.getConnection()) {
+     			if(dao.updateQuestion(q)) {
+     				response.sendRedirect("/jsp/admin-questions");
+     			}
      		}
-     		
-     		request.setAttribute("listQuestion", list);
-     		RequestDispatcher rd=request.getRequestDispatcher("/jsp/admin-questions.jsp");
-     		rd.forward(request, response);
         }
        
-        
-        
 	}
 }

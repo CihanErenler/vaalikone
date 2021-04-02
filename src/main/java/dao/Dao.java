@@ -193,35 +193,42 @@ public class Dao {
 			return null;
 		}
 	}
-
-
-	public ArrayList<Question> addQuestion(Question q) {
+	
+	public boolean addQuestion(Question q) {
 		String sql = "INSERT INTO question (question) VALUES (?)";
 		try {
 
-			PreparedStatement statement=conn.prepareStatement(sql);
-			statement.setString(1, q.getText());
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, q.getText());
 
-			statement.executeUpdate();
-			return readAllQuestions();
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		catch(SQLException e) {
-			return null;
+			return false;
 		}
 
 	}
 	
-	public ArrayList<Question> updateQuestion(Question q) {
+	public boolean updateQuestion(Question q) {
 		try {
 			String sql="update question set question=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, q.getText());
 			pstmt.setInt(2, q.getId());
-			pstmt.executeUpdate();
-			return readAllQuestions();
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		catch(SQLException e) {
-			return null;
+			return false;
 		}
 	}
 	

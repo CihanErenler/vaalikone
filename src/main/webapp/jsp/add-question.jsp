@@ -22,7 +22,12 @@
       <div class="card">
 	        <a href="admin-questions" class="btn btn-back">
 	        <i class="fas fa-chevron-left"></i> Back</a>
-	        <h1 class="title">Edit Question</h1>
+	        <c:if test="${requestScope.addNew == '1'}">
+	        	<h1 class="title">Add Question</h1>
+	        </c:if>
+	        <c:if test="${requestScope.addNew == null}">
+	        	<h1 class="title">Edit Question</h1>
+	        </c:if>
 	        <div class="underline"></div>
 	        
 	        <c:if test="${requestScope.addNew == '1'}">
