@@ -19,34 +19,34 @@ import dao.Dao;
 import data.Candidate;
 
 
+	
+	@WebServlet("/readToUpdateCan")
+	public class ReadToUpdateCan extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private Dao dao;
+	public void init() {
+	dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+	}
+	
+		public ReadToUpdateCan() {
+		super();
+	
+	}
 
-@WebServlet("/readToUpdateCan")
-public class ReadToUpdateCan extends HttpServlet {
-private static final long serialVersionUID = 1L;
-private Dao dao;
-public void init() {
-dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
-}
-
-public ReadToUpdateCan() {
-super();
-
-}
 
 
-
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String id = request.getParameter("id");
-Candidate c = null;
-
-if(dao.getConnection()) {
-c = dao.getCandidate(id);
-}
-
-request.setAttribute("profile", c);
-RequestDispatcher rd = request.getRequestDispatcher("/jsp/update-candidate.jsp");
-rd.forward(request, response);
-}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		Candidate c = null;
+		
+		if(dao.getConnection()) {
+		c = dao.getCandidate(id);
+		}
+		
+		request.setAttribute("profile", c);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/update-candidate.jsp");
+		rd.forward(request, response);
+	}
 
 
 

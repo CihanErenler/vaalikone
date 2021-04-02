@@ -75,13 +75,13 @@ public class Dao {
 		}
 	}
 
-	public ArrayList<Candidate> updateCandidate(Candidate c)
+	public ArrayList<Candidate> updateCandidate(Candidate c, Dao dao)
 	{
 		try
 		{
-			String sql="update candidate set fname=? lname=? city=? age=? profession=? political_party=? why_candidate=?"
-					+ "about=? profile_pic=? where id=?";
-			PreparedStatement pstmt=conn.prepareStatement(sql);
+			String sql="update candidate set fname=?, lname=?, city=?, age=?, profession=?, political_party=?, why_candidate=?, about=?, profile_pic=? where id=?";
+			PreparedStatement pstmt= dao.conn.prepareStatement(sql);
+			System.out.println(c.getProfile_pic());
 			pstmt.setString(1, c.getFname());
 			pstmt.setString(2, c.getLname());
 			pstmt.setString(3, c.getCity());
@@ -92,6 +92,7 @@ public class Dao {
 			pstmt.setString(8, c.getAbout());
 			pstmt.setString(9, c.getProfile_pic());
 			pstmt.setString(10, c.getId());
+			System.out.println(pstmt);
 			pstmt.executeUpdate();
 			return readAllCandidate();
 		}
@@ -100,7 +101,27 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	//Get img
+	public String getPic(String id)  {
+		String img="";
+		
+		try {
+			String sql = "select profile_pic from candidate where id=?";
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery(sql);
+			
+			img = RS.getString("profile_pic");
+			
+		}catch(SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return img;
+		
+	}
 
+	//Get Candidate
 	public Candidate getCandidate(String id) {
 		Candidate c = null;
 		try {
@@ -124,6 +145,61 @@ public class Dao {
 		}catch(SQLException e) {
 			return null;
 		}
+	}
+	
+	//Add Candidate
+	public boolean addCandidate(Candidate c) {
+		String sql = "INSERT INTO candidate (fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic) VALUES (?,?,?,?,?,?,?,?,?)";
+		try {
+			
+			System.out.println(c);
+			
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, c.getFname());
+			pstmt.setString(2, c.getLname());
+			pstmt.setString(3, c.getCity());
+			pstmt.setString(4, c.getAge());
+			pstmt.setString(5, c.getProfession());
+			pstmt.setString(6, c.getPolitical_party());
+			pstmt.setString(7, c.getWhy_candidate());
+			pstmt.setString(8, c.getAbout());
+			pstmt.setString(9, c.getProfile_pic());
+			
+			System.out.println(pstmt);
+
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(SQLException e) {
+			return false;
+		}
+
+	}
+	
+	//Delete Candidate
+	public ArrayList<Candidate> deleteCandidate (String id) {
+		ArrayList<Candidate> a = new ArrayList<>();
+		try {
+			String sql="delete from candidate where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//pstmt.setString(1, q.getText());
+			pstmt.setString(1, id);
+			if(pstmt.executeUpdate()>0) {
+				a = readAllCandidate();
+			}
+			else {
+				System.out.println("hmm");
+			}
+		}
+		catch(SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return a;
 	}
 
 	public ArrayList<Answer> getCanAnswerList(String id){

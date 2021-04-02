@@ -13,7 +13,7 @@ public class Candidate {
 	String why_candidate;
 	String about;
 	String profile_pic;
-	String pic_path = "../img/";
+	String pic_path = "/img/";
 	ArrayList<Answer> answers;
 	
 	public Candidate() 
@@ -33,7 +33,7 @@ public class Candidate {
 		this.political_party = political_party;
 		this.why_candidate = why_candidate;
 		this.about = about;
-		this.profile_pic = this.pic_path + profile_pic;
+		this.profile_pic =  profile_pic;
 	}
 	
 	public Candidate(String id, String fname, String lname, String city, String age, String profession,
@@ -48,10 +48,24 @@ public class Candidate {
 		this.political_party = political_party;
 		this.why_candidate = why_candidate;
 		this.about = about;
-		this.profile_pic = this.pic_path + profile_pic;
+		this.profile_pic = profile_pic;
 		this.answers = answers;
 	}
 	
+	
+	public Candidate( String fname, String lname, String city, String age, String profession,
+			String political_party, String why_candidate, String about, String profile_pic) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.city = city;
+		this.age = age;
+		this.profession = profession;
+		this.political_party = political_party;
+		this.why_candidate = why_candidate;
+		this.about = about;
+		this.profile_pic = getPic_path() + profile_pic;
+	}
 	
 	public String getId() {
 		return id;

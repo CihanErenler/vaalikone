@@ -16,7 +16,7 @@
       integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/jsp/style.css" />
     <title>Admin Candidate</title>
   </head>
   <body>
@@ -28,8 +28,8 @@
           <h1 class="title">Candidates</h1>
           <div class="underline"></div>
           <div class="admin btn-wrapper">
-            <a href="admin-dashboard.jsp" class="btn btn-thin">Back</a>
-            <a href="add-candidate.jsp" class="btn btn-thin">Add Candidate</a>
+            <a href="/jsp/admin-dashboard.jsp" class="btn btn-thin">Back</a>
+            <a href="/jsp/add-candidate.jsp" class="btn btn-thin">Add Candidate</a>
           </div>
         </div>
         <div class="admin-content">
@@ -37,7 +37,7 @@
 		<c:forEach var="candidate" items="${requestScope.candidatelist}" >
           <div class="can-card">
             <div class="img-wrap">
-              <img src="../img/${candidate.profile_pic}" alt="candidate" />
+              <img src="${candidate.profile_pic}" alt="candidate" />
             </div>
             <div class="can-content">
               <div class="can-name-info can-name-info-flex">
@@ -51,7 +51,7 @@
                   <a href="/readToUpdateCan?id=${candidate.id}" class="edit-btn">
                     <i class="fas fa-pen"></i>
                   </a>
-                  <a href="/delete?id=${candidate.id}" class="delete-btn">
+                  <a href="/deleteCan?id=${candidate.id}" class="delete-btn">
                     <i class="fas fa-trash-alt"></i>
                   </a>
                 </div>

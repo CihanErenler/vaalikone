@@ -1,15 +1,12 @@
 package app;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,36 +14,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import java.io.*;  
+
 import dao.Dao;
 import data.Candidate;
 
-@WebServlet(
-	    name = "updateCan",
-	    urlPatterns = {"/updateCan"}
-	)
-@MultipartConfig(
-		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
-		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
-		)
-public class UpdateCan extends HttpServlet 
-{
-	private Dao dao;
 
-	public void init() 
-	{
+@WebServlet(name = "AddCandidate", urlPatterns = { "/jsp/addCan" })
+@MultipartConfig(
+  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+)
+
+
+public class addCan extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	Dao dao;
+    
+    public addCan() {
+        super();
+        
+    }
+    
+    @Override
+	public void init() {
 		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
 	}
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		response.sendRedirect("index.html");
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String img = "";
 		
 		//get the file chosen by the user
@@ -69,14 +71,9 @@ public class UpdateCan extends HttpServlet
 			
 			System.out.println(request.getParameter("profile_pic"));
 		}else {
-			img = request.getParameter("img");
+			img = "placeholder.jpg";
 		}
 		
-		String imgVal = isthereafile ? "/img/"+filePart.getSubmittedFileName() : img;
-		System.out.println(imgVal);
-		
-				
-		String id=request.getParameter("id");
 		String fname=request.getParameter("fname");
 		String lname=request.getParameter("lname");
 		String city=request.getParameter("city");
@@ -85,20 +82,16 @@ public class UpdateCan extends HttpServlet
 		String political_party=request.getParameter("political_party");
 		String why_candidate=request.getParameter("why_candidate");
 		String about=request.getParameter("about");
-		String profile_pic= imgVal;
+		String profile_pic= isthereafile ? filePart.getSubmittedFileName() : img;
+		
+		Candidate c =new Candidate(fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
+		
+		if (dao.getConnection()) {
+ 			if(dao.addCandidate(c)) {
+ 				response.sendRedirect("/jsp/admin-candidate");
+ 			}
+ 		}
 		
 		
-		Candidate c =new Candidate(id, fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
-		
-		ArrayList<Candidate> list = new ArrayList<>();
-		if(dao.getConnection()) 
-		{
-			list = dao.updateCandidate(c, dao);
-		}
-		
-		request.setAttribute("candidatelist", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
-		rd.forward(request, response);
 	}
-
 }
