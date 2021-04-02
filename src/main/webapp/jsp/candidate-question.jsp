@@ -66,7 +66,12 @@
               </li>
             </ul>
           </div>
-          <div class="question">
+         
+          <button name="submit-can-question" type="submit" class="btn btn-thin">
+            Submit
+          </button>
+         </form>
+          <!-- <div class="question">
             <h2 class="index">2</h2>
             <p class="question-text">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta
@@ -159,11 +164,8 @@
                 <label for="strongly-agree">Strongly Agree</label>
               </li>
             </ul>
-          </div>
-          <button name="submit-can-question" type="submit" class="btn btn-thin">
-            Submit
-          </button>
-        </form>
+          </div> -->
+          
       </div>
     </div>
   </body>

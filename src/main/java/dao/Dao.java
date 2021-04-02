@@ -232,6 +232,24 @@ public class Dao {
 		}
 	}
 	
+	public boolean deleteQuestion(Question q) {
+		try {
+			String sql="delete from question where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//pstmt.setString(1, q.getText());
+			pstmt.setInt(1, q.getId());
+			if(pstmt.executeUpdate()>0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(SQLException e) {
+			return false;
+		}
+	}
+	
 	// Login/admin related
 	public boolean adminLogin(Admin adm) {
 		try {
