@@ -14,8 +14,8 @@ import dao.Dao;
 import data.Candidate;
 
 @WebServlet(
-	    name = "Update",
-	    urlPatterns = {"/update"}
+	    name = "updateCan",
+	    urlPatterns = {"/updateCan"}
 	)
 public class UpdateCan extends HttpServlet 
 {
@@ -49,14 +49,14 @@ public class UpdateCan extends HttpServlet
 		
 		Candidate c =new Candidate(id, fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
 		
-		ArrayList<Candidate> list = null;
+		ArrayList<Candidate> list = new ArrayList<>();
 		if(dao.getConnection()) 
 		{
-			list = dao.updateCandidate(c);
+			list = dao.updateCandidate(c, dao);
 		}
 		
 		request.setAttribute("candidatelist", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/update-candidate.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
 		rd.forward(request, response);
 	}
 

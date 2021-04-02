@@ -16,7 +16,7 @@
       integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/jsp/style.css" />
     <title>Admin Candidate</title>
   </head>
   <body>
@@ -37,7 +37,7 @@
 		<c:forEach var="candidate" items="${requestScope.candidatelist}" >
           <div class="can-card">
             <div class="img-wrap">
-              <img src="../img/${candidate.profile_pic}" alt="candidate" />
+              <img src="${candidate.profile_pic}" alt="candidate" />
             </div>
             <div class="can-content">
               <div class="can-name-info can-name-info-flex">

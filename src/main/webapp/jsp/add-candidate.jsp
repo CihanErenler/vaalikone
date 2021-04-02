@@ -20,9 +20,9 @@
         <h1 class="title">Add Candidate</h1>
         <div class="underline"></div>
         <div class="add-img">
-            <img class="output-img" src="../img/rubeus-hagrid.jpg" alt="candidate" />
+            <img class="output-img" src="http://www.ll-mm.com/images/placeholders/team-placeholder.jpg" alt="candidate" />
         </div>
-            <form action="" method="POST" enctype="multipart/form-data" class="candidate-form">
+            <form action="addCan" method="POST"  class="candidate-form">
                 <label for="img-file" class="upload"></i>Add Picture</label>
                 <input type="file" name="file" id="img-file">	
                 <input type="text" name="fname" id="fname" placeholder="First Name"/>

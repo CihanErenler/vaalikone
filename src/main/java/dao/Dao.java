@@ -75,13 +75,13 @@ public class Dao {
 		}
 	}
 
-	public ArrayList<Candidate> updateCandidate(Candidate c)
+	public ArrayList<Candidate> updateCandidate(Candidate c, Dao dao)
 	{
 		try
 		{
-			String sql="update candidate set fname=? lname=? city=? age=? profession=? political_party=? why_candidate=?"
-					+ "about=? profile_pic=? where id=?";
-			PreparedStatement pstmt=conn.prepareStatement(sql);
+			String sql="update candidate set fname=?, lname=?, city=?, age=?, profession=?, political_party=?, why_candidate=?, about=?, profile_pic=? where id=?";
+			PreparedStatement pstmt= dao.conn.prepareStatement(sql);
+			System.out.println(c.getProfile_pic());
 			pstmt.setString(1, c.getFname());
 			pstmt.setString(2, c.getLname());
 			pstmt.setString(3, c.getCity());
@@ -92,6 +92,7 @@ public class Dao {
 			pstmt.setString(8, c.getAbout());
 			pstmt.setString(9, c.getProfile_pic());
 			pstmt.setString(10, c.getId());
+			System.out.println(pstmt);
 			pstmt.executeUpdate();
 			return readAllCandidate();
 		}
@@ -126,6 +127,7 @@ public class Dao {
 		}
 	}
 
+	//Get Candidate
 	public ArrayList<Answer> getCanAnswerList(String id){
 		ArrayList<Answer> list = new ArrayList<>();
 
