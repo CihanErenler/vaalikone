@@ -51,26 +51,15 @@ public class UpdateAnswer extends HttpServlet {
 		String id = "";
 		ArrayList<Answer> answer = new ArrayList<Answer>();
 		
-//		if (dao.getConnection()) {
-//			id = String.valueOf(dao.getIdByRef(ref));
-//			for (int i=0; i<size; i++) {
-//				Answer ans = new Answer(id, request.getParameter("questionID".concat(String.valueOf(i))), request.getParameter(String.valueOf(i)));
-//				answer.add(ans);
-//			}
-//			dao.addAnswerCandidate(answer);
-//		}
-		
-		System.out.println(dao.getIdByRef(ref));
-		
-		
-		
-//		System.out.println(answer);
-		System.out.println("REF : " + ref);
-//		System.out.println("Size: " + size);
-		
-		
-		
-		response.getWriter().append("Hello");
+		if (dao.getConnection()) {
+			id = String.valueOf(dao.getIdByRef(ref));
+			for (int i=0; i<size; i++) {
+				Answer ans = new Answer(id, request.getParameter("questionID".concat(String.valueOf(i))), request.getParameter(String.valueOf(i)));
+				answer.add(ans);
+			}
+			dao.addAnswerCandidate(answer);
+			response.sendRedirect("admin-candidate");
+		}
 	}
 
 }
