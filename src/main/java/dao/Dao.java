@@ -149,19 +149,22 @@ public class Dao {
 	
 	//	Get candidate id by reference
 	public int getIdByRef(String ref) {
+		System.out.println("ref >>"+ref);
+		int id = 0;
 		try {
 			String sql = "select id from candidate where ref_num=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,ref);
 			ResultSet rs = pstmt.executeQuery();
-			int id = 1000;
+		
 			while (rs.next()) {
 				id = rs.getInt("id");
 			}
-			return id;
 		}catch(SQLException e) {
-			return 100;
+			return 0;
 		}
+		return id;
+		
 	}
 	
 	//Add Candidate
