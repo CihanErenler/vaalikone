@@ -85,13 +85,13 @@ public class addCan extends HttpServlet {
 		String profile_pic= isthereafile ? filePart.getSubmittedFileName() : img;
 		
 		Candidate c =new Candidate(fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
+
 		
 		if (dao.getConnection()) {
  			if(dao.addCandidate(c)) {
- 				response.sendRedirect("/jsp/admin-candidate");
+ 				response.sendRedirect("/jsp/candidate-question?ref="+c.getRef_num());
  			}
- 		}
-		
+ 		}	
 		
 	}
 }

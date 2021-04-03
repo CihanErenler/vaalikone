@@ -1,6 +1,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.sql.Timestamp;
 
 public class Candidate {
 	String id;
@@ -14,7 +15,12 @@ public class Candidate {
 	String about;
 	String profile_pic;
 	String pic_path = "/img/";
+	String ref_num = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
+	public String getRef_num() {
+		return ref_num;
+	}
 	ArrayList<Answer> answers;
+	
 	
 	public Candidate() 
 	{

@@ -149,7 +149,7 @@ public class Dao {
 	
 	//Add Candidate
 	public boolean addCandidate(Candidate c) {
-		String sql = "INSERT INTO candidate (fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic) VALUES (?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO candidate (fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic, ref_num) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			
 			System.out.println(c);
@@ -164,6 +164,7 @@ public class Dao {
 			pstmt.setString(7, c.getWhy_candidate());
 			pstmt.setString(8, c.getAbout());
 			pstmt.setString(9, c.getProfile_pic());
+			pstmt.setString(10, c.getRef_num());
 			
 			System.out.println(pstmt);
 
