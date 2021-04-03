@@ -29,9 +29,11 @@
 			<form method="post" action="UpdateAnswer" class="question-form">
 			<input type="hidden" name="ref" value="${requestScope.ref}" />
 			<input type="hidden" name="size" value="${requestScope.questions.size()}" />
+			
 			<c:forEach var="que" items="${requestScope.questions}" varStatus="counter">
 				<section>
 					<div class="question">
+						<input type="hidden" name="questionID${counter.index}" value="${que.id}" />
 						<h2 class="index">${counter.index+1}</h2>
 						<p class="question-text">${que.text}</p>
 					</div>

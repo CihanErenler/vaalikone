@@ -147,6 +147,23 @@ public class Dao {
 		}
 	}
 	
+	//	Get candidate id by reference
+	public int getIdByRef(String ref) {
+		try {
+			String sql = "select id from candidate where ref_num=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,ref);
+			ResultSet rs = pstmt.executeQuery();
+			int id = 1000;
+			while (rs.next()) {
+				id = rs.getInt("id");
+			}
+			return id;
+		}catch(SQLException e) {
+			return 100;
+		}
+	}
+	
 	//Add Candidate
 	public boolean addCandidate(Candidate c) {
 		String sql = "INSERT INTO candidate (fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic, ref_num) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -274,10 +291,10 @@ public class Dao {
 	public boolean addQuestion(Question q) {
 		String sql = "INSERT INTO question (question) VALUES (?)";
 		try {
-
+	
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, q.getText());
-
+	
 			if(pstmt.executeUpdate()>0) {
 				return true;
 			}
@@ -288,7 +305,7 @@ public class Dao {
 		catch(SQLException e) {
 			return false;
 		}
-
+	
 	}
 	
 	public boolean updateQuestion(Question q) {
@@ -391,5 +408,25 @@ public class Dao {
 			return 100;
 		}
 	}
+	
+	public void addAnswerCandidate(ArrayList<Answer> answer) {
+		try {
+			String sql="insert into answer (can_id, question_id, answer) VALUES (?, ?, ?)";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			for (Answer ans:answer) {
+				pstmt.setString(1, ans.getCan_id());
+				pstmt.setString(2, ans.getQuestion_id());
+				pstmt.setString(3, ans.getAnswer());
+				pstmt.addBatch();
+				System.out.println(pstmt);
+			}
+			pstmt.executeBatch();
+			System.out.println("succeed");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("error");
+		}
+	}
+	
 
 }
