@@ -66,7 +66,7 @@ public class addCan extends HttpServlet {
 		    //for example, you can copy the uploaded file to the server
 		    //note that you probably don't want to do this in real life!
 		    //upload it to a file host like S3 or GCS instead
-		    File fileToSave = new File("C:\\Users\\Cihan\\Desktop\\web programming\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
+		    File fileToSave = new File("C:\\Users\\rhexa\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
 			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			
 			System.out.println(request.getParameter("profile_pic"));
@@ -85,13 +85,13 @@ public class addCan extends HttpServlet {
 		String profile_pic= isthereafile ? filePart.getSubmittedFileName() : img;
 		
 		Candidate c =new Candidate(fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic);
+
 		
 		if (dao.getConnection()) {
  			if(dao.addCandidate(c)) {
- 				response.sendRedirect("/jsp/admin-candidate");
+ 				response.sendRedirect("/jsp/candidate-question?ref="+c.getRef_num());
  			}
- 		}
-		
+ 		}	
 		
 	}
 }
