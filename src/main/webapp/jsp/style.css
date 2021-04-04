@@ -127,7 +127,7 @@ img {
   color: var(--dark-blue);
   border-radius: 5px;
   padding: 3px 7px;
-  margin-bottom: 10px;
+	margin-bottom:10px;
 }
 
 .dark-text {
@@ -965,4 +965,42 @@ img {
 
 #submit {
   display: none;
+}
+
+/* Warnign */
+
+#warning{
+	position: absolute;
+	max-width: 400px;
+	width: 90%;
+	left: 50%;
+	transform:  translateX(-50%);
+	padding: 20px;
+	border-radius: 10px;
+	color: #fff;
+	text-align: center;
+}
+
+.danger{
+	background: rgb(255, 128, 128);
+}
+
+.fadein{
+	animation: fade-in .5s ease-in-out forwards;
+}
+
+@keyframes fade-in{
+	0%{top: -100px; opacity: 0;}
+	60%{top: 30px;} 
+	100%{top: 20px; opacity: 1;}
+}
+
+.fadeout{
+	animation: fade-out .5s ease-in-out forwards;
+}
+
+@keyframes fade-out{
+	0%{top: 20px; opacity: 1;}
+	 40%{top: 30px;}
+	100%{top: -100px; opacity: 0;}
 }

@@ -1,9 +1,8 @@
 
 const back = document.querySelector(".btn-back");
+back.addEventListener("click", goBack);
 
-back.addEventListener("click", goBack );
-
-function goBack(){
+function goBack() {
 	window.history.back();
-	console.log("burada")
+
 }
