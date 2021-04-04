@@ -19,13 +19,12 @@
 
 <link rel="stylesheet" href="style.css" />
 <script defer src="/js/add-question.js"></script>
-<script defer src="/js/profile.js"></script>
 </head>
 <body>
 	<%@ include file="../html/navbar.html"%>
 	<div class="add-question container flex-container">
 		<div class="card">
-			<a href="#" class="btn btn-back"> <i
+			<a href="#" class="btn btn-back go-back"> <i
 				class="fas fa-chevron-left"></i> Back
 			</a>
 			<c:if test="${requestScope.addNew == '1'}">
@@ -62,5 +61,6 @@
     </div> -->
 
 
+	<script src="/js/goBack.js"></script>
 </body>
 </html>

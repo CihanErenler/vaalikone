@@ -14,7 +14,7 @@
     <%@ include file="../html/navbar.html" %>
     <div class="add-can container flex-container">
       <div class="card">
-        <a href="admin-candidate.jsp" class="btn btn-back">
+        <a href="admin-candidate" class="btn btn-back">
           <i class="fas fa-chevron-left"></i>
           Back</a>
         <h1 class="title">Add Candidate</h1>
@@ -38,6 +38,7 @@
       </div>
     </div>
 
-    <script src="../js/add-candidate.js"></script>
+    <script src="/js/add-candidate.js"></script>
+<!--     <script src="/js/goBack.js"></script> -->
   </body>
 </html>

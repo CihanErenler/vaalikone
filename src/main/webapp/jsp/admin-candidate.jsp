@@ -19,7 +19,7 @@
 <title>Admin Candidate</title>
 </head>
 <body>
-
+	<%@ include file="/html/navbar.html" %>
 
 	<div class="admin-pages container flex-container">
 		<div class="card">
@@ -44,7 +44,7 @@
 						<div class="can-content">
 							<div class="can-name-info can-name-info-flex">
 								<a href="/ShowProfile?id=${candidate.id}">
-									<h3>${candidate.fname}${candidate.lname}</h3>
+									<h3>${candidate.fname} ${candidate.lname}</h3>
 								</a>
 								<h4>
 									<span class="age">Age :</span> ${candidate.age}
@@ -60,7 +60,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="party">${candidate.political_party}</div>
+							<div class="party admin-can-party">${candidate.political_party}</div>
 							<div class="short-about">${candidate.about}</div>
 						</div>
 					</div>
