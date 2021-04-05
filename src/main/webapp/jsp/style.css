@@ -633,12 +633,23 @@ img {
   min-width: 100px;
   font-size: 18px;
   font-weight: 300;
+  width: 180px;
 }
 
 .btn-back:hover,
 .candidate-form .btn-thin:hover {
   background: var(--light-hover);
 }
+
+.profile-buttons 
+{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
 
 .candidate-form {
   max-width: 600px;
