@@ -38,6 +38,7 @@
       </div>
     </div>
 
-    <script src="../js/add-candidate.js"></script>
+    <script src="/js/add-candidate.js"></script>
+<!--     <script src="/js/goBack.js"></script> -->
   </body>
 </html>
