@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -46,6 +47,7 @@
 								<a href="/ShowProfile?id=${candidate.id}">
 									<h3>${candidate.fname} ${candidate.lname}</h3>
 								</a>
+
 								<h4>
 									<span class="age">Age :</span> ${candidate.age}
 								</h4>
@@ -60,7 +62,11 @@
 									</a>
 								</div>
 							</div>
+
 							<div class="party admin-can-party">${candidate.political_party}</div>
+
+							<div class="party">${candidate.political_party}</div>
+
 							<div class="short-about">${candidate.about}</div>
 						</div>
 					</div>
