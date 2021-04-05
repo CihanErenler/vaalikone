@@ -65,8 +65,6 @@
 
 							<div class="party admin-can-party">${candidate.political_party}</div>
 
-							<div class="party">${candidate.political_party}</div>
-
 							<div class="short-about">${candidate.about}</div>
 						</div>
 					</div>
