@@ -127,7 +127,10 @@ img {
   color: var(--dark-blue);
   border-radius: 5px;
   padding: 3px 7px;
-  margin-bottom: 10px;
+}
+
+.admin-can-party{
+	margin-bottom: 10px;
 }
 
 .dark-text {
@@ -222,7 +225,18 @@ img {
   border-radius: 10px;
   grid-template-columns: 300px 1fr;
   margin-bottom: 40px;
+  transition: all .4s ease;
 }
+
+.can-card:hover{
+	transform: scale(1.005);
+	box-shadow: 1px 6px 15px 3px rgba(0,0,0,0.08);
+}
+
+.can-card:hover .img-wrap img{
+	transform: scale(1.05);
+}
+
 
 .can-card .img-wrap {
   height: 208px;
@@ -230,11 +244,17 @@ img {
   overflow: hidden;
 }
 
-.can-content {
-  padding: 20px;
+.can-card .img-wrap img{
+	transition: transform .4s ease;
 }
 
-.can-content .can-name-info {
+.can-content {
+  padding: 20px;
+  /* background: var(--bg); */
+ 
+}
+
+ .can-name-info {
   margin-bottom: 10px;
 }
 
@@ -965,4 +985,42 @@ img {
 
 #submit {
   display: none;
+}
+
+/* Warnign */
+
+#warning{
+	position: absolute;
+	max-width: 400px;
+	width: 90%;
+	left: 50%;
+	transform:  translateX(-50%);
+	padding: 20px;
+	border-radius: 10px;
+	color: #fff;
+	text-align: center;
+}
+
+.danger{
+	background: rgb(255, 128, 128);
+}
+
+.fadein{
+	animation: fade-in .5s ease-in-out forwards;
+}
+
+@keyframes fade-in{
+	0%{top: -100px; opacity: 0;}
+	60%{top: 30px;} 
+	100%{top: 20px; opacity: 1;}
+}
+
+.fadeout{
+	animation: fade-out .5s ease-in-out forwards;
+}
+
+@keyframes fade-out{
+	0%{top: 20px; opacity: 1;}
+	 40%{top: 30px;}
+	100%{top: -100px; opacity: 0;}
 }
