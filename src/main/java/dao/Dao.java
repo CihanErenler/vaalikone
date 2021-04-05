@@ -11,6 +11,7 @@ import data.Admin;
 import data.Answer;
 import data.Candidate;
 import data.Question;
+import data.RandomAnswer;
 import data.Voter;
 
 import java.sql.Connection;
@@ -274,6 +275,26 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	//get question id by ref
+	public int getQuestionByRef(String ref) {
+		int id = 0;
+		try {
+			String sql = "select id from question where question_ref=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ref);
+			ResultSet rs = pstmt.executeQuery();
+
+
+			while (rs.next()) {
+				id = rs.getInt("id");
+				System.out.println(id);
+			}
+		} catch (SQLException e) {
+			return 0;
+		}
+		return id;
+	}
 
 	public ArrayList<Question> readAllQuestions() {
 		ArrayList<Question> listQuestion = new ArrayList<>();
@@ -295,11 +316,12 @@ public class Dao {
 	}
 
 	public boolean addQuestion(Question q) {
-		String sql = "INSERT INTO question (question) VALUES (?)";
+		String sql = "INSERT INTO question (question, question_ref) VALUES (?,?)";
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, q.getText());
+			pstmt.setString(2, q.getRef_num());
 
 			if (pstmt.executeUpdate() > 0) {
 				return true;
@@ -310,6 +332,24 @@ public class Dao {
 			return false;
 		}
 
+	}
+	
+	public void addAnswersForNewQuestion(ArrayList<RandomAnswer> r) {
+		try {
+			String sql = "insert into answer (can_id, question_id, answer) VALUES (?, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			for (RandomAnswer ans : r) {
+				pstmt.setString(1, ans.getCanId());
+				pstmt.setString(2, ans.getQid());
+				pstmt.setString(3, ans.getAnswer());
+				pstmt.addBatch();
+			}
+			pstmt.executeBatch();
+			System.out.println("succeed");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("error");
+		}
 	}
 
 	public boolean updateQuestion(Question q) {

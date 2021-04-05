@@ -1,8 +1,11 @@
 package data;
 
+import java.sql.Timestamp;
+
 public class Question {
 	private int id;
 	private String text;
+	String ref_num = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
 	public Question(String id, String text) {
 		// TODO Auto-generated constructor stub
 		setId(id);
@@ -24,6 +27,12 @@ public class Question {
 		catch(NumberFormatException | NullPointerException e) {
 			//Do nothing - the value of id won't be changed
 		}
+	}
+	public String getRef_num() {
+		return ref_num;
+	}
+	public void setRef_num(String ref_num) {
+		this.ref_num = ref_num;
 	}
 	public String getText() {
 		return text;
