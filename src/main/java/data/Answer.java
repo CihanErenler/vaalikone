@@ -17,7 +17,19 @@ public class Answer {
 		this.answer_text = answer_text;
 		setAnswer_value(this.answer);
 	}
+	
+	public Answer(String id, String can_id, String question_id, String answer) {
+		setId(id);
+		this.can_id = can_id;
+		this.question_id = question_id;
+		this.answer = answer;
+	}
 
+	public Answer(String can_id, String question_id, String answer) {
+		this.can_id = can_id;
+		this.question_id = question_id;
+		this.answer = answer;
+	}
 
 	public String getAnswer_text() {
 		return answer_text;

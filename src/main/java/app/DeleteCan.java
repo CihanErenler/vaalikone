@@ -34,17 +34,19 @@ public class DeleteCan extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Candidate> list = new ArrayList<>();
+//		ArrayList<Candidate> list = new ArrayList<>();
 		
 		String id = request.getParameter("id");
     	
     	if (dao.getConnection()) {
- 			list = dao.deleteCandidate(id);
+ 			if(dao.deleteCandidate(id)) {
+ 				response.sendRedirect("/jsp/admin-candidate");
+ 			}
     	}
     	
-    	request.setAttribute("candidatelist", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
-		rd.forward(request, response);
+//    	request.setAttribute("candidatelist", list);
+//		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
+//		rd.forward(request, response);
 	}
 
 	

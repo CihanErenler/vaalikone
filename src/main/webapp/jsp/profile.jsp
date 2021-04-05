@@ -25,7 +25,7 @@
     <%@ include file="../html/navbar.html" %>
     <div class="container flex-container">
       <div class="card profile p-x-11">
-       <a href="/jsp/candidates" class="btn btn-back">
+       <a href="#" class="btn btn-back">
           <i class="fas fa-chevron-left"></i>
           Back</a
         >
@@ -85,5 +85,7 @@
  		</div>
       </div>
     </div>
+    
+    <script src="/js/profile.js"></script>
   </body>
 </html>
