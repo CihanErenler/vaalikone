@@ -14,9 +14,13 @@
     <%@ include file="../html/navbar.html" %>
     <div class="add-can container flex-container">
       <div class="card">
-        <a href="jsp/admin-candidate" class="btn btn-back">
-          <i class="fas fa-chevron-left"></i>
-          Back</a>
+	      <div class= "profile-buttons">
+	        <a href="jsp/admin-candidate" class="btn btn-back">
+	          <i class="fas fa-chevron-left"></i>
+	          Back</a>
+	         <a href="/jsp/ReadToUpdateAnswer?id=${requestScope.profile.getId()}" class="btn btn-back">
+	          Update Answers</a>
+	          </div>
         <h1 class="title">Update Candidate</h1>
         <div class="underline"></div>
         <div class="add-img">

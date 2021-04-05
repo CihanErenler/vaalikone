@@ -1,18 +1,33 @@
 package app;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Dao;
+import data.Answer;
+import data.Question;
+
 /**
  * Servlet implementation class ReadToUpdateAnswer
  */
-@WebServlet("/ReadToUpdateAnswer")
+@WebServlet("/jsp/ReadToUpdateAnswer")
 public class ReadToUpdateAnswer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	Dao dao = null;
+	
+	public void init() 
+	{
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+	}
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +42,17 @@ public class ReadToUpdateAnswer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String id = request.getParameter("id");
+		
+		ArrayList<Answer> a = null;
+		
+		if (dao.getConnection()) {
+ 			a = dao.getCanAnswerList(id);
+ 		}
+		
+		request.setAttribute("answer", a);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/change-answer.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

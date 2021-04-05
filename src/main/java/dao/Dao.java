@@ -423,5 +423,30 @@ public class Dao {
 			System.out.println("error");
 		}
 	}
+	
+	public void updateAnswerCandidate(ArrayList<Answer> answer) 
+	{
+		try 
+		{
+			String sql = "update answer set answer=? where can_id=? and question_id=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			for (Answer ans : answer) 
+			{
+				pstmt.setString(1, ans.getCan_id());
+				pstmt.setString(2, ans.getQuestion_id());
+				pstmt.setString(3, ans.getAnswer());
+				pstmt.addBatch();
+			}
+			pstmt.executeBatch();
+			System.out.println("succeed");
+			
+		} catch (Exception e) 
+		{
+			// TODO: handle exception
+			System.out.println("error");
+		}
+
+	}
+	
 
 }
