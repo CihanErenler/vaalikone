@@ -21,14 +21,14 @@
 	<%@ include file="../html/navbar.html"%>
 	<div class="can-question container flex-container">
 		<div class="card">
-			<a href="add-candidate.jsp" class="btn btn-back"> <i
+			<a href="#" class="btn btn-back"> <i
 				class="fas fa-chevron-left"></i> Back
 			</a>
 			<h1 class="title">Candidate's answers</h1>
 			<div class="underline"></div>
 			<form method="post" action="ChangeAnswer" class="question-form">
 			<input type="hidden" name="size" value="${requestScope.answer.size()}" />
-			<input type="hidden" name="id" value="${requestScope.id}" />
+			<input type="text" name="id" value="${requestScope.id}" />
 			
 			<c:forEach var="ans" items="${requestScope.answer}" varStatus="counter">
 				<section>
@@ -40,16 +40,16 @@
 					<div class="answer">
 						<ul> 
 							<li><input type="radio" name="${counter.index}" id="strongly-disagree"
-								value="1" <c:if test="ans.answer_value==1">checked</c:if>/> <label for="strongly-disagree">Strongly
+								value="1" <c:if test="${ans.answer==1}">checked</c:if>/> <label for="strongly-disagree">Strongly
 									Disagree</label></li>
-							<li><input type="radio" name="${counter.index}" id="disagree" value="2" <c:if test="ans.answer_value==2">checked</c:if> />
+							<li><input type="radio" name="${counter.index}" id="disagree" value="2" <c:if test="${ans.answer==2}">checked</c:if> />
 								<label for="disagree">Disagree</label></li>
 							<li><input type="radio" name="${counter.index}" id="neutral" value="3"
-								<c:if test="ans.answer_value==3">checked</c:if> /> <label for="neutral">Neutral</label></li>
-							<li><input type="radio" name="${counter.index}" id="agree" value="4" <c:if test="ans.answer_value==4">checked</c:if> />
+								<c:if test="${ans.answer==3}">checked</c:if> /> <label for="neutral">Neutral</label></li>
+							<li><input type="radio" name="${counter.index}" id="agree" value="4" <c:if test="${ans.answer==4}">checked</c:if> />
 								<label for="agree">Agree</label></li>
 							<li><input type="radio" name="${counter.index}" id="strongly-agree"
-								value="5" <c:if test="ans.answer_value==5">checked</c:if> /> <label for="strongly-agree">Strongly Agree</label></li>
+								value="5" <c:if test="${ans.answer==5}">checked</c:if> /> <label for="strongly-agree">Strongly Agree</label></li>
 						</ul>
 					</div>
 				</section>
@@ -66,5 +66,6 @@
 
 		</div>
 	</div>
+	<script src="/js/goBack.js"></script>
 </body>
 </html>

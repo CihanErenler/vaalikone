@@ -58,19 +58,18 @@ public class ChangeAnswer extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println(request.getParameter("size"));
 		System.out.println(request.getParameter("id"));
-		System.out.println(request.getParameter("1"));
 		
-//		int size = Integer.parseInt(request.getParameter("size"));
-//		ArrayList<Answer> answer = new ArrayList<Answer>();
-//		
-//		if (dao.getConnection()) {
-//			for (int i=0; i<size; i++) {
-//				Answer ans = new Answer(id, request.getParameter("questionID".concat(String.valueOf(i))), request.getParameter(String.valueOf(i)));
-//				answer.add(ans);
-//			}
-//			dao.updateAnswerCandidate(answer);
-//			response.sendRedirect("admin-candidate");
-//		}
+		int size = Integer.parseInt(request.getParameter("size"));
+		ArrayList<Answer> answer = new ArrayList<Answer>();
+		
+		if (dao.getConnection()) {
+			for (int i=0; i<size; i++) {
+				Answer ans = new Answer(request.getParameter("id"), request.getParameter("questionID".concat(String.valueOf(i))), request.getParameter(String.valueOf(i)));
+				answer.add(ans);
+			}
+			dao.updateAnswerCandidate(answer);
+			response.sendRedirect("admin-candidate");
+		}
 	}
 
 }

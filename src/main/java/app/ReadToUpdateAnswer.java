@@ -49,7 +49,7 @@ public class ReadToUpdateAnswer extends HttpServlet {
 		if (dao.getConnection()) {
  			a = dao.getCanAnswerList(id);
  		}
-		
+		request.setAttribute("id", id);
 		request.setAttribute("answer", a);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/change-answer.jsp");
 		rd.forward(request, response);
