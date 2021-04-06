@@ -92,6 +92,23 @@ img {
   font-weight: 300 !important;
 }
 
+.question-index {
+  color: var(--primary-color) !important;
+}
+
+.disabled{
+	color: var(--light-gray) !important;
+}
+
+
+.ready-submit{
+	background: #33bd58 !important;
+}
+
+.ready-submit:hover{
+	background: #2dad4f !important;
+}
+
 .btn:hover {
   background: var(--hover);
 }
@@ -112,6 +129,7 @@ img {
   margin-bottom: 5px;
   text-align: center;
   font-size: 40px;
+  transition: all .4s ease;
 }
 
 .underline {
@@ -960,6 +978,7 @@ img {
 .progress-card {
   position: absolute;
   width: 925px;
+  overflow: hidden;
 }
 
 .progress-bar {
@@ -980,9 +999,7 @@ img {
   transition: all 0.4s ease;
 }
 
-.question-index {
-  color: var(--primary-color) !important;
-}
+
 
 #submit {
   display: none;

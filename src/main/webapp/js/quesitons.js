@@ -1,25 +1,3 @@
-const questions = [
-  "If You Had Three Wishes, What Would You Wish For?",
-  "What Would You Rather Throw Away: Love Or Money?",
-  "What’s The Most Beautiful Place You’ve Ever Seen?",
-  "What Was Your Fondest Memory Of High School?",
-  "What’s Your Favorite TV Show?",
-  "What’s The Strangest Thing In Your Refrigerator?",
-  "Have You Ever Been To A Five Star Resort?",
-  "What Was Your Favorite Toy Growing Up?",
-  "What’s The Funniest Way You’ve Ever Broken The Law?",
-  "What’s Your Favorite Sports Team?",
-  "What Talent Would You Want To Possess If You Could?",
-  "If You Could Trade Lives With Someone, Who Would It Be?",
-  "If You Could Erase One Event From History, Which One Would You Erase?",
-  "What Was Your Favorite Toy As A Child?",
-  "Who Do You Most Like To Poke Fun At?",
-  "If You Were Suddenly Transported To Another Planet, How Would You Assess The Situation?",
-  "When Do You Feel The Most In Control?",
-  "Would You Rather Have 10 Hobbies Or One Passion?",
-  "If You Could Interview A Famous Person, Who Would You Choose?",
-  "If Your Food Is Bad At A Restaurant, Would You Say Something?",
-];
 
 const form = document.getElementById("qustions-form");
 const next = document.getElementById("next");
@@ -27,52 +5,96 @@ const submit = document.getElementById("submit");
 const bar = document.querySelector(".bar");
 const wrapper = document.querySelector(".wrapper-question");
 const questionIndex = document.querySelector(".question-index");
+const wrapperContent = document.querySelector(".wrapper-content");
+const totalNum = document.querySelector(".total-num");
+const answersArr = document.querySelector(".answersArr");
+const title = document.querySelector(".title");
+const label = document.querySelectorAll(".answer label");
 
-let amount = 5;
+const questions = [...wrapperContent.getAttribute("data-questions").split("%")];
+
+
+let amount = calculate(questions.length);
 
 next.addEventListener("click", update);
-submit.addEventListener("click", redirect);
+/*submit.addEventListener("click", redirect);*/
 window.addEventListener("load", () => {
-  wrapper.textContent = questions[0];
+	wrapper.textContent = questions[0];
+	bar.style.width = calculate(questions.length) + "%";
+	totalNum.textContent = questions.length;
 });
 
 const question = questionIterator(questions);
 
+let answers = [];
+
 function update(e) {
-  e.preventDefault();
+	e.preventDefault();
+	
+	const getName = document.getElementsByName("score");
+	
+	for(let i = 0; i < getName.length; i++){
+		if(getName[i].checked){
+			answers.push(getName[i].value);
+		}
+	}
+	
+	console.log(questions.join("%"));
+		answersArr.value = answers.join("%");
+	
 
-  const isDone = question.next();
-  let index = +questionIndex.textContent + 1;
+	const isDone = question.next();
+	let index = +questionIndex.textContent + 1;
 
-  if (!isDone.done) {
-    questionIndex.textContent = index;
-    amount += 5;
-    bar.style.width = amount + "%";
-    wrapper.textContent = isDone.value;
-  }
+	if (!isDone.done) {
+		questionIndex.textContent = index;
+		amount += calculate(questions.length);
+		bar.style.width = amount + "%";
+		wrapper.textContent = isDone.value;
+	}
 
-  if (index === 20) {
-    next.style.display = "none";
-    submit.style.display = "block";
-  }
+	if (index === questions.length + 1) {
+		next.style.display = "none";
+		submit.style.display = "block";
+		title.classList.add("disabled");
+		questionIndex.classList.add("disabled");
+		submit.classList.add("ready-submit");
+		wrapper.textContent = "All quesions were answered!"
+		wrapper.style.color = "#c4c4c4";
+		
+		label.forEach(i => {
+			i.style.color = "#c4c4c4";
+		})
+		
+		const getName = document.getElementsByName("score");
+	
+		for(let i = 0; i < getName.length; i++){
+			getName[i].disabled = true;
+		}
+		
+	}
 }
 
-function redirect(e) {
-  e.preventDefault();
-  window.location.href = "../jsp/top-3.jsp";
-}
+/*function redirect(e) {
+	e.preventDefault();
+	window.location.href = "../jsp/top-3.jsp";
+}*/
 
 function questionIterator(questions) {
-  let currentIndex = 1;
+	let currentIndex = 1;
 
-  return {
-    next: function () {
-      return currentIndex < questions.length
-        ? {
-            value: questions[currentIndex++],
-            done: false,
-          }
-        : { done: true };
-    },
-  };
+	return {
+		next: function() {
+			return currentIndex < questions.length
+				? {
+					value: questions[currentIndex++],
+					done: false,
+				}
+				: { done: true };
+		},
+	};
+}
+
+function calculate(x){
+	return 100 / x;
 }
