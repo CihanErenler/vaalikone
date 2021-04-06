@@ -24,9 +24,9 @@
 	
 	    <%@ include file="../html/navbar.html" %>
 	     <div class="candidates container">
+	      	<div class="card">
 	      <h1 class="title">Candidates</h1>
 	      <div class="underline"></div>
-	      
 			  <c:forEach var="candidate" items="${requestScope.candidatelist}" >
 			      <div class="candidates-wrapper">
 				   <a href="/ShowProfile?id=${candidate.id}">
@@ -44,7 +44,7 @@
 				                  ${candidate.city}
 				                </h4>
 				              </div>
-				              <div class="party">${candidate.political_party}</div>
+				              <div class="party admin-can-party">${candidate.political_party}</div>
 				              <div class="short-about">
 								${candidate.about}
 				              </div>
@@ -53,7 +53,7 @@
 						</a>
 					</div>
 				</c:forEach>
-	
+				</div>
 	      </div>
 </body>
 </html>

@@ -232,7 +232,7 @@ img {
 }
 
 .candidates.container {
-  padding-top: 87px;
+  padding: 87px 20px;
 }
 
 .can-card {
