@@ -13,6 +13,83 @@ public class Answer {
 	String fname;
 	String lname;
 	
+	public Answer(String can_id, String question_id, String answer, String img, String party, String fname, String lname) {
+		this.can_id = can_id;
+		this.question_id = question_id;
+		this.answer = answer;
+		this.img = img;
+		this.party = party;
+		this.fname = fname;
+		this.lname = lname;
+		setAnswer_value(this.answer);
+	}
+	
+	
+	
+	/**
+	 * @return the img
+	 */
+	public String getImg() {
+		return img;
+	}
+
+
+	/**
+	 * @param img the img to set
+	 */
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
+	/**
+	 * @return the party
+	 */
+	public String getParty() {
+		return party;
+	}
+
+
+	/**
+	 * @param party the party to set
+	 */
+	public void setParty(String party) {
+		this.party = party;
+	}
+
+
+	/**
+	 * @return the fname
+	 */
+	public String getFname() {
+		return fname;
+	}
+
+
+	/**
+	 * @param fname the fname to set
+	 */
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+
+	/**
+	 * @return the lname
+	 */
+	public String getLname() {
+		return lname;
+	}
+
+
+	/**
+	 * @param lname the lname to set
+	 */
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+
 	public Answer(String id, String can_id, String question_id, String answer, String answer_text) {
 		setId(id);
 		this.can_id = can_id;

@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
+<%@ page import="java.util.ArrayList" %>   
+<%@ page import="data.Answer" %>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+  
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/jsp/style.css" />
     <title>Top 3 Candidates</title>
   </head>
   <body>
@@ -18,51 +23,51 @@
         <div class="top-3">
           <div class="top-wrap">
             <div class="rank">2</div>
-            <div class="circle" data-val="62">
+            <div class="circle" data-val="${requestScope.top.get(1).getAnswer()}">
               <div class="circle-half second"></div>
               <div class="circle-half second"></div>
               <div class="half"></div>
               <div class="circle-img">
-                <a href="profile.html"
-                  ><img src="../img/rubeus-hagrid.jpg" alt="profile-img"
+                <a href="/ShowProfile?id=${requestScope.top.get(1).getCan_id()}"
+                  ><img src="${requestScope.top.get(1).getImg()}" alt="profile-img"
                 /></a>
                 <span class="per">0%</span>
               </div>
             </div>
-            <h2>Rebeus Hagrid</h2>
-            <div class="party">Gryffindor</div>
+            <h2>${requestScope.top.get(1).getFname()} ${requestScope.top.get(1).getLname()}</h2>
+            <div class="party">${requestScope.top.get(1).getParty()}</div>
           </div>
           <div class="top-wrap">
             <div class="rank">1</div>
-            <div class="circle" data-val="85">
+            <div class="circle" data-val="${requestScope.top.get(0).getAnswer()}">
               <div class="circle-half"></div>
               <div class="circle-half"></div>
               <div class="half"></div>
               <div class="circle-img">
-                <a href="profile.html"
-                  ><img src="../img/batman.jpg" alt="profile-img"
+                <a href="/ShowProfile?id=${requestScope.top.get(0).getCan_id()}"
+                  ><img src="${requestScope.top.get(0).getImg()}" alt="profile-img"
                 /></a>
                 <span class="per">0%</span>
               </div>
             </div>
-            <h2 class="top-name">Batman</h2>
-            <div class="party">Gotham</div>
+            <h2 class="top-name">${requestScope.top.get(0).getFname()} ${requestScope.top.get(0).getLname()}</h2>
+            <div class="party">${requestScope.top.get(0).getParty()}</div>
           </div>
           <div class="top-wrap">
             <div class="rank">3</div>
-            <div class="circle" data-val="48">
+            <div class="circle" data-val="${requestScope.top.get(2).getAnswer()}">
               <div class="circle-half third"></div>
               <div class="circle-half third"></div>
               <div class="half"></div>
               <div class="circle-img">
-                <a href="profile.html"
-                  ><img src="../img/kratos.jpg" alt="profile-img"
+                <a href="/ShowProfile?id=${requestScope.top.get(2).getCan_id()}"
+                  ><img src="${requestScope.top.get(2).getImg()}" alt="profile-img"
                 /></a>
                 <span class="per">0%</span>
               </div>
             </div>
-            <h2>Kratos</h2>
-            <div class="party">Helheim</div>
+            <h2>${requestScope.top.get(2).getFname()} ${requestScope.top.get(2).getLname()}</h2>
+            <div class="party">${requestScope.top.get(2).getParty()}</div>
           </div>
         </div>
         <div class="btn-container">
