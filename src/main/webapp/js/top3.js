@@ -10,7 +10,7 @@ circle.forEach((item) => {
 
   const number = +item.getAttribute("data-val");
 
-  // Animate persantage
+  // Animate percentage
   let num = 0;
   setInterval(() => {
     if (num < number) {
@@ -21,7 +21,7 @@ circle.forEach((item) => {
     }
   }, calculateTime(number));
 
-  // Anamate progress bar
+  // Animate progress bar
   const portion = number * 3.6;
   const time = calculateTime(portion);
 
@@ -29,7 +29,7 @@ circle.forEach((item) => {
   setInterval(() => {
     i++;
 
-    if (i < portion) {
+    if (i <= portion) {
       if (i <= 180) {
         half1.style.transform = `rotate(${i}deg)`;
       }
