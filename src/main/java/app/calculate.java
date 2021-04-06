@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -98,9 +99,14 @@ public class calculate extends HttpServlet {
 
 	
 		
-		for (Answer x : customSort(candi)) {
-			System.out.println("Name : " + x.getFname() + " " + x.getLname() + " / " + "Percentage : " + x.getAnswer() + "%");
-		}
+		/*
+		 * for (Answer x : customSort(candi)) { System.out.println("Name : " +
+		 * x.getFname() + " " + x.getLname() + " / " + "Percentage : " + x.getAnswer() +
+		 * "%"); }
+		 */
+		request.setAttribute("top", customSort(candi).subList(0, 3));
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/top-3.jsp");
+		rd.forward(request, response);
 	}
 
 	// function returns an array of arrays that stores list of answers per each
