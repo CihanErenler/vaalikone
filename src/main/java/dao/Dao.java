@@ -153,7 +153,6 @@ public class Dao {
 			pstmt.setString(1, ref);
 			ResultSet rs = pstmt.executeQuery();
 
-
 			while (rs.next()) {
 				id = rs.getInt("id");
 			}
@@ -215,7 +214,7 @@ public class Dao {
 //
 //		return a;
 //	}
-	
+
 	public boolean deleteCandidate(String id) {
 		try {
 			String sql = "delete from candidate where id=?";
@@ -275,8 +274,8 @@ public class Dao {
 			return null;
 		}
 	}
-	
-	//get question id by ref
+
+	// get question id by ref
 	public int getQuestionByRef(String ref) {
 		int id = 0;
 		try {
@@ -284,7 +283,6 @@ public class Dao {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, ref);
 			ResultSet rs = pstmt.executeQuery();
-
 
 			while (rs.next()) {
 				id = rs.getInt("id");
@@ -333,7 +331,7 @@ public class Dao {
 		}
 
 	}
-	
+
 	public void addAnswersForNewQuestion(ArrayList<RandomAnswer> r) {
 		try {
 			String sql = "insert into answer (can_id, question_id, answer) VALUES (?, ?, ?)";
@@ -382,6 +380,38 @@ public class Dao {
 		} catch (SQLException e) {
 			return false;
 		}
+	}
+
+	// Get question statistics
+	public ArrayList<String> getStatistics(ArrayList<Integer> a) {
+		ArrayList<String> s = new ArrayList<>();
+		try {
+			String sql = "select count(answer) from answer where question_id=? and answer=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			for (int i = 0; i < a.size(); i++) {
+
+				String temp = "";
+				for (int j = 1; j <= 5; j++) {
+					pstmt.setInt(1, a.get(i));
+					pstmt.setInt(2, j);
+					ResultSet rs = pstmt.executeQuery();
+					if (rs.next()) {
+						if (j != 5) {
+							temp += rs.getString("count(answer)") + ";";
+						} else {
+							temp += rs.getString("count(answer)");
+						}
+					}
+				}
+				s.add(temp);
+			}
+			System.out.println("succeed");
+		} catch (SQLException e) {
+			e.getStackTrace();
+		}
+		
+		return s;
 	}
 
 	// Login/admin related
@@ -463,15 +493,12 @@ public class Dao {
 			System.out.println("error");
 		}
 	}
-	
-	public void updateAnswerCandidate(ArrayList<Answer> answer) 
-	{
-		try 
-		{
+
+	public void updateAnswerCandidate(ArrayList<Answer> answer) {
+		try {
 			String sql = "update answer set answer=? where can_id=? and question_id=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			for (Answer ans : answer) 
-			{
+			for (Answer ans : answer) {
 				pstmt.setString(1, ans.getAnswer());
 				pstmt.setString(2, ans.getCan_id());
 				pstmt.setString(3, ans.getQuestion_id());
@@ -480,14 +507,12 @@ public class Dao {
 			}
 			pstmt.executeBatch();
 			System.out.println("succeed");
-			
-		} catch (Exception e) 
-		{
+
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("error");
 		}
 
 	}
-	
 
 }
