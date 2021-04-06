@@ -1,5 +1,6 @@
 package app;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,6 +47,7 @@ public class randomAnswers extends HttpServlet {
 			dao.addAnswersForNewQuestion(randoms);
 		}
 		
+
 		request.setAttribute("question", q);
 		request.setAttribute("cans", randoms);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/askToCandidates.jsp");
@@ -63,7 +65,7 @@ public class randomAnswers extends HttpServlet {
 		
 		for(Candidate can : c) {
 			String randomAnswer = String.valueOf((int)Math.floor(Math.random() * 5 + 1));
-			System.out.println(can.getProfile_pic());
+		
 			answers.add(new RandomAnswer(can.getId(), qid, randomAnswer, can.getProfile_pic()));
 		}
 		

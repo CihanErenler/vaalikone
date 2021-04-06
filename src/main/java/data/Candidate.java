@@ -26,7 +26,7 @@ public class Candidate {
 	{
 		
 	}
-	
+
 	public Candidate(String id, String fname, String lname, String city, String age, String profession,
 			String political_party, String why_candidate, String about, String profile_pic) {
 		super();

@@ -30,6 +30,11 @@ public class Answer {
 		this.question_id = question_id;
 		this.answer = answer;
 	}
+	
+	public Answer(String can_id, String answer) {
+		this.can_id = can_id;
+		this.answer = answer;
+	}
 
 	public String getAnswer_text() {
 		return answer_text;
