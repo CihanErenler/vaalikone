@@ -65,7 +65,7 @@ public class UpdateCan extends HttpServlet
 		    //note that you probably don't want to do this in real life!
 		    //upload it to a file host like S3 or GCS instead
 		    
-		    File fileToSave = new File("C:\\Users\\Connor\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
+		    File fileToSave = new File("C:\\Users\\kota\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
 			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			
 			System.out.println(request.getParameter("profile_pic"));

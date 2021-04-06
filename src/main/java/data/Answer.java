@@ -8,6 +8,10 @@ public class Answer {
 	String answer;
 	String answer_text;
 	String answer_value;
+	String img;
+	String party;
+	String fname;
+	String lname;
 	
 	public Answer(String id, String can_id, String question_id, String answer, String answer_text) {
 		setId(id);
