@@ -72,7 +72,7 @@
         </div>
         <div class="btn-container">
           <a href="../index.html" class="btn">Homepage</a>
-          <a href="questions.jsp" class="btn">Retake Test</a>
+          <a href="/voterQuestions" class="btn">Retake Test</a>
         </div>
       </div>
     </div>
