@@ -96,16 +96,9 @@ public class calculate extends HttpServlet {
 			candi.add(new Answer(can_id, que_id, answer, img, party, fname, lname ));
 		}
 
-		Collections.sort(candi,new Comparator<Answer>() {
-	         @Override
-	     	public int compare(Answer a1, Answer a2) {
-	             return a1.getAnswer().compareToIgnoreCase(a2.getAnswer());
-	     }
-	    });
+	
 		
-		Collections.reverse(candi);
-		
-		for (Answer x : candi) {
+		for (Answer x : customSort(candi)) {
 			System.out.println("Name : " + x.getFname() + " " + x.getLname() + " / " + "Percentage : " + x.getAnswer() + "%");
 		}
 	}
@@ -193,6 +186,22 @@ public class calculate extends HttpServlet {
 		return num;
 	}
 	
-	
+	// sorting the percentage average values in order
+	public ArrayList<Answer> customSort(ArrayList<Answer> a) {
+		boolean sorted = false;
+		Answer temp;
+		while (!sorted) {
+			sorted = true;
+			for (int i = 0; i < a.size() - 1; i++) {
+				if (Integer.parseInt(a.get(i).getAnswer()) < Integer.parseInt(a.get(i + 1).getAnswer())) {
+					temp = a.get(i);
+					a.set(i, a.get(i + 1));
+					a.set(i + 1, temp);
+					sorted = false;
+				}
+			}
+		}
+		return a;
+	}
 
 }
