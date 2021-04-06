@@ -68,7 +68,8 @@ public class calculate extends HttpServlet {
 			System.out.println("Id : "+ x.getCan_id()+" / "+ "Percentage : "+x.getAnswer()+"%");
 		}
 	}
-
+	
+	
 	protected ArrayList<ArrayList<Answer>> getPer(ArrayList<Candidate> x, String[] y) {
 
 		ArrayList<ArrayList<Answer>> list = new ArrayList<>();
