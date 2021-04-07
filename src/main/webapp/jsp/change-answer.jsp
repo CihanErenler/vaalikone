@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<%@ include file="../html/navbar.html"%>
+	<%@ include file="../html/admin-nav.html"%>
 	<div class="can-question container flex-container">
 		<div class="card">
 			<a href="#" class="btn btn-back"> <i
@@ -29,7 +29,7 @@
 			<div class="underline"></div>
 			<form method="post" action="ChangeAnswer" class="question-form">
 			<input type="hidden" name="size" value="${requestScope.answer.size()}" />
-			<input type="text" name="id" value="${requestScope.id}" />
+			<input type="hidden" name="id" value="${requestScope.id}" />
 			
 			<c:forEach var="ans" items="${requestScope.answer}" varStatus="counter">
 				<section>

@@ -22,7 +22,7 @@
 <script defer src="/js/add-question.js"></script>
 </head>
 <body>
-	<%@ include file="../html/navbar.html"%>
+	<%@ include file="../html/admin-nav.html"%>
 	<div class="add-question container flex-container">
 		<div class="card">
 			<a href="#" class="btn btn-back go-back"> <i

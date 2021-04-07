@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/jsp/style.css" />
   </head>
   <body>
-    <%@ include file="../html/navbar.html" %>
+    <%@ include file="../html/admin-nav.html" %>
     <div class="add-can container flex-container">
       <div class="card">
 	      <div class= "profile-buttons">

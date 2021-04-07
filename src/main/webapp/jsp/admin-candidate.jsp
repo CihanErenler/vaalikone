@@ -21,7 +21,7 @@
 <title>Admin Candidate</title>
 </head>
 <body>
-	<%@ include file="/html/navbar.html" %>
+	<%@ include file="/html/admin-nav.html" %>
 
 	<div class="admin-pages container flex-container">
 		<div class="card">
