@@ -45,7 +45,7 @@ public class UpdateQue extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		}
 
 	}
@@ -66,7 +66,7 @@ public class UpdateQue extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		}
 		else {
 			String id = request.getParameter("id");

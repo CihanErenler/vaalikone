@@ -54,14 +54,16 @@ public class DeleteQue extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		}
 
-		String id = request.getParameter("id");
-		q.setId(id);
-		if (dao.getConnection()) {
-			if (dao.deleteQuestion(q)) {
-				response.sendRedirect("/jsp/admin-questions");
+		else {
+			String id = request.getParameter("id");
+			q.setId(id);
+			if (dao.getConnection()) {
+				if (dao.deleteQuestion(q)) {
+					response.sendRedirect("/jsp/admin-questions");
+				}
 			}
 		}
 	}

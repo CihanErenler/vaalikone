@@ -42,7 +42,7 @@ public class UpdateAnswer extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		}
 	}
 
@@ -60,7 +60,7 @@ public class UpdateAnswer extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		} else {
 			String ref = request.getParameter("ref");
 			int size = Integer.parseInt(request.getParameter("size"));

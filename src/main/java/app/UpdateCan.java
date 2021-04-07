@@ -49,7 +49,7 @@ public class UpdateCan extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		}
 	}
 
@@ -68,7 +68,7 @@ public class UpdateCan extends HttpServlet {
 		}
 
 		if (!isLoggedIn) {
-			response.sendRedirect("/index.html");
+			response.sendRedirect("/index.jsp");
 		} else {
 			String img = "";
 
@@ -89,7 +89,7 @@ public class UpdateCan extends HttpServlet {
 				// upload it to a file host like S3 or GCS instead
 
 				File fileToSave = new File(
-						"C:\\Users\\rhexa\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
+						"C:\\Users\\kota\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
 				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 				System.out.println(request.getParameter("profile_pic"));
