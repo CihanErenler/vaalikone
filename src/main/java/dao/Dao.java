@@ -253,6 +253,28 @@ public class Dao {
 		}
 	}
 
+	public ArrayList<Answer> getAnsersByQuestionId(String id) {
+		ArrayList<Answer> list = new ArrayList<>();
+
+		try {
+			String sql = "select * from answer where question_id=?;";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			System.out.println(pstmt);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				System.out.println(rs.getString("answer"));
+				list.add(new Answer(rs.getString("can_id"), rs.getString("answer")));
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			return null;
+		}
+		
+	}
+
 	// Questions related
 
 	public Question getQuestions(String id) {
@@ -330,6 +352,27 @@ public class Dao {
 			return false;
 		}
 
+	}
+	
+	public boolean checkQuestion(String id) {
+		boolean check = true;
+		String sql = "select count(answer) from answer where question_id=?";
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt("count(answer)") == 0) {
+					check = false;	
+				}
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+		
+		System.out.println(check);
+		return check;
 	}
 
 	public void addAnswersForNewQuestion(ArrayList<RandomAnswer> r) {
@@ -410,7 +453,7 @@ public class Dao {
 		} catch (SQLException e) {
 			e.getStackTrace();
 		}
-		
+
 		return s;
 	}
 
