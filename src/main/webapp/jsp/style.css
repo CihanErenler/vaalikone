@@ -850,6 +850,16 @@ img {
   background: var(--light-hover);
 }
 
+.login-error{
+	width: 70%;
+	padding: 20px;
+	text-align: center;
+	background: tomato;
+	color: white;
+	border-radius:5px;
+	margin: 20px auto;
+	
+}
 /*Add question */
 
 .add-question {

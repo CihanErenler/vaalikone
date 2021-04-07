@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <title>Add Candidate</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="/js/add-candidateform.js"></script>
   </head>
   <body>
     <%@ include file="../html/admin-nav.html" %>

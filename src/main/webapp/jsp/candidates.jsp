@@ -3,6 +3,7 @@
     
  <%@ page import="data.Candidate" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,8 @@
 				              </div>
 				              <div class="party admin-can-party">${candidate.political_party}</div>
 				              <div class="short-about">
-								${candidate.about}
+				              <c:set var = "string2" value = "${fn:substring(candidate.about, 0, 201)}" />
+								${string2}...
 				              </div>
 				            </div>
 				          </div>
