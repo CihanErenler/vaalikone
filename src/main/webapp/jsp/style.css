@@ -1325,18 +1325,18 @@ img {
 
 .question-card-q {
   border-bottom: 1px solid #ddd;
-  padding: 10px 0 20px;
+  padding: 10px 0 20px 20px;
 }
 
 .question-card-q .question-text {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
   margin-top: 10px;
 }
 
 .question-card-q .index {
   color: var(--primary-color);
-  font-size: 26px;
+  font-size: 24px;
 }
 
 .chart {
