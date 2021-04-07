@@ -9,10 +9,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Statistics</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+	integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="/jsp/style.css" />
 </head>
 <body>
-	<%@ include file="/html/navbar.html" %>
+	<%@ include file="/html/navbar.html"%>
 	<div class="container">
 		<div class="card statistics-card">
 			<h1 class="title">Statistics of the questions</h1>
@@ -65,9 +69,10 @@
 					</div>
 				</div>
 			</c:forEach>
+		</div>
 	</div>
-	</div>
-
-<script src="/js/statistics.js"></script>
+	<div class="scroll"><i class="fas fa-arrow-up"></i></div>
+	<script src="/js/statistics.js"></script>
+	<script src="/js/scrollUp.js"></script>
 </body>
 </html>

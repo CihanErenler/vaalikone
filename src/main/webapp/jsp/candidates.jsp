@@ -55,5 +55,7 @@
 				</c:forEach>
 				</div>
 	      </div>
+	      <div class="scroll"><i class="fas fa-arrow-up"></i></div>
+	      <script src="/js/scrollUp.js"></script>
 </body>
 </html>
