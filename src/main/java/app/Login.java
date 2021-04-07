@@ -35,35 +35,64 @@ public class Login extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	HttpSession session=request.getSession(false);
+    	
+    	boolean isLoggedIn = false;
+    	if (session==null){
+    	}
+    	else {
+    		if(session.getAttribute("isLoggedIn")==null) {
+    			
+    		}
+    		else {
+    			isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
+    		}
+    	}
+    	
+    	if (isLoggedIn) {
+			System.out.println("logged in");
+			response.sendRedirect("/jsp/admin-dashboard.jsp");
+		} else {
+			response.sendRedirect("/jsp/login.jsp");
+		}
+    }
+    
 	/**
+	 * @throws ServletException 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session=request.getSession();
-		Boolean isLoggedIn = false;
 		Admin adm = new Admin();
 		adm.setEmail(request.getParameter("email"));
 		adm.setPass(request.getParameter("password"));
 		
+    	if (session.getAttribute("isLoggedIn")==null){
+    		session.setAttribute("isLoggedIn", false);
+    	}
+		
 		if (dao.getConnection()) {
-			isLoggedIn=dao.adminLogin(adm);
+			if(dao.adminLogin(adm)) {
+				session.setAttribute("isLoggedIn", true);
+			}
 		}
 		else {
 			System.out.println("No connection to database");
 		}
 		
-		if (isLoggedIn) {
+		if ((boolean) session.getAttribute("isLoggedIn")) {
 			System.out.println("logged in");
 			response.sendRedirect("/jsp/admin-dashboard.jsp");
 		} else {
-	        session.setAttribute("loginError", true);
 			System.out.println(dao.matchedAdminInt(adm));
 			System.out.println("not logged in");
 			
-			response.sendRedirect("/jsp/login.jsp");
-//			  request.setAttribute("isLoggedIn", isLoggedIn); RequestDispatcher
-//			  rd=request.getRequestDispatcher("/jsp/login.jsp"); rd.forward(request,
-//			  response);
+			response.sendRedirect("/jsp/login.jsp?loginError=true");
+			
+//			request.setAttribute("loginError", true);
+//			RequestDispatcher rd = request.getRequestDispatcher("/jsp/login.jsp");
+//			rd.forward(request, response);
 			 
 		}	
 	}
