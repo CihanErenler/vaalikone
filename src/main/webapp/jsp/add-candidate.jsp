@@ -33,8 +33,8 @@
                 <input type="number" name="age" id="age" placeholder="Age"/>
                 <input type="text" name="profession" id="profession" placeholder="Profession"/>
                 <input type="text" name="political_party" id="party" placeholder="Political party"/>
-                <textarea name="why_candidate" id="" placeholder="Why did you become a candidate?"></textarea>
-                <textarea name="about" id="" placeholder="About"></textarea>
+                <textarea name="why_candidate" id="why-can" placeholder="Why did you become a candidate?"></textarea>
+                <textarea name="about" id="about" placeholder="About"></textarea>
                 <button name = "submit" type="submit" class="btn btn-thin">Add Candidate</button>
             </form>
       </div>

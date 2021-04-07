@@ -1,19 +1,47 @@
-
-const form = document.querySelector(".question-form");
-const input = document.getElementById("question-input");
-
+//add candidate fields
+const fname = document.querySelector("#fname");
+const lname = document.querySelector("#lname");
+const city = document.querySelector("#city");
+const age = document.querySelector("#age");
+const profession = document.querySelector("#profession");
+const party = document.querySelector("#party");
+const whyCan = document.querySelector("#why-can");
+const about = document.querySelector("#about");
+const form = document.querySelector(".candidate-form");
 
 
 form.addEventListener("submit", (e) => {
 	let errors = [];
 	
-	if(input.value === "" || input.value === null){
+	if(fname.value === "" || fname.value === null){
+		errors.push("name required");
+		console.log("entered")
+	}
+	if(lname.value === "" || lname.value === null){
 		errors.push("name required");
 	}	
+	if(city.value === "" || city.value === null){
+		errors.push("name required");
+	}	
+	if(age.value === "" || age.value === null){
+		errors.push("name required");
+	}	
+	if(profession.value === "" || profession.value === null){
+		errors.push("name required");
+	}	
+	if(party.value === "" || party.value === null){
+		errors.push("name required");
+	}	
+	if(whyCan.value === "" || whyCan.value === null){
+		errors.push("name required");
+	}	
+	if(about.value === "" || about.value === null){
+		errors.push("name required");
+	}		
 	
 	if(errors.length > 0){
 		e.preventDefault();
-		showWarning("danger","Please enter a question");
+		showWarning("danger","Please fill in all empty fields");
 	}
 });
 

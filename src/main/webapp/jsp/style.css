@@ -1050,7 +1050,7 @@ img {
 /* Warnign */
 
 #warning{
-	position: absolute;
+	position: fixed;
 	max-width: 400px;
 	width: 90%;
 	left: 50%;
