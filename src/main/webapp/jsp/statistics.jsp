@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/jsp/style.css" />
 </head>
 <body>
-	<%@ include file="/html/navbar.html"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="container">
 		<div class="card statistics-card">
 			<h1 class="title">Statistics of the questions</h1>

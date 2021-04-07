@@ -160,6 +160,10 @@ img {
   color: var(--dark-blue);
 }
 
+.dark-text i{
+	color: var(--primary-color) !important;
+}
+
 .p-x-3 {
   padding: 0 30px;
 }
@@ -200,8 +204,17 @@ img {
   justify-content: flex-end;
 }
 
+.main-nav i{
+	display: inline-block;
+	color: #fff ;
+	font-weight: 20px;
+	font-size: 20px;
+	width: 25px;
+	height: 40px;
+}
+
 .main-nav a {
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #main-header {
