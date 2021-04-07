@@ -3,6 +3,7 @@
 
 <%@ page import="data.Candidate"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../jsp/session.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,7 @@
 <title>Admin Candidate</title>
 </head>
 <body>
-	<%@ include file="/html/navbar.html" %>
+	<%@ include file="/html/admin-nav.html" %>
 
 	<div class="admin-pages container flex-container">
 		<div class="card">

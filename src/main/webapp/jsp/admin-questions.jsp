@@ -3,7 +3,8 @@
 
 <%@ page import="java.util.ArrayList" %>   
 <%@ page import="data.Question" %>   
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="../jsp/session.jsp" %>    
     
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@
     <title>Admin Questions</title>
   </head>
   <body>
-    <%@ include file="../html/navbar.html" %>
+    <%@ include file="../html/admin-nav.html" %>
     <div class="admin-pages container flex-container">
       <div class="card">
         <div class="admin-header">
