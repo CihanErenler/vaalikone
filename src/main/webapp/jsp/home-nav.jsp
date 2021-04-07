@@ -7,18 +7,18 @@
 		if (isLoggedIn) {
 		%>
 		<nav class="main-nav">
-			<a href="/index.jsp">Home</a>
-			<a href="/jsp/admin-dashboard.jsp">Dashboard</a>
-			<a href="/Statistics">Statistics</a>
-			<a href="/logout">Log Out</a>
+			<a href="/index.jsp"><i class="fas fa-home"></i>Home</a>
+			<a href="/jsp/admin-dashboard.jsp"><i class="fas fa-clipboard-check"></i>Dashboard</a>
+			<a href="/Statistics"><i class="fas fa-chart-line"></i>Statistics</a>
+			<a href="/logout"><i class="fas fa-sign-in-alt"></i>Log Out</a>
 		</nav>
 		<%
 			} else {
 		%>
 		<nav class="main-nav">
-			<a href="/index.jsp">Home</a>
-			<a href="/Statistics">Statistics</a>
-			<a href="/login">Admin Login</a>
+			<a href="/index.jsp"><i class="fas fa-home"></i>Home</a>
+			<a href="/Statistics"><i class="fas fa-chart-line"></i>Statistics</a>
+			<a href="/login"><i class="fas fa-sign-in-alt"></i>Admin Login</a>
 		</nav>
 		<%
 			}
