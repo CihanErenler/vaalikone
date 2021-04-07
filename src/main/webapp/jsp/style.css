@@ -21,6 +21,10 @@
   box-sizing: border-box;
 }
 
+html{
+	scroll-behavior: smooth;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   background-color: var(--bg);
@@ -166,6 +170,23 @@ img {
   padding: 50px 110px;
 }
 
+.scroll{
+	position: fixed;
+	right: -70px;
+	bottom: 60px;
+	width: 60px;
+	height: 60px;
+	background: var(--primary-color);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	font-size: 24px;
+	transition: all .5s ease;
+	cursor: pointer;
+}
+
 /* Header */
 .main-nav {
   position: absolute;
@@ -232,7 +253,7 @@ img {
 }
 
 .candidates.container {
-  padding-top: 87px;
+  padding: 87px 20px;
 }
 
 .can-card {
@@ -1287,5 +1308,90 @@ img {
   width: 100%;
   display: block;
   margin: auto;
+}
+
+/* Statistics */
+.statistics-card {
+  margin-top: 100px;
+}
+
+.question-card {
+  border: 2px solid #eee;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  background: #f4f4f4;
+}
+
+.question-card-q {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0 20px 20px;
+}
+
+.question-card-q .question-text {
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+.question-card-q .index {
+  color: var(--primary-color);
+  font-size: 24px;
+}
+
+.chart {
+  margin-top: 20px;
+}
+
+.chart-wrap {
+  display: grid;
+  grid-template-columns: 160px 1fr 100px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.chart-wrap .last-part {
+  text-align: center;
+}
+
+.chart-wrap .first-part {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.chart-wrap .last-part,
+.chart-wrap .first-part {
+  font-weight: 300;
+  color: rgb(94, 94, 94);
+}
+
+.chart .progress {
+  height: 20px;
+  background: #ddd;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.p-bar {
+  height: 100%;
+  transition: all 0.4s ease;
+  width: 0;
+}
+
+#strongly-disagree {
+  background: #AF3838;
+}
+#disagree {
+  background: #E69753;
+}
+#neutral {
+  background: #E8DD97;
+}
+#agree {
+  background: #96D3D3;
+}
+#strongly-agree {
+  background: #5FA3D7;
 }
 
