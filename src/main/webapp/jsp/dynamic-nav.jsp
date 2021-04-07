@@ -6,8 +6,13 @@
 	}
 	
 	if (isLoggedIn) {
-		out.print("admin-nav.html");
-	} else {
-		out.print("navbar.html");
-	}
+	%>
+	<%@ include file="../html/admin-nav.html"%>
+	<%
+		} else {
+	%>
+	<%@ include file="../html/navbar.html"%>
+	<%
+		}
 %>
+
