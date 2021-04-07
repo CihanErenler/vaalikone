@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.Question;
+import data.Answer;
 import data.Candidate;
 import data.RandomAnswer;
 
@@ -35,18 +36,27 @@ public class randomAnswers extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("qid");
+		System.out.println("id is="+id);
 		ArrayList<Candidate> candidates = new ArrayList<>();
 		ArrayList<RandomAnswer> randoms = new ArrayList<>();
+		ArrayList<Answer> answers = new ArrayList<>();
 		
 		Question q = null;
 		
 		if(dao.getConnection()) {
-			q = dao.getQuestions(id);
-			candidates = dao.readAllCandidate();
-			randoms = assignAnswers(candidates, id);
-			dao.addAnswersForNewQuestion(randoms);
-		}
+			if(!dao.checkQuestion(id)) {
+				q = dao.getQuestions(id);
+				candidates = dao.readAllCandidate();
+				randoms = assignAnswers(candidates, id);
+				dao.addAnswersForNewQuestion(randoms);
+			}
+			else {
+				candidates = dao.readAllCandidate();
+				answers = dao.getAnsersByQuestionId(id);
+				randoms = assignAnswersElse(candidates, answers, id);
+			}
 		
+		}
 
 		request.setAttribute("question", q);
 		request.setAttribute("cans", randoms);
@@ -65,8 +75,21 @@ public class randomAnswers extends HttpServlet {
 		
 		for(Candidate can : c) {
 			String randomAnswer = String.valueOf((int)Math.floor(Math.random() * 5 + 1));
-		
+			System.out.println("birinci"+randomAnswer);
 			answers.add(new RandomAnswer(can.getId(), qid, randomAnswer, can.getProfile_pic()));
+		}
+		
+		return answers;
+	}
+	
+	protected ArrayList<RandomAnswer> assignAnswersElse(ArrayList<Candidate> c,ArrayList<Answer> a, String qid) {
+		ArrayList<RandomAnswer> answers = new ArrayList<>();
+		
+		for(int i = 0; i < c.size(); i++) {
+			String randomAnswer = a.get(i).getAnswer();
+			System.out.println("ikinci"+randomAnswer);
+					answers.add(new RandomAnswer(c.get(i).getId(), qid, randomAnswer, c.get(i).getProfile_pic()));
+					
 		}
 		
 		return answers;

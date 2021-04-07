@@ -27,7 +27,7 @@
 				<div class="question-card"
 					data-val="${requestScope.statistics.get(loop.index)}">
 					<div class="question-card-q">
-						<h2 class="index">Question ${loop.index + 1}</h2>
+						<h2 class="index"><a href="/respondents?index=${loop.index+1}?id=${requestScope.questions.get(loop.index).getId()}">Question ${loop.index + 1}</a></h2>
 						<p class="question-text">${s.getText()}</p>
 					</div>
 					<div class="chart">
