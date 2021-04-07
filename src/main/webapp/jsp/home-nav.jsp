@@ -9,6 +9,7 @@
 		<nav class="main-nav">
 			<a href="/index.jsp">Home</a>
 			<a href="/jsp/admin-dashboard.jsp">Dashboard</a>
+			<a href="/Statistics">Statistics</a>
 			<a href="/logout">Log Out</a>
 		</nav>
 		<%
@@ -16,6 +17,7 @@
 		%>
 		<nav class="main-nav">
 			<a href="/index.jsp">Home</a>
+			<a href="/Statistics">Statistics</a>
 			<a href="/login">Admin Login</a>
 		</nav>
 		<%
