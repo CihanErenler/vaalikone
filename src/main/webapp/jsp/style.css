@@ -850,6 +850,16 @@ img {
   background: var(--light-hover);
 }
 
+.login-error{
+	width: 70%;
+	padding: 20px;
+	text-align: center;
+	background: tomato;
+	color: white;
+	border-radius:5px;
+	margin: 20px auto;
+	
+}
 /*Add question */
 
 .add-question {
@@ -1040,7 +1050,7 @@ img {
 /* Warnign */
 
 #warning{
-	position: absolute;
+	position: fixed;
 	max-width: 400px;
 	width: 90%;
 	left: 50%;
@@ -1321,11 +1331,16 @@ img {
   border-radius: 10px;
   margin-bottom: 30px;
   background: #f4f4f4;
+  position: relative;
 }
 
 .question-card-q {
   border-bottom: 1px solid #ddd;
   padding: 10px 0 20px 20px;
+}
+
+.question-card-q a{
+	color:  var(--primary-color)
 }
 
 .question-card-q .question-text {
@@ -1394,4 +1409,5 @@ img {
 #strongly-agree {
   background: #5FA3D7;
 }
+
 

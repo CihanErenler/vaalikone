@@ -25,11 +25,11 @@
 				<button name="submit" type="submit" class="btn btn-thin">
 					Log in</button>
 			</form>
-
 			<%
+			
 				try {
 				if (Boolean.parseBoolean(request.getParameter("loginError"))) {
-					out.print("Wrong username or password");
+					out.print("<div class=\"login-error\">Wrong username or password</div>");
 				}
 			} catch (Exception e) {
 
