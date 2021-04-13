@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <%@ include file="../html/admin-nav.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container full-container">
       <div class="card dashboard">
         <h1 class="title">Admin Dashboard</h1>

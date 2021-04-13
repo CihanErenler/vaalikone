@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<%@ include file="../html/admin-nav.html"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="can-question container flex-container">
 		<div class="card">
 			<a href="#" class="btn btn-back"> <i

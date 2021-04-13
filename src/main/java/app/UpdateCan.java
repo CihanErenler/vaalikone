@@ -89,7 +89,7 @@ public class UpdateCan extends HttpServlet {
 				// upload it to a file host like S3 or GCS instead
 
 				File fileToSave = new File(
-						"C:\\Users\\Cihan\\Desktop\\web programming\\src\\main\\webapp\\img" + filePart.getSubmittedFileName());
+						"C:\\Users\\rhexa\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
 				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 				System.out.println(request.getParameter("profile_pic"));

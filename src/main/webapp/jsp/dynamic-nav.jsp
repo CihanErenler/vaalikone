@@ -1,11 +1,11 @@
 
 <%
-	boolean isLoggedIn = false;
+	boolean isLoggedInNav = false;
 	if (session.getAttribute("isLoggedIn") != null) {
-		isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
+		isLoggedInNav = (boolean) session.getAttribute("isLoggedIn");
 	}
 	
-	if (isLoggedIn) {
+	if (isLoggedInNav) {
 	%>
 	<%@ include file="../html/admin-nav.html"%>
 	<%

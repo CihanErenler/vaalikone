@@ -22,7 +22,7 @@
     <title>Admin Questions</title>
   </head>
   <body>
-    <%@ include file="../html/admin-nav.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="admin-pages container flex-container">
       <div class="card">
         <div class="admin-header">

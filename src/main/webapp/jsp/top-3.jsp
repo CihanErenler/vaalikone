@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   </head>
   <body>
-    <%@ include file="../html/navbar.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container full-container">
       <div class="card">
         <div class="title">Top 3 Candidates</div>

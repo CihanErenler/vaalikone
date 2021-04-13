@@ -17,7 +17,7 @@
     <title>Document</title>
   </head>
   <body>
-  <%@ include file="/html/navbar.html" %>
+  <%@ include file="/jsp/dynamic-nav.jsp" %>
 
     <section class="container">
       <div class="card ask-to-candidate">

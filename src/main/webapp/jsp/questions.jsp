@@ -16,7 +16,7 @@
 <title>Questions</title>
 </head>
 <body>
-	<%@ include file="dynamic-nav.jsp"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="question-page container flex-container full-container">
 		<div class="card progress-card">
 			<div class="progress-bar">

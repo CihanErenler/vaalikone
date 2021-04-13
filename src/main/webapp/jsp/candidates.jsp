@@ -23,7 +23,7 @@
   </head>
 	<body>
 	
-	    <%@ include file="dynamic-nav.jsp" %>
+	    <%@ include file="/jsp/dynamic-nav.jsp" %>
 	     <div class="candidates container">
 	      	<div class="card">
 	      <h1 class="title">Candidates</h1>

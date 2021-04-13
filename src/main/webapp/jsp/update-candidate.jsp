@@ -16,7 +16,7 @@
 <script defer src="/js/add-candidateform.js"></script>
 </head>
 <body>
-	<%@ include file="../html/admin-nav.html"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="add-can container flex-container">
 		<div class="card">
 			<div class="profile-buttons">

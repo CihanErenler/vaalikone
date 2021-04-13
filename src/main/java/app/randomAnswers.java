@@ -49,6 +49,7 @@ public class randomAnswers extends HttpServlet {
 				randoms = assignAnswers(candidates, id);
 				dao.addAnswersForNewQuestion(randoms);
 			} else {
+				q = dao.getQuestions(id);
 				candidates = dao.readAllCandidate();
 				answers = dao.getAnsersByQuestionId(id);
 				randoms = assignAnswersElse(candidates, answers, id);

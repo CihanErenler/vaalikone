@@ -66,7 +66,12 @@ public class Dao {
 				c.setWhy_candidate(RS.getString("why_candidate"));
 				c.setAbout(RS.getString("about"));
 				c.setProfile_pic(RS.getString("profile_pic"));
-				list.add(c);
+				if(checkCanAnswer(c.getId())) {
+					list.add(c);
+				} else {
+					deleteCandidate(c.getId());
+				}
+				
 			}
 			return list;
 		} catch (SQLException e) {
@@ -357,6 +362,27 @@ public class Dao {
 	public boolean checkQuestion(String id) {
 		boolean check = true;
 		String sql = "select count(answer) from answer where question_id=?";
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt("count(answer)") == 0) {
+					check = false;	
+				}
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+		
+		System.out.println(check);
+		return check;
+	}
+	
+	public boolean checkCanAnswer(String id) {
+		boolean check = true;
+		String sql = "select count(answer) from answer where can_id=?";
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);

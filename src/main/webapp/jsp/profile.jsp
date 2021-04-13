@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/jsp/style.css" />
   </head>
   <body>
-    <%@ include file="dynamic-nav.jsp" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container">
       <div class="card profile p-x-11">
 
