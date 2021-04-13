@@ -8,6 +8,7 @@
 	Password:	Password1
 2. Change the file upload/edit path in src/main/java => dao => Dao.java inside the constructor. Variable name: "uploadPath".
 3. To use the app as an admin, use the following credentials:
+
 	ADMIN LOGIN INFO
 	USER:	anna@anna.anna
 	Password:	Password1
