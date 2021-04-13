@@ -1,6 +1,6 @@
-#Read Me
+# Read Me
 
-##Steps to follow
+## Steps to follow
 1. Change the config file for the database in src/main/java => dao => Dao.java inside the constructor
 	Current database info: 
 	URL:	jdbc:mysql://localhost:3306/vaalikone
