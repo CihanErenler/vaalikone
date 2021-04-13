@@ -30,7 +30,7 @@ public class UpdateCan extends HttpServlet {
 	private Dao dao;
 
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+		dao = new Dao();
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class UpdateCan extends HttpServlet {
 				// upload it to a file host like S3 or GCS instead
 
 				File fileToSave = new File(
-						"C:\\Users\\rhexa\\git\\vaalikone\\src\\main\\webapp\\img\\" + filePart.getSubmittedFileName());
+						dao.getUploadPath() + filePart.getSubmittedFileName());
 				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
 				System.out.println(request.getParameter("profile_pic"));

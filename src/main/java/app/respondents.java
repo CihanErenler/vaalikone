@@ -20,7 +20,7 @@ public class respondents extends HttpServlet {
 	private Dao dao;
 
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+		dao = new Dao();
 	}
   
     public respondents() {

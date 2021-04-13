@@ -12,7 +12,6 @@ import data.Answer;
 import data.Candidate;
 import data.Question;
 import data.RandomAnswer;
-import data.Voter;
 
 import java.sql.Connection;
 
@@ -21,11 +20,24 @@ public class Dao {
 	private String user;
 	private String pass;
 	private Connection conn;
+	private String uploadPath;
 
-	public Dao(String url, String user, String pass) {
-		this.url = url;
-		this.user = user;
-		this.pass = pass;
+	public Dao() {
+		this.url = "jdbc:mysql://localhost:3306/vaalikone";
+		this.user = "root";
+		this.pass = "Password1";
+		this.uploadPath = "C:\\Users\\rhexa\\git\\vaalikone\\src\\main\\webapp\\img\\";
+	}
+
+//	public Dao(String url, String user, String pass) {
+//		this.url = url;
+//		this.user = user;
+//		this.pass = pass;
+//	}
+
+//	getting upload path
+	public String getUploadPath() {
+		return uploadPath;
 	}
 
 	// Connection method
@@ -66,12 +78,12 @@ public class Dao {
 				c.setWhy_candidate(RS.getString("why_candidate"));
 				c.setAbout(RS.getString("about"));
 				c.setProfile_pic(RS.getString("profile_pic"));
-				if(checkCanAnswer(c.getId())) {
+				if (checkCanAnswer(c.getId())) {
 					list.add(c);
 				} else {
 					deleteCandidate(c.getId());
 				}
-				
+
 			}
 			return list;
 		} catch (SQLException e) {
@@ -272,12 +284,12 @@ public class Dao {
 				System.out.println(rs.getString("answer"));
 				list.add(new Answer(rs.getString("can_id"), rs.getString("answer")));
 			}
-			
+
 			return list;
 		} catch (SQLException e) {
 			return null;
 		}
-		
+
 	}
 
 	// Questions related
@@ -358,7 +370,7 @@ public class Dao {
 		}
 
 	}
-	
+
 	public boolean checkQuestion(String id) {
 		boolean check = true;
 		String sql = "select count(answer) from answer where question_id=?";
@@ -367,19 +379,19 @@ public class Dao {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getInt("count(answer)") == 0) {
-					check = false;	
+			if (rs.next()) {
+				if (rs.getInt("count(answer)") == 0) {
+					check = false;
 				}
 			}
 		} catch (SQLException e) {
 			return false;
 		}
-		
+
 		System.out.println(check);
 		return check;
 	}
-	
+
 	public boolean checkCanAnswer(String id) {
 		boolean check = true;
 		String sql = "select count(answer) from answer where can_id=?";
@@ -388,15 +400,15 @@ public class Dao {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getInt("count(answer)") == 0) {
-					check = false;	
+			if (rs.next()) {
+				if (rs.getInt("count(answer)") == 0) {
+					check = false;
 				}
 			}
 		} catch (SQLException e) {
 			return false;
 		}
-		
+
 		System.out.println(check);
 		return check;
 	}

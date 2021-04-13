@@ -21,7 +21,7 @@ public class UpdateAnswer extends HttpServlet {
 	
 	public void init() 
 	{
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+		dao = new Dao();
 	}      
  
     public UpdateAnswer() {
