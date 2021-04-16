@@ -15,6 +15,12 @@ import javax.servlet.http.HttpSession;
 import dao.Dao;
 import data.Question;
 
+/**
+ * 
+ * Servlet allowing logged in admin to change a question text
+ * or add a new question
+ *
+ */
 @WebServlet("/jsp/updateque")
 public class UpdateQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -15,6 +15,7 @@ import data.Question;
 
 /**
  * Servlet implementation class CandidateQuestion
+ * 
  */
 @WebServlet("/jsp/candidate-question")
 public class CandidateQuestion extends HttpServlet {

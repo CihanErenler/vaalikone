@@ -26,6 +26,12 @@ import data.Candidate;
 		maxFileSize = 1024 * 1024 * 10, // 10 MB
 		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
+
+/**
+ * 
+ * Servlet allowing logged in admin to change candidates data
+ *
+ */
 public class UpdateCan extends HttpServlet {
 	private Dao dao;
 

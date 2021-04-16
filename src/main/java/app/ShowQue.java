@@ -15,6 +15,7 @@ import data.Question;
 
 /**
  * Servlet implementation class ShowQue
+ * Displaying all existing questions for the admin
  */
 @WebServlet("/jsp/admin-questions")
 public class ShowQue extends HttpServlet {

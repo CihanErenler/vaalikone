@@ -15,6 +15,12 @@ import dao.Dao;
 import data.Candidate;
 
 @WebServlet("/jsp/admin-candidate")
+
+/**
+ * Servlet responsible for showing all candidates for logged admin
+ *
+ */
+
 public class adminShowCans extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;

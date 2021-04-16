@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Candidate;
 
+/**
+ * 
+ * Servlet responsible for displaying a list of all candidates for voter
+ *
+ */
 @WebServlet("/jsp/candidates")
 public class ShowCan extends HttpServlet 
 {

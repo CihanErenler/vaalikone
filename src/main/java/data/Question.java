@@ -2,8 +2,21 @@ package data;
 
 import java.sql.Timestamp;
 
+/**
+ * Class - question
+ *
+ */
+
 public class Question {
+	
+	/**
+	 * Question id
+	 */
 	private int id;
+	
+	/**
+	 * Question text
+	 */
 	private String text;
 	String ref_num = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
 	public Question(String id, String text) {

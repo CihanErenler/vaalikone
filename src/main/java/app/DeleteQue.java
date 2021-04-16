@@ -13,6 +13,7 @@ import data.Question;
 
 /**
  * Servlet implementation class DeleteQue
+ * Responsible for deleting question
  */
 @WebServlet("/DeleteQue")
 public class DeleteQue extends HttpServlet {

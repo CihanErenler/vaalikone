@@ -14,6 +14,7 @@ import data.Question;
 
 /**
  * Servlet implementation class ReadToUpdateQue
+ * Displays question for the admin, possible edition
  */
 @WebServlet("/jsp/ReadToUpdateQue")
 public class ReadToUpdateQue extends HttpServlet {

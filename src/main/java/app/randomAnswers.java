@@ -16,6 +16,11 @@ import data.Answer;
 import data.Candidate;
 import data.RandomAnswer;
 
+/**
+ * 
+ * Adding random answers to newly created question for existing candidates
+ *
+ */
 @WebServlet("/randomAnswers")
 public class randomAnswers extends HttpServlet {
 	private static final long serialVersionUID = 1L;

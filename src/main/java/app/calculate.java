@@ -17,6 +17,11 @@ import data.Answer;
 import data.Candidate;
 import data.Question;
 
+/**
+ * 
+ * Servlet responsible for calculating a match between voters and candidates answers
+ * Sends result to top 3 page which displays result to a voter
+ */
 @WebServlet("/calculate")
 public class calculate extends HttpServlet {
 	private static final long serialVersionUID = 1L;

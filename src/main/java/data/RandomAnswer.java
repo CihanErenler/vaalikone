@@ -1,10 +1,31 @@
 package data;
 
+/**
+ * Random answer class
+ * Needed for inserting random answers for a new question
+ * for existing candidates
+ *
+ */
 public class RandomAnswer {
 	
+	/**
+	 * Candidate id
+	 */
 	String canId;
+	
+	/**
+	 * Question id
+	 */
 	String qid;
+	
+	/**
+	 * random answer
+	 */
 	String answer;
+	
+	/**
+	 * Candidate's profile picture, needed for display purposes
+	 */
 	String pic;
 	public RandomAnswer(String canId, String qid, String answer, String pic) {
 		super();
