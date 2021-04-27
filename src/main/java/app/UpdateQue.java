@@ -2,6 +2,7 @@ package app;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,16 +76,14 @@ public class UpdateQue extends HttpServlet {
 			String text = request.getParameter("question");
 
 			if (request.getParameter("addNew") != null) {
-//				System.out.println("new question");
-//				Question q = new Question();
-//				q.setText(text);
-//
-//				if (dao.getConnection()) {
-//					if (dao.addQuestion(q)) {
-//						String qid = String.valueOf(dao.getQuestionByRef(q.getRef_num()));
-//						response.sendRedirect("/randomAnswers?qid=" + qid);
-//					}
-//				}
+				Question q = new Question();
+				q.setQuestion(text);
+				q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
+				
+				if (addQuestion(q)) {
+					String qid = q.getQuestionRef();
+					response.sendRedirect("/randomAnswers?qid="+qid);
+				}
 			} else {
 				Question q = new Question();
 				q.setId(Integer.parseInt(id));
@@ -104,10 +103,25 @@ public class UpdateQue extends HttpServlet {
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
 
-		Response res = b.post(Entity.entity(q, MediaType.APPLICATION_JSON));
+		Response res = b.put(Entity.entity(q, MediaType.APPLICATION_JSON));
 		if (res.getStatus() == 200) {
 			return true;
 		} else {
+			return false;
+		}
+	}
+	private boolean addQuestion(Question q) {
+		String url = "http://localhost:8080/rest/questionservice/add";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url);
+		Builder b = wt.request();
+		Entity e = Entity.entity(q, MediaType.APPLICATION_JSON);
+		Response res = b.post(e);
+		
+		if (res.getStatus() == 200) {
+			return true;
+		}
+		else {
 			return false;
 		}
 	}
