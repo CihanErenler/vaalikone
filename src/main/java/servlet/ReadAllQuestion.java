@@ -42,7 +42,7 @@ public class ReadAllQuestion extends HttpServlet {
 		
 		List<Question> listQuestion = b.get(new GenericType<List<Question>>() {});
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/testing.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-questions.jsp");
 		request.setAttribute("listQuestion", listQuestion);
 		rd.forward(request, response);
 	}

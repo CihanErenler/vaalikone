@@ -21,26 +21,26 @@ public class QuestionService {
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("Vaalikone");
 //	private
 	@Path("/add")
-	public String addQuestion() {
-		return "";
+	public Response addQuestion() {
+		return Response.ok().build();
 	}
 
 //	private
 	@Path("/update")
-	public String updateQuestion() {
-		return "";
+	public Response updateQuestion() {
+		return Response.ok().build();
 	}
 
-//	private
+//	private	
 	@Path("/delete")
-	public String deleteQuestion() {
-		return "";
+	public Response deleteQuestion() {
+		return Response.ok().build();
 	}
 
 //	public
 	@Path("/read")
-	public String readQuestion() {
-		return "";
+	public Response readQuestion() {
+		return Response.ok().build();
 	}
 
 //	public

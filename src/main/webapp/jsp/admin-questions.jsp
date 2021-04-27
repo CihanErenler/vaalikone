@@ -38,13 +38,13 @@
           <div class="question question-ad">
             <h2 class="index">${counter.index+1}</h2> 
             <p class="question-text">
-              ${question.text}
+              ${question.getQuestion()}
             </p>
             <div class="edit-buttons">
-              <a href="/jsp/ReadToUpdateQue?id=${question.id}" class="edit-btn question-btn">
+              <a href="/jsp/ReadToUpdateQue?id=${question.getId()}" class="edit-btn question-btn">
                 <i class="fas fa-pen"></i>
               </a>
-              <a href="/DeleteQue?id=<c:out value='${question.id}' />" class="delete-btn question-btn">
+              <a href="/DeleteQue?id=<c:out value='${question.getId()}' />" class="delete-btn question-btn">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>
