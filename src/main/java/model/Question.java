@@ -25,7 +25,7 @@ public class Question implements Serializable {
 	private String questionRef;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question", fetch=FetchType.LAZY)
 	private List<Answer> answers;
 
 	public Question() {
