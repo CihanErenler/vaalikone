@@ -37,37 +37,37 @@
 			</div>
 			<div class="admin-content">
 
-				<c:forEach var="candidate" items="${requestScope.candidatelist}">
+				<c:forEach var="candidate" items="${requestScope.candidateList}">
 					<div class="can-card">
-						<a href="/ShowProfile?id=${candidate.id}">
+						<a href="/ShowProfile?id=${candidate.getId()}">
 							<div class="img-wrap">
-								<img src="${candidate.profile_pic}" alt="candidate" />
+								<img src="${candidate.getProfilePic()}" alt="candidate" />
 							</div>
 						</a>
 						<div class="can-content">
 							<div class="can-name-info can-name-info-flex">
-								<a href="/ShowProfile?id=${candidate.id}">
-									<h3>${candidate.fname} ${candidate.lname}</h3>
+								<a href="/ShowProfile?id=${candidate.getId()}">
+									<h3>${candidate.getFname()} ${candidate.getLname()}</h3>
 								</a>
 
 								<h4>
-									<span class="age">Age :</span> ${candidate.age}
+									<span class="age">Age :</span> ${candidate.getAge()}
 								</h4>
 								<h4>
-									<i class="fas fa-map-marker"></i> ${candidate.city}
+									<i class="fas fa-map-marker"></i> ${candidate.getCity()}
 								</h4>
 								<div class="edit-buttons">
-									<a href="/readToUpdateCan?id=${candidate.id}" class="edit-btn">
+									<a href="/readToUpdateCan?id=${candidate.getId()}" class="edit-btn">
 										<i class="fas fa-pen"></i>
-									</a> <a href="/deleteCan?id=${candidate.id}" class="delete-btn">
+									</a> <a href="/deleteCan?id=${candidate.getId()}" class="delete-btn">
 										<i class="fas fa-trash-alt"></i>
 									</a>
 								</div>
 							</div>
 
-							<div class="party admin-can-party">${candidate.political_party}</div>
+							<div class="party admin-can-party">${candidate.getPoliticalParty()}</div>
 
-							<div class="short-about"><c:set var = "string2" value = "${fn:substring(candidate.about, 0, 201)}" />
+							<div class="short-about"><c:set var = "string2" value = "${fn:substring(candidate.getAbout(), 0, 201)}" />
 								${string2}...</div>
 						</div>
 					</div>
