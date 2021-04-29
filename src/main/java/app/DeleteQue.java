@@ -66,7 +66,6 @@ public class DeleteQue extends HttpServlet {
 		String url = "http://localhost:8080/rest/questionservice/delete";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url).path(String.valueOf(q.getId()));
-		System.out.println("Out thingy" + wt);
 		Builder b = wt.request();
 		Response res = b.delete();
 

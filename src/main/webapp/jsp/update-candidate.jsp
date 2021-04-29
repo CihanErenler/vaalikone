@@ -29,7 +29,7 @@
 			<h1 class="title">Update Candidate</h1>
 			<div class="underline"></div>
 			<div class="add-img">
-				<img class="output-img" src="${requestScope.profile.profile_pic}"
+				<img class="output-img" src="/img/${requestScope.profile.profile_pic}"
 					alt="candidate" />
 			</div>
 			<form action="updateCan" method="POST" enctype="multipart/form-data"

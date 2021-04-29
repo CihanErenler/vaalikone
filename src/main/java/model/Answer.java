@@ -22,7 +22,7 @@ public class Answer implements Serializable {
 	private String answer;
 
 	//bi-directional many-to-one association to Candidate
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonBackReference(value="candidate-obj")
 	@JoinColumn(name="can_id")
 	private Candidate candidate;

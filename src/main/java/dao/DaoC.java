@@ -52,6 +52,23 @@ public class DaoC {
 		return false;
 	}
 	
+	public boolean deleteCandidate(Candidate c) 
+	{
+		String url = "http://localhost:8080/rest/candidateservice/delete";
+		Client cl = ClientBuilder.newClient();
+		WebTarget wt = cl.target(url).path(String.valueOf(c.getId()));
+		Builder b = wt.request();
+		Response res = b.delete();
+
+		if (res.getStatus() == 200) 
+		{
+			return true;
+		} else 
+		{
+			return false;
+		}
+	}
+	
 	public ArrayList<Candidate> readAllCandidate() {
 		String url = "http://127.0.0.1:8080/rest/candidateservice/readall";
 		Client c = ClientBuilder.newClient();

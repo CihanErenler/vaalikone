@@ -51,7 +51,7 @@ public class Candidate implements Serializable {
 	private String whyCandidate;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="candidate", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="candidate", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonManagedReference(value="candidate-obj")
 	private List<Answer> answers;
 

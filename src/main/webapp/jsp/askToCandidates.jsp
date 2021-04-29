@@ -39,7 +39,7 @@
         <c:forEach var="can" items="${requestScope.cans}">
         	<div class="ask-answer" data-answer="${can.getAnswer()}">
             <div class="ask-answer-img-wrap">
-              <img src="${can.getPic()}" alt="candidate" />
+              <img src="/img/${can.getPic()}" alt="candidate" />
             </div>
             <div class="thinking-part">
               <div>
