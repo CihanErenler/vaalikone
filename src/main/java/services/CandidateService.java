@@ -6,8 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,51 +18,49 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import dao.DaoS;
 import model.Candidate;
 
 @Path("/candidateservice")
 public class CandidateService 
 {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("Vaalikone");	
+
+	DaoS dao = new DaoS();
+	
 //	private
+	@POST
 	@Path("/add")
-	public String addCandidate() 
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addCandidate(Candidate c) 
 	{
-		return "";
+		return dao.addCandidate(c);
 	}
 	
 //	private
+	@PUT
 	@Path("/update")
-	public String updateCandidate() 
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateCandidate(Candidate c) 
 	{
-		return "";
+		return dao.updateCandidate(c);
 	}
 	
 //	private
 	@DELETE
 	@Path("/delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	
 	public Response deleteCandidate(@PathParam("id") int id) 
 	{
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		Candidate c = em.find(Candidate.class, id);
-		if (c!=null) 
-		{
-			em.remove(c);//The actual delete
-		}
-		em.getTransaction().commit();
-		return Response.ok().build();
+		return dao.deleteCandidate(id);
 	}
 	
 //	public
 	@Path("/read/{id}")
-	public Response readCandidate (@PathParam("id") String id) 
+	public Response readCandidate (@PathParam("id") int id) 
 	{
-		EntityManager em = emf.createEntityManager();
-
-		return Response.ok().build();
+		return dao.deleteCandidate(id);
 	}
 	
 //	public
@@ -68,36 +69,7 @@ public class CandidateService
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response readAllCandidateAdmin() 
 	{
-		EntityManager em = emf.createEntityManager();
-
-		List<Candidate> list = em.createQuery("select a from Candidate a").getResultList();
-		
-		ArrayList<Candidate> candidateList = new ArrayList<Candidate>();
-		for (Candidate c : list) 
-		{
-			Candidate candidate = new Candidate();
-			candidate.setId(c.getId());
-			candidate.setAbout(c.getAbout());
-			candidate.setAge(c.getAge());
-			candidate.setCity(c.getCity());
-			candidate.setFname(c.getFname());
-			candidate.setLname(c.getLname());
-			candidate.setPoliticalParty(c.getPoliticalParty());
-			candidate.setProfilePic(c.getProfilePic());
-			candidateList.add(candidate);
-		}
-		
-		ResponseBuilder builder;
-		if (list == null) 
-		{
-			builder = Response.status(404);
-		}
-		else 
-		{
-			builder = Response.ok(candidateList);
-		}
-		
-		return builder.build();
+		return dao.readAllCandidate();
 	}
 	
 	

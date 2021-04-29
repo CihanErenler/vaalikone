@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import dao.Dao;
-import data.Candidate;
+import dao.DaoC;
+import model.Candidate;
 
 @WebServlet(name = "updateCan", urlPatterns = { "/updateCan" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -27,10 +27,13 @@ import data.Candidate;
 		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class UpdateCan extends HttpServlet {
-	private Dao dao;
-
-	public void init() {
-		dao = new Dao();
+	
+	private static final long serialVersionUID = 1L;
+	DaoC dao;
+	
+	@Override
+	public void init () {		
+		dao = new DaoC();
 	}
 
 	@Override
@@ -106,23 +109,28 @@ public class UpdateCan extends HttpServlet {
 			String city = request.getParameter("city");
 			String age = request.getParameter("age");
 			String profession = request.getParameter("profession");
-			String political_party = request.getParameter("political_party");
+			String politicalParty = request.getParameter("political_party");
 			String why_candidate = request.getParameter("why_candidate");
 			String about = request.getParameter("about");
 			String profile_pic = imgVal;
 
-			Candidate c = new Candidate(id, fname, lname, city, age, profession, political_party, why_candidate, about,
-					profile_pic);
-
-			ArrayList<Candidate> list = new ArrayList<>();
-			if (dao.getConnection()) {
-				list = dao.updateCandidate(c, dao);
+			Candidate c = new Candidate();
+			c.setId(Integer.parseInt(id));
+			c.setFname(fname);
+			c.setLname(lname);
+			c.setCity(city);
+			c.setAge(Integer.parseInt(age));
+			c.setProfession(profession);
+			c.setPoliticalParty(politicalParty);
+			c.setWhyCandidate(why_candidate);
+			c.setAbout(about);
+			c.setProfilePic(profile_pic);
+			 
+			if (dao.updateCandidate(c)) {
+				System.out.println("candidate details updated");
+				response.sendRedirect("/readallcandidatesadmin");
 			}
-
-			request.setAttribute("candidatelist", list);
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("/readallcandidatesadmin");
 		}
 	}
-
 }

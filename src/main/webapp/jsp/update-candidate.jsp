@@ -20,7 +20,7 @@
 	<div class="add-can container flex-container">
 		<div class="card">
 			<div class="profile-buttons">
-				<a href="jsp/admin-candidate" class="btn btn-back"> <i
+				<a href="/readallcandidatesadmin" class="btn btn-back"> <i
 					class="fas fa-chevron-left"></i> Back
 				</a> <a
 					href="/jsp/ReadToUpdateAnswer?id=${requestScope.profile.getId()}"
