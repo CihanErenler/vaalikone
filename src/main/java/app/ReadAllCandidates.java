@@ -1,4 +1,4 @@
-package servlet;
+package app;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,12 +17,14 @@ import javax.ws.rs.core.GenericType;
 
 import model.Candidate;
 
-@WebServlet("/readallcandidatesadmin")
-public class ReadAllCandidatesAdmin extends HttpServlet 
-{
+/**
+ * Servlet implementation class ReadAllCandidates
+ */
+@WebServlet("/readallcandidates")
+public class ReadAllCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ReadAllCandidatesAdmin() 
+    
+    public ReadAllCandidates() 
     {
         super();
         // TODO Auto-generated constructor stub
@@ -30,14 +32,14 @@ public class ReadAllCandidatesAdmin extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String url = "http://localhost:8080/rest/candidateservice/readalladmin";
+		String url = "http://localhost:8080/rest/candidateservice/readall";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
 		
 		List<Candidate> candidateList = b.get(new GenericType<List<Candidate>>() {});
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-candidate.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidates.jsp");
 		request.setAttribute("candidateList", candidateList);
 		rd.forward(request, response);	
 
@@ -47,5 +49,4 @@ public class ReadAllCandidatesAdmin extends HttpServlet
 	{
 
 	}
-
 }

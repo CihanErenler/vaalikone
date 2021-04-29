@@ -73,10 +73,14 @@ public class QuestionService {
 //	public
 	@GET
 	@Path("/read/{id}")
-	public Response readQuestion(@PathParam("id") String id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response readQuestion(@PathParam("id") int id) {
 		EntityManager em = emf.createEntityManager();
 		
-		return Response.ok().build();
+		em.getTransaction().begin();
+		Question q = em.find(Question.class, id);
+		
+		return Response.ok(q).build();
 	}
 
 //	public

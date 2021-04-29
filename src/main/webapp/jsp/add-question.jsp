@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="data.Question"%>
+<%@ page import="model.Question"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../jsp/session.jsp" %>
 
@@ -49,7 +49,7 @@
 					<input type="hidden" name="id"
 						value="<c:out value='${question.id}' />" /> <input
 						id="question-input" type="text" name="question"
-						value="<c:out value='${question.text}' />" />
+						value="<c:out value='${question.question}' />" />
 					<button name="submit" type="submit" class="btn btn-thin">
 						Submit</button>
 				</form>
