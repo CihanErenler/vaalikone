@@ -88,14 +88,14 @@ public class QuestionService {
 
 		List<Question> list = em.createQuery("select a from Question a").getResultList();
 		
-		ArrayList<Question> questionList = new ArrayList<Question>();
-		for (Question q : list) {
-			Question question = new Question();
-			question.setQuestion(q.getQuestion());
-			question.setId(q.getId());
-			question.setQuestionRef(q.getQuestionRef());
-			questionList.add(question);
-		}
+//		ArrayList<Question> questionList = new ArrayList<Question>();
+//		for (Question q : list) {
+//			Question question = new Question();
+//			question.setQuestion(q.getQuestion());
+//			question.setId(q.getId());
+//			question.setQuestionRef(q.getQuestionRef());
+//			questionList.add(question);
+//		}
 		
 		ResponseBuilder builder;
 		if (list == null) {
