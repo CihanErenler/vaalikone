@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -46,7 +49,8 @@ public class Candidate implements Serializable {
 	private String whyCandidate;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="candidate")
+	@OneToMany(mappedBy="candidate", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JsonManagedReference(value="candidate-obj")
 	private List<Answer> answers;
 
 	public Candidate() {

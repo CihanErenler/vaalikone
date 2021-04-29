@@ -102,7 +102,8 @@ public class QuestionService {
 			builder = Response.status(404);
 		}
 		else {
-			builder = Response.ok(questionList);
+//			builder = Response.ok(questionList);
+			builder = Response.ok(list);
 		}
 		
 		return builder.build();
