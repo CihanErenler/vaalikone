@@ -1,8 +1,7 @@
-package app;
+package servlet;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,22 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.GenericType;
-
+import javax.ws.rs.client.Invocation.Builder;
 import model.Question;
 
 /**
- * Servlet implementation class ShowQue
+ * Servlet implementation class ReadAllQuestion
  */
-@WebServlet("/jsp/admin-questions")
-public class ShowQue extends HttpServlet {
+@WebServlet("/jsp/readallquestion")
+public class ReadAllQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
     /**
-     * @see HttpServlet#HttpServlet()	
+     * @see HttpServlet#HttpServlet()
      */
-    public ShowQue() {
+    public ReadAllQuestion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,6 +45,12 @@ public class ShowQue extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-questions.jsp");
 		request.setAttribute("listQuestion", listQuestion);
 		rd.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

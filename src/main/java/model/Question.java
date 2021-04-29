@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -25,7 +28,8 @@ public class Question implements Serializable {
 	private String questionRef;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JsonManagedReference(value="question-obj")
 	private List<Answer> answers;
 
 	public Question() {

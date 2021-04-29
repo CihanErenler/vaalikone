@@ -1,6 +1,8 @@
 package services;
 
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 
 /**
@@ -11,9 +13,11 @@ import javax.ws.rs.Path;
 @Path("/auth")
 public class Auth {
 
+	@POST
 	@Path("/login")
-	public String doLogin() {
-		return "";
+	public Response doLogin() {
+		
+		return Response.ok().build();
 	}
 	
 	@Path("/fetch")
