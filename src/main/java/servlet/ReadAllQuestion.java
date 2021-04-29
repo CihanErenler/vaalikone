@@ -19,7 +19,7 @@ import model.Question;
 /**
  * Servlet implementation class ReadAllQuestion
  */
-@WebServlet("/readallquestion")
+@WebServlet("/jsp/readallquestion")
 public class ReadAllQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
