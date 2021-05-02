@@ -79,7 +79,7 @@ public class UpdateAnswer extends HttpServlet {
 					answer.add(ans);
 				}
 				dao.addAnswerCandidate(answer);
-				response.sendRedirect("admin-candidate");
+				response.sendRedirect("/readallcandidatesadmin");
 			}
 		}
 	}

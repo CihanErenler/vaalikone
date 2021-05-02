@@ -7,40 +7,58 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import dao.DaoS;
 import model.Question;
 
 @Path("/questionservice")
 public class QuestionService {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("Vaalikone");
+	DaoS dao = new DaoS();
+
 //	private
+	@POST
 	@Path("/add")
-	public Response addQuestion() {
-		return Response.ok().build();
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addQuestion(Question q) {
+		System.out.println("This is our parameter: " + q.getQuestionRef());
+		return dao.addQuestion(q);
 	}
 
 //	private
+	@PUT
 	@Path("/update")
-	public Response updateQuestion() {
-		return Response.ok().build();
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateQuestion(Question q) {
+		return dao.updateQuestion(q);
 	}
 
 //	private	
-	@Path("/delete")
-	public Response deleteQuestion() {
-		return Response.ok().build();
+	@DELETE
+	@Path("/delete/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteQuestion(@PathParam("id") int id) {
+		return dao.deleteQuestion(id);
 	}
 
 //	public
-	@Path("/read")
-	public Response readQuestion() {
-		return Response.ok().build();
+	@GET
+	@Path("/read/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response readQuestion(@PathParam("id") int id) {
+		return dao.readQuestion(id);
 	}
 
 //	public
@@ -48,28 +66,7 @@ public class QuestionService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response readAllQuestion() {
-		EntityManager em = emf.createEntityManager();
-
-		List<Question> list = em.createQuery("select a from Question a").getResultList();
-		
-		ArrayList<Question> questionList = new ArrayList<Question>();
-		for (Question q : list) {
-			Question question = new Question();
-			question.setQuestion(q.getQuestion());
-			question.setId(q.getId());
-			question.setQuestionRef(q.getQuestionRef());
-			questionList.add(question);
-		}
-		
-		ResponseBuilder builder;
-		if (list == null) {
-			builder = Response.status(404);
-		}
-		else {
-			builder = Response.ok(questionList);
-		}
-		
-		return builder.build();
+		return dao.readAllQuestion();
 	}
 
 }

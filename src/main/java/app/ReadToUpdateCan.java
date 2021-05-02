@@ -38,7 +38,6 @@ import data.Candidate;
 	}
 
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		Candidate c = null;

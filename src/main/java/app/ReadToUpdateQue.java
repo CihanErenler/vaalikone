@@ -1,6 +1,7 @@
 package app;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.Invocation.Builder;
 
-import dao.Dao;
-import data.Question;
+import model.Question;
 
 /**
  * Servlet implementation class ReadToUpdateQue
@@ -20,11 +24,6 @@ import data.Question;
 public class ReadToUpdateQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private Dao dao;
-	public void init() {
-		dao=new Dao();
-	}
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,14 +46,25 @@ public class ReadToUpdateQue extends HttpServlet {
 		}
 		else {
 			Question q= null;
-			if (dao.getConnection()) {
-				q=dao.getQuestions(id);
-			}
+			q=getQuestion(id);
+			
 			request.setAttribute("question", q);
 			
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/add-question.jsp");
 			rd.forward(request, response);
-		}
-		
+		}	
 	}
+	
+	
+	private Question getQuestion(String id) {
+		String url = "http://localhost:8080/rest/questionservice/read";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url).path(id);
+		Builder b = wt.request();
+		
+		Question q = b.get(Question.class);
+		
+		return q;
+	}
+	
 }

@@ -17,8 +17,8 @@ import javax.servlet.http.Part;
 
 import java.io.*;
 
-import dao.Dao;
-import data.Candidate;
+import dao.DaoC;
+import model.Candidate;
 
 @WebServlet(name = "AddCandidate", urlPatterns = { "/jsp/addCan" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -32,7 +32,7 @@ import data.Candidate;
  */
 public class addCan extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Dao dao;
+	DaoC dao;
 
 	public addCan() {
 		super();
@@ -41,7 +41,7 @@ public class addCan extends HttpServlet {
 
 	@Override
 	public void init() {
-		dao = new Dao();
+		dao = new DaoC();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -102,21 +102,18 @@ public class addCan extends HttpServlet {
 			String fname = request.getParameter("fname");
 			String lname = request.getParameter("lname");
 			String city = request.getParameter("city");
-			String age = request.getParameter("age");
+			int age = Integer.parseInt(request.getParameter("age"));
 			String profession = request.getParameter("profession");
 			String political_party = request.getParameter("political_party");
 			String why_candidate = request.getParameter("why_candidate");
 			String about = request.getParameter("about");
 			String profile_pic = isthereafile ? filePart.getSubmittedFileName() : img;
 
-			Candidate c = new Candidate(fname, lname, city, age, profession, political_party, why_candidate, about,
-					profile_pic);
+			Candidate c = new Candidate(about, age, city, fname, lname, political_party, profession, profile_pic, why_candidate);
 
-			if (dao.getConnection()) {
 				if (dao.addCandidate(c)) {
-					response.sendRedirect("/jsp/candidate-question?ref=" + c.getRef_num());
+					response.sendRedirect("/jsp/candidate-question?ref=" + c.getRefNum());
 				}
-			}
 
 		}
 	}

@@ -17,7 +17,7 @@
 				<h1>Find Your Candidate</h1>
 				<h3>For the upcoming election</h3>
 				<div class="btn-wrapper">
-					<a href="jsp/candidates" class="btn">See Candidates</a> <a
+					<a href="/readallcandidates" class="btn">See Candidates</a> <a
 						href="/voterQuestions" class="btn">Take Test</a>
 				</div>
 			</div>

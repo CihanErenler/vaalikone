@@ -7,9 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.Invocation.Builder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import dao.Dao;
-import data.Question;
+import model.Question;
 
 /**
  * Servlet implementation class DeleteQue
@@ -18,12 +24,6 @@ import data.Question;
 @WebServlet("/DeleteQue")
 public class DeleteQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Dao dao = null;
-
-	@Override
-	public void init() {
-		dao = new Dao();
-	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -33,10 +33,6 @@ public class DeleteQue extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -60,23 +56,24 @@ public class DeleteQue extends HttpServlet {
 
 		else {
 			String id = request.getParameter("id");
-			q.setId(id);
-			if (dao.getConnection()) {
-				if (dao.deleteQuestion(q)) {
-					response.sendRedirect("/jsp/admin-questions");
-				}
+			q.setId(Integer.parseInt(id));
+			if (deleteQuestion(q)) {
+				response.sendRedirect("/jsp/admin-questions");
 			}
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	private boolean deleteQuestion(Question q) {
+		String url = "http://localhost:8080/rest/questionservice/delete";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url).path(String.valueOf(q.getId()));
+		Builder b = wt.request();
+		Response res = b.delete();
 
+		if (res.getStatus() == 200) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

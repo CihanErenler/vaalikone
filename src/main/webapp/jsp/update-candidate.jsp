@@ -20,7 +20,7 @@
 	<div class="add-can container flex-container">
 		<div class="card">
 			<div class="profile-buttons">
-				<a href="jsp/admin-candidate" class="btn btn-back"> <i
+				<a href="/readallcandidatesadmin" class="btn btn-back"> <i
 					class="fas fa-chevron-left"></i> Back
 				</a> <a
 					href="/jsp/ReadToUpdateAnswer?id=${requestScope.profile.getId()}"
@@ -29,7 +29,7 @@
 			<h1 class="title">Update Candidate</h1>
 			<div class="underline"></div>
 			<div class="add-img">
-				<img class="output-img" src="${requestScope.profile.profile_pic}"
+				<img class="output-img" src="/img/${requestScope.profile.profile_pic}"
 					alt="candidate" />
 			</div>
 			<form action="updateCan" method="POST" enctype="multipart/form-data"

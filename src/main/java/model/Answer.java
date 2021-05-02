@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 /**
  * The persistent class for the answer database table.
@@ -20,12 +22,14 @@ public class Answer implements Serializable {
 	private String answer;
 
 	//bi-directional many-to-one association to Candidate
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonBackReference(value="candidate-obj")
 	@JoinColumn(name="can_id")
 	private Candidate candidate;
 
 	//bi-directional many-to-one association to Question
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JsonBackReference(value="question-obj")
 	private Question question;
 
 	public Answer() {

@@ -1,7 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -46,10 +51,26 @@ public class Candidate implements Serializable {
 	private String whyCandidate;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="candidate")
+	@OneToMany(mappedBy="candidate", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference(value="candidate-obj")
 	private List<Answer> answers;
 
 	public Candidate() {
+	}
+
+	public Candidate(String about, int age, String city, String fname, String lname, String politicalParty,
+			String profession, String profilePic, String whyCandidate) {
+		super();
+		this.about = about;
+		this.age = age;
+		this.city = city;
+		this.fname = fname;
+		this.lname = lname;
+		this.politicalParty = politicalParty;
+		this.profession = profession;
+		this.profilePic = profilePic;
+		this.whyCandidate = whyCandidate;
+		this.refNum = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
 	}
 
 	public int getId() {
