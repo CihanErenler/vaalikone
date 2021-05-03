@@ -18,7 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Candidate;
 
-
+/**
+ * 
+ * Displays candidate info for the admin, can be edited
+ *
+ */
 	
 	@WebServlet("/readToUpdateCan")
 	public class ReadToUpdateCan extends HttpServlet {

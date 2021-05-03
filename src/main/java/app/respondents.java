@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.Candidate;
 
+/**
+ * 
+ * Servlet responsible for displaying candidates profile
+ *
+ */
 
 @WebServlet("/respondents")
 public class respondents extends HttpServlet {

@@ -26,6 +26,12 @@ import model.Candidate;
 		maxFileSize = 1024 * 1024 * 10, // 10 MB
 		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
+
+/**
+ * 
+ * Servlet allowing logged in admin to change candidates data
+ *
+ */
 public class UpdateCan extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -100,7 +106,7 @@ public class UpdateCan extends HttpServlet {
 				img = request.getParameter("img");
 			}
 
-			String imgVal = isthereafile ? "/img/" + filePart.getSubmittedFileName() : img;
+			String imgVal = isthereafile ? filePart.getSubmittedFileName() : img;
 			System.out.println(imgVal);
 
 			String id = request.getParameter("id");

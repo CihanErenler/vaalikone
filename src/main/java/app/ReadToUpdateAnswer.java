@@ -17,6 +17,7 @@ import data.Question;
 
 /**
  * Servlet implementation class ReadToUpdateAnswer
+ * Displays candidates answers that can be later changed
  */
 @WebServlet("/jsp/ReadToUpdateAnswer")
 public class ReadToUpdateAnswer extends HttpServlet {
