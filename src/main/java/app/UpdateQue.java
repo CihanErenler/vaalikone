@@ -23,15 +23,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.Dao;
+import dao.DaoC;
 import model.Question;
 
+/**
+ * 
+ * Servlet allowing logged in admin to change a question text
+ * or add a new question
+ *
+ */
 @WebServlet("/jsp/updateque")
 public class UpdateQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DaoC dao;
 
 	public UpdateQue() {
 		super();
 
+	}
+	
+	@Override
+	public void init() {
+		dao = new DaoC();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -80,7 +93,7 @@ public class UpdateQue extends HttpServlet {
 				q.setQuestion(text);
 				q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
 				
-				if (addQuestion(q)) {
+				if (dao.addQuestion(q)) {
 					String qid = q.getQuestionRef();
 					response.sendRedirect("/randomAnswers?qid="+qid);
 				}
@@ -89,7 +102,7 @@ public class UpdateQue extends HttpServlet {
 				q.setId(Integer.parseInt(id));
 				q.setQuestion(text);
 
-				if (updateQuestion(q)) {
+				if (dao.updateQuestion(q)) {
 					response.sendRedirect("/jsp/admin-questions");
 				}
 			}
@@ -97,32 +110,6 @@ public class UpdateQue extends HttpServlet {
 
 	}
 
-	private boolean updateQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/update";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url);
-		Builder b = wt.request();
+	
 
-		Response res = b.put(Entity.entity(q, MediaType.APPLICATION_JSON));
-		if (res.getStatus() == 200) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	private boolean addQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/add";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url);
-		Builder b = wt.request();
-		Entity e = Entity.entity(q, MediaType.APPLICATION_JSON);
-		Response res = b.post(e);
-		
-		if (res.getStatus() == 200) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 }

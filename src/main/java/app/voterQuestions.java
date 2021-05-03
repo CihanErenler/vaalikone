@@ -14,6 +14,11 @@ import dao.Dao;
 import data.Question;
 import data.Candidate;
 
+/**
+ * 
+ * Servlet responsible for displaying questions to the voter
+ *
+ */
 @WebServlet("/voterQuestions")
 public class voterQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;

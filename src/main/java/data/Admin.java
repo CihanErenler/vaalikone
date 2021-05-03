@@ -1,14 +1,43 @@
 package data;
 
+/**
+ * Admin Class
+ *
+ */
 public class Admin {
+	/**
+	 * Parameters defining admin class
+	 */
+	
+	/**
+	 * id
+	 */
 	private String id;
+	/**
+	 * first name
+	 */
 	private String fname;
+	
+	/**
+	 * last name
+	 */
 	private String lname;
+	
+	/**
+	 * email address
+	 */
 	private String email;
+	
+	/**
+	 * Password, stored as md5 encrypted
+	 */
 	private String pass;
 	
 	
-	
+	/**
+	 * getters and setters for the admin class
+	 * @return
+	 */
 	public String getId() {
 		return id;
 	}

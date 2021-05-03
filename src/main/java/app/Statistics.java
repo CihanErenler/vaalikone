@@ -14,6 +14,11 @@ import dao.Dao;
 import data.Candidate;
 import data.Question;
 
+/**
+ * 
+ * Servlet handling the statisctis page
+ *
+ */
 @WebServlet("/Statistics")
 public class Statistics extends HttpServlet {
 	private static final long serialVersionUID = 1L;

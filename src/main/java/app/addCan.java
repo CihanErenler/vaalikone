@@ -26,6 +26,10 @@ import model.Candidate;
 		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 
+/**
+ * Servlet responsible for adding a new candidate
+ *
+ */
 public class addCan extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DaoC dao;
@@ -46,6 +50,9 @@ public class addCan extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	/**
+	 * Servlet allows to add new candidate only to a logged in admin
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);

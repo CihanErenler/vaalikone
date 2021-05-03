@@ -21,6 +21,7 @@ import model.Candidate;
 
 /**
  * Servlet implementation class DeleteCan
+ * Responsible for deleting candidate
  */
 @WebServlet("/deleteCan")
 public class DeleteCan extends HttpServlet {
