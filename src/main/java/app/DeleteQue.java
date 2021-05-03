@@ -15,6 +15,7 @@ import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import dao.DaoC;
 import model.Question;
 
 /**
@@ -24,6 +25,7 @@ import model.Question;
 @WebServlet("/DeleteQue")
 public class DeleteQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DaoC dao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -32,6 +34,12 @@ public class DeleteQue extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public void init() {
+		dao = new DaoC();
+	}
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -57,23 +65,11 @@ public class DeleteQue extends HttpServlet {
 		else {
 			String id = request.getParameter("id");
 			q.setId(Integer.parseInt(id));
-			if (deleteQuestion(q)) {
+			if (dao.deleteQuestion(q)) {
 				response.sendRedirect("/jsp/admin-questions");
 			}
 		}
 	}
 
-	private boolean deleteQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/delete";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url).path(String.valueOf(q.getId()));
-		Builder b = wt.request();
-		Response res = b.delete();
 
-		if (res.getStatus() == 200) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

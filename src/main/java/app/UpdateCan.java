@@ -106,7 +106,7 @@ public class UpdateCan extends HttpServlet {
 				img = request.getParameter("img");
 			}
 
-			String imgVal = isthereafile ? "/img/" + filePart.getSubmittedFileName() : img;
+			String imgVal = isthereafile ? filePart.getSubmittedFileName() : img;
 			System.out.println(imgVal);
 
 			String id = request.getParameter("id");
