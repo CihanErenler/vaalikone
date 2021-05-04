@@ -60,6 +60,14 @@ public class QuestionService {
 	public Response readQuestion(@PathParam("id") int id) {
 		return dao.readQuestion(id);
 	}
+	
+//	public
+	@GET
+	@Path("/readbyanswerid/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response readQuestionByAnswerID(@PathParam("id") int id) {
+		return dao.readQuestionByAnswerID(id);
+	}
 
 //	public
 	@Path("/readall")

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="model.Candidate" %> 
-     <%@ page import="model.Answer" %>
-     <%@ page import="model.Question" %>
+<%@page import="dao.DaoC"%>
+<%@ page import="model.Candidate" %> 
+<%@ page import="model.Answer" %>
+<%@ page import="model.Question" %>
      
-    <%@ page import="java.util.*" %> 
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ page import="java.util.*" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
 <!DOCTYPE html>
 <html lang="en">
@@ -82,12 +83,13 @@
 		</c:forEach> --%>
 		<%
 		Candidate person = (Candidate)request.getAttribute("profile");
-		List<Answer> list= person.getAnswers();	
+		List<Answer> list= person.getAnswers();
+		DaoC dao = new DaoC();
 		
 		for (int i = 0; list != null && i < list.size(); i++){
 			int number = i+1;  
 			Answer a = list.get(i);
-			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getQuestion() +"</p> <div class='question-answer'>" + a.getAnswer_value(a.getAnswer()) +"</div> </div>");
+			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + dao.readQuestionByAnswerID(a.getId()).getQuestion() +"</p> <div class='question-answer'>" + a.getAnswer_value(a.getAnswer()) +"</div> </div>");
 		}
 		%>
  		</div>

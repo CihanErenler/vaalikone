@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Response;
 
+import model.Answer;
 import model.Candidate;
 import model.Question;
 
@@ -57,6 +58,17 @@ public class DaoS {
 	public Response readQuestion(int id) {
 		em.getTransaction().begin();
 		Question q = em.find(Question.class, id);
+		em.getTransaction().commit();
+		if (q != null) {
+			return Response.ok(q).build();
+		}
+		return Response.status(409).build();
+	}
+	
+	public Response readQuestionByAnswerID(int id) {
+		em.getTransaction().begin();
+		Answer a = em.find(Answer.class, id);
+		Question q = em.find(Question.class, a.getQuestion().getId());
 		em.getTransaction().commit();
 		if (q != null) {
 			return Response.ok(q).build();

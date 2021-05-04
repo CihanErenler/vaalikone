@@ -138,5 +138,15 @@ public class DaoC {
 			return false;
 		}
 	}
+	
+	public Question readQuestionByAnswerID(int id) {
+		String url = "http://localhost:8080/rest/questionservice/readbyanswerid";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url).path(String.valueOf(id));
+		Builder b = wt.request();
+		Response res = b.get();
+		
+		return res.readEntity(Question.class);
+	}
 
 }
