@@ -30,8 +30,9 @@ public class Answer implements Serializable {
 	//bi-directional many-to-one association to Question
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JsonBackReference(value="question-obj")
+	@JoinColumn(name="question_id")
 	private Question question;
-
+	
 	public Answer() {
 	}
 
@@ -65,6 +66,18 @@ public class Answer implements Serializable {
 
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+	
+	public String getAnswer_value(String answerNum) {
+		String answer_value = "";
+		switch(answerNum) {
+		case "1": answer_value = "Strongly Disagree"; break;
+		case "2": answer_value = "Disagree"; break;
+		case "3": answer_value = "Neutral"; break;
+		case "4": answer_value = "Agree"; break;
+		case "5": answer_value = "Strongly Agree"; break;
+		}
+		return answer_value;
 	}
 
 }

@@ -2,6 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -68,6 +70,16 @@ public class DaoC {
 		{
 			return false;
 		}
+	}
+	
+	public Candidate readCandidate(String id) {
+		String url = "http://localhost:8080/rest/candidateservice/read";
+		Client cl = ClientBuilder.newClient();
+		WebTarget wt = cl.target(url).path(id);
+		Builder b = wt.request();
+		Response res = b.get();
+		
+		return res.readEntity(Candidate.class);
 	}
 	
 	public ArrayList<Candidate> readAllCandidate() {

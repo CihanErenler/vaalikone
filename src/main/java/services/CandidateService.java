@@ -57,10 +57,12 @@ public class CandidateService
 	}
 	
 //	public
+	@GET
 	@Path("/read/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response readCandidate (@PathParam("id") int id) 
 	{
-		return dao.deleteCandidate(id);
+		return dao.readCandidate(id);
 	}
 	
 //	public

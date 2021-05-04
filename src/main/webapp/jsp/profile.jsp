@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="data.Candidate" %> 
-     <%@ page import="data.Answer" %> 
+    <%@ page import="model.Candidate" %> 
+     <%@ page import="model.Answer" %>
+     <%@ page import="model.Question" %>
+     
     <%@ page import="java.util.*" %> 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -33,7 +35,7 @@
         >
         <div class="profile-info">
           <div class="profile-img-wrapper">
-            <img src="${requestScope.profile.profile_pic}" alt="prfile-img" />
+            <img src="/img/${requestScope.profile.profilePic}" alt="prfile-img" />
           </div>
           <div class="profile-name-info">
             <div class="first-line">
@@ -48,7 +50,7 @@
                 <i class="fas fa-map-marker"></i>
                 ${requestScope.profile.city}
               </h4>
-              <div class="party">${requestScope.profile.political_party}</div>
+              <div class="party">${requestScope.profile.politicalParty}</div>
             </div>
           </div>
         </div>
@@ -63,7 +65,7 @@
           <div class="why-text">
             <h2>Why did you became a candidate?</h2>
             <p>
-              ${requestScope.profile.why_candidate}
+              ${requestScope.profile.whyCandidate}
             </p>
           </div>
         </div>
@@ -72,16 +74,20 @@
         <div class="underline"></div>
 
 		<div class="questions">
+		<%-- <c:forEach var="answer" items="${requestScope.profile.getAnwers()}" varStatus="ind">
+		<div class='question'> <h2 class='index'>${ind.index}</h2>
+			<p class = 'question-text' >${answer.getAnswer()}</p>
+			<div class='question-answer'>${answer.getAnswer_value(answer.getAnswer())}</div>
+		</div>
+		</c:forEach> --%>
 		<%
 		Candidate person = (Candidate)request.getAttribute("profile");
-		ArrayList<Answer> list= person.getAnswers();	
-		
-		
+		List<Answer> list= person.getAnswers();	
 		
 		for (int i = 0; list != null && i < list.size(); i++){
 			int number = i+1;  
 			Answer a = list.get(i);
-			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getAnswer_text() +"</p> <div class='question-answer'>" + a.getAnswer_value() +"</div> </div>");
+			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getQuestion() +"</p> <div class='question-answer'>" + a.getAnswer_value(a.getAnswer()) +"</div> </div>");
 		}
 		%>
  		</div>

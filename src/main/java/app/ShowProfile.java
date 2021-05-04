@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Dao;
-import data.Candidate;
+import dao.DaoC;
+import model.Candidate;
 
 /**
  * 
@@ -20,10 +20,10 @@ import data.Candidate;
 @WebServlet("/ShowProfile")
 public class ShowProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Dao dao;
+	private DaoC dao;
 
 	public void init() {
-		dao = new Dao();
+		dao = new DaoC();
 	}
 
 	public ShowProfile() {
@@ -35,10 +35,7 @@ public class ShowProfile extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 		Candidate c = null;
-
-		if (dao.getConnection()) {
-			c = dao.getCandidate(id);
-		}
+		c = dao.readCandidate(id);
 
 		request.setAttribute("profile", c);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/profile.jsp");
