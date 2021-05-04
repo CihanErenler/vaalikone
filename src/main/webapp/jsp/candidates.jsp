@@ -33,7 +33,7 @@
 				   <a href="/ShowProfile?id=${candidate.getId()}">
 				          <div class="can-card">
 				            <div class="img-wrap">
-				              <img src="${candidate.getProfilePic()}" alt="candidate" />
+				              <img src="/img/${candidate.getProfilePic()}" alt="candidate" />
 				            </div>
 				            
 				            <div class="can-content">
