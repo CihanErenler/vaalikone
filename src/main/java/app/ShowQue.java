@@ -16,6 +16,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.GenericType;
 
+import dao.DaoC;
 import model.Question;
 
 /**
@@ -25,7 +26,7 @@ import model.Question;
 @WebServlet("/jsp/admin-questions")
 public class ShowQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	DaoC dao = new DaoC();
     /**
      * @see HttpServlet#HttpServlet()	
      */
@@ -38,13 +39,7 @@ public class ShowQue extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "http://localhost:8080/rest/questionservice/readall";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url);
-		Builder b = wt.request();
-		
-		List<Question> listQuestion = b.get(new GenericType<List<Question>>() {});
-		
+		ArrayList<Question> listQuestion = dao.readAllQuestion();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/admin-questions.jsp");
 		request.setAttribute("listQuestion", listQuestion);
 		rd.forward(request, response);

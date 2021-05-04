@@ -2,7 +2,7 @@ package app;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.Dao;
-import data.Answer;
+import dao.DaoC;
+import model.Question;
+import model.Answer;
+import model.Candidate;
 
 /**
  * 
@@ -21,12 +23,7 @@ import data.Answer;
 @WebServlet("/jsp/UpdateAnswer")
 public class UpdateAnswer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Dao dao = null;
-	
-	public void init() 
-	{
-		dao = new Dao();
-	}      
+	DaoC dao = new DaoC();  
  
     public UpdateAnswer() {
         super();
@@ -68,19 +65,24 @@ public class UpdateAnswer extends HttpServlet {
 		} else {
 			String ref = request.getParameter("ref");
 			int size = Integer.parseInt(request.getParameter("size"));
-			String id = "";
-			ArrayList<Answer> answer = new ArrayList<Answer>();
 			
-
-			if (dao.getConnection()) {
-				id = String.valueOf(dao.getIdByRef(ref));
-				for (int i=0; i<size; i++) {
-					Answer ans = new Answer(id, request.getParameter("questionID".concat(String.valueOf(i))), request.getParameter(String.valueOf(i)));
-					answer.add(ans);
-				}
-				dao.addAnswerCandidate(answer);
-				response.sendRedirect("/readallcandidatesadmin");
+			List<Answer> answer = new ArrayList<Answer>();
+			
+			Candidate c = dao.readCandidateByRef(ref);
+			
+			for (int i=0; i<size; i++) {
+				Answer ans = new Answer();
+				Question q = dao.readQuestion(Integer.parseInt(request.getParameter("questionID".concat(String.valueOf(i)))));
+				
+				ans.setAnswer(request.getParameter(String.valueOf(i)));
+				ans.setQuestion(q);
+				answer.add(ans);
 			}
+			c.setAnswers(answer);
+			dao.updateCandidate(c);
+			
+			response.sendRedirect("/readallcandidatesadmin");
+			
 		}
 	}
 

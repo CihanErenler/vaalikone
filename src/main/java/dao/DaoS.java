@@ -133,6 +133,16 @@ public class DaoS {
 		}
 		return Response.status(409).build();
 	}
+	
+	public Response readCandidateByRef(String refnum) {
+		em.getTransaction().begin();
+		Candidate c = (Candidate) em.createQuery("SELECT c from Candidate c where c.refNum = "+refnum).getSingleResult();
+		em.getTransaction().commit();
+		if (c != null) {
+			return Response.ok(c).build();
+		}
+		return Response.status(409).build();
+	}
 
 	public Response readAllCandidate() {
 		List<Candidate> list = em.createQuery("select a from Candidate a").getResultList();

@@ -22,13 +22,13 @@ public class Answer implements Serializable {
 	private String answer;
 
 	//bi-directional many-to-one association to Candidate
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonBackReference(value="candidate-obj")
 	@JoinColumn(name="can_id")
 	private Candidate candidate;
 
 	//bi-directional many-to-one association to Question
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonBackReference(value="question-obj")
 	@JoinColumn(name="question_id")
 	private Question question;

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Dao;
-import data.Question;
+import dao.DaoC;
+import model.Question;
 
 /**
  * Servlet implementation class CandidateQuestion
@@ -20,11 +20,11 @@ import data.Question;
 @WebServlet("/jsp/candidate-question")
 public class CandidateQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Dao dao = null;
+	DaoC dao = null;
 	
 	public void init() 
 	{
-		dao = new Dao();
+		dao = new DaoC();
 	}
        
     /**
@@ -42,11 +42,7 @@ public class CandidateQuestion extends HttpServlet {
 		// TODO Auto-generated method stub
 		String ref = request.getParameter("ref");
 		
-		ArrayList<Question> q = null;
-		
-		if (dao.getConnection()) {
- 			q = dao.readAllQuestions();
- 		}
+		ArrayList<Question> q = dao.readAllQuestion();
 		
 		request.setAttribute("ref", ref);
 		request.setAttribute("questions", q);

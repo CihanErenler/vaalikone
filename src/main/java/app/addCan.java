@@ -111,9 +111,9 @@ public class addCan extends HttpServlet {
 
 			Candidate c = new Candidate(about, age, city, fname, lname, political_party, profession, profile_pic, why_candidate);
 
-				if (dao.addCandidate(c)) {
-					response.sendRedirect("/jsp/candidate-question?ref=" + c.getRefNum());
-				}
+			if (dao.addCandidate(c)) {
+				response.sendRedirect("/jsp/candidate-question?ref=" + c.getRefNum());
+			}
 
 		}
 	}

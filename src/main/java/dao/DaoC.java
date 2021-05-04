@@ -82,6 +82,16 @@ public class DaoC {
 		return res.readEntity(Candidate.class);
 	}
 	
+	public Candidate readCandidateByRef(String ref) {
+		String url = "http://localhost:8080/rest/candidateservice/readbyref";
+		Client cl = ClientBuilder.newClient();
+		WebTarget wt = cl.target(url).path(ref);
+		Builder b = wt.request();
+		Response res = b.get();
+		
+		return res.readEntity(Candidate.class);
+	}
+	
 	public ArrayList<Candidate> readAllCandidate() {
 		String url = "http://127.0.0.1:8080/rest/candidateservice/readall";
 		Client c = ClientBuilder.newClient();
@@ -137,6 +147,25 @@ public class DaoC {
 		} else {
 			return false;
 		}
+	}
+	
+	public ArrayList<Question> readAllQuestion(){
+		String url = "http://localhost:8080/rest/questionservice/readall";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url);
+		Builder b = wt.request();
+				
+		return b.get(new GenericType<ArrayList<Question>>() {});
+	}
+	
+	public Question readQuestion(int id) {
+		String url = "http://localhost:8080/rest/questionservice/read";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url).path(String.valueOf(id));
+		Builder b = wt.request();
+		Response res = b.get();
+		
+		return res.readEntity(Question.class);
 	}
 	
 	public Question readQuestionByAnswerID(int id) {

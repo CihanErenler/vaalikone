@@ -66,6 +66,15 @@ public class CandidateService
 	}
 	
 //	public
+	@GET
+	@Path("/readbyref/{refnum}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response readCandidateByRef(@PathParam("refnum") String refnum) 
+	{
+		return dao.readCandidateByRef(refnum);
+	}
+	
+//	public
 	@Path("/readalladmin")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
