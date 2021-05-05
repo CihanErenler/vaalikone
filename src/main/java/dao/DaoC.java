@@ -13,6 +13,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import model.Answer;
 import model.Candidate;
 import model.Question;
 
@@ -178,4 +179,17 @@ public class DaoC {
 		return res.readEntity(Question.class);
 	}
 
+//	Answer Start
+	public boolean addAnswer(Answer a) {
+		String url = "http://127.0.0.1:8080/rest/answerservice/add";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url);
+		Builder b = wt.request();
+		
+		Response res = b.post(Entity.entity(a, MediaType.APPLICATION_JSON));
+		if (res.getStatus() == 200) {
+			return true;			
+		}
+		return false;
+	}
 }

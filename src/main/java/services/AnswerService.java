@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.DaoS;
+import model.Answer;
 import model.Candidate;
 
 @Path("/answerservice")
@@ -19,9 +20,9 @@ public class AnswerService {
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addCandidate(Candidate c) 
+	public Response addAnswer(Answer a) 
 	{
-		return dao.addCandidate(c);
+		return dao.addAnswer(a);
 	}
 	
 //	admin
