@@ -154,5 +154,17 @@ public class DaoS {
 	}
 	
 //	Candidate End
+
+//	Answer start
+	public Response addAnswer(Answer a) {
+		em.getTransaction().begin();
+		em.persist(a);// The actual insertion line
+		em.getTransaction().commit();
+		if (a.equals(em.find(Answer.class, a.getId()))) {
+			return Response.ok().build();
+		} else {
+			return Response.status(409).build();
+		}
+	}
 	
 }
