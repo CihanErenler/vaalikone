@@ -13,15 +13,20 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import model.Answer;
 import model.Candidate;
 import model.Question;
 
 public class DaoC {
 	private final String uploadPath;
+	private final String root;
 
 	public DaoC() {
 		this.uploadPath = "C:\\Users\\kota\\git\\vaalikone\\src\\main\\webapp\\img\\";
+		root = "http://localhost:8080/rest";
 	}
 	
 	public String getUploadPath() {
@@ -31,7 +36,7 @@ public class DaoC {
 //	Candidate Start
 	
 	public boolean addCandidate(Candidate can) {
-		String url = "http://127.0.0.1:8080/rest/candidateservice/add";
+		String url = root+"/candidateservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
@@ -44,7 +49,7 @@ public class DaoC {
 	}
 	
 	public boolean updateCandidate(Candidate can) {
-		String url = "http://127.0.0.1:8080/rest/candidateservice/update";
+		String url = root+"/candidateservice/update";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
@@ -58,7 +63,7 @@ public class DaoC {
 	
 	public boolean deleteCandidate(Candidate c) 
 	{
-		String url = "http://localhost:8080/rest/candidateservice/delete";
+		String url = root+"/candidateservice/delete";
 		Client cl = ClientBuilder.newClient();
 		WebTarget wt = cl.target(url).path(String.valueOf(c.getId()));
 		Builder b = wt.request();
@@ -74,7 +79,7 @@ public class DaoC {
 	}
 	
 	public Candidate readCandidate(String id) {
-		String url = "http://localhost:8080/rest/candidateservice/read";
+		String url = root+"/candidateservice/read";
 		Client cl = ClientBuilder.newClient();
 		WebTarget wt = cl.target(url).path(id);
 		Builder b = wt.request();
@@ -84,7 +89,7 @@ public class DaoC {
 	}
 	
 	public Candidate readCandidateByRef(String ref) {
-		String url = "http://localhost:8080/rest/candidateservice/readbyref";
+		String url = root+"/candidateservice/readbyref";
 		Client cl = ClientBuilder.newClient();
 		WebTarget wt = cl.target(url).path(ref);
 		Builder b = wt.request();
@@ -94,7 +99,7 @@ public class DaoC {
 	}
 	
 	public ArrayList<Candidate> readAllCandidate() {
-		String url = "http://127.0.0.1:8080/rest/candidateservice/readall";
+		String url = root+"/candidateservice/readall";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
@@ -107,7 +112,7 @@ public class DaoC {
 	// Question Start
 	
 	public boolean updateQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/update";
+		String url = root+"/questionservice/update";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
@@ -121,7 +126,7 @@ public class DaoC {
 	}
 	
 	public boolean addQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/add";
+		String url = root+"/questionservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
@@ -137,7 +142,7 @@ public class DaoC {
 	}
 	
 	public boolean deleteQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/delete";
+		String url = root+"/questionservice/delete";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url).path(String.valueOf(q.getId()));
 		Builder b = wt.request();
@@ -181,7 +186,7 @@ public class DaoC {
 
 //	Answer Start
 	public boolean addAnswer(Answer a) {
-		String url = "http://127.0.0.1:8080/rest/answerservice/add";
+		String url = root+"/answerservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 /**
@@ -12,12 +15,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  */
 @Entity
 @NamedQuery(name="Answer.findAll", query="SELECT a FROM Answer a")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Answer.class)
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@Column(name="id")
+	private int answerId;
 
 	private String answer;
 
@@ -29,7 +34,7 @@ public class Answer implements Serializable {
 
 	//bi-directional many-to-one association to Question
 	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JsonBackReference(value="question-obj")
+//	@JsonBackReference(value="question-obj")
 	@JoinColumn(name="question_id")
 	private Question question;
 	
@@ -37,11 +42,11 @@ public class Answer implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return this.answerId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.answerId = id;
 	}
 
 	public String getAnswer() {
