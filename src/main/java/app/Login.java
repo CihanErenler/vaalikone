@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.Dao;
-import data.Admin;
+import dao.DaoC;
+import model.Admin;
 
 /**
  * Servlet implementation class Login
@@ -22,12 +22,8 @@ import data.Admin;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Dao dao;
-
-	@Override
-	public void init() {
-		dao = new Dao();
-	}
+	
+	DaoC dao = new DaoC();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -68,48 +64,24 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		Admin adm = new Admin();
 		adm.setEmail(request.getParameter("email"));
-		adm.setPass(crypt(request.getParameter("password")));
+		adm.setPwd(crypt(request.getParameter("password")));
 
 		if (session.getAttribute("isLoggedIn") == null) {
 			session.setAttribute("isLoggedIn", false);
 		}
 
-		if (dao.getConnection()) {
-			if (dao.adminLogin(adm)) {
-				session.setAttribute("isLoggedIn", true);
-			}
-		} else {
-			System.out.println("No connection to database");
+		if (dao.login(adm).getStatus() == 200) {
+			session.setAttribute("isLoggedIn", true);
 		}
 
 		if ((boolean) session.getAttribute("isLoggedIn")) {
 			System.out.println("logged in");
 			response.sendRedirect("/jsp/admin-dashboard.jsp");
 		} else {
-			System.out.println(dao.matchedAdminInt(adm));
 			System.out.println("not logged in");
 
 			response.sendRedirect("/jsp/login.jsp?loginError=true");
-
-//			request.setAttribute("loginError", true);
-//			RequestDispatcher rd = request.getRequestDispatcher("/jsp/login.jsp");
-//			rd.forward(request, response);
-
 		}
-	}
-
-	private void matchedAdminArrPrintEmail(Admin adm) {
-		ArrayList<Admin> ad = null;
-		ad = dao.matchedAdmin(adm);
-		for (Admin admin : ad) {
-			System.out.println(admin.getEmail());
-		}
-	}
-
-	private void matchedAdminPrintInt(Admin adm) {
-		int ai = 0;
-		ai = dao.matchedAdminInt(adm);
-		System.out.println(ai);
 	}
 
 	private static String crypt(String str) {

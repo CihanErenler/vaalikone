@@ -1,12 +1,17 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import model.Admin;
 import model.Answer;
 import model.Candidate;
 import model.Question;
@@ -155,6 +160,21 @@ public class DaoS {
 	
 //	Candidate End
 
+//	Auth Start
+	public Response login(Admin adm) {
+		List<Admin> a = null;
+		em.getTransaction().begin();
+		a = em.createQuery("SELECT a from Admin a WHERE a.pwd='"+adm.getPwd()+"' AND a.email='"+adm.getEmail()+"'").getResultList();
+		em.getTransaction().commit();
+		
+		if (a.size() == 1) {
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.UNAUTHORIZED).entity(adm).build();
+		}
+	}
+//	Auth End	
+	
 //	Answer start
 	public Response addAnswer(Answer a) {
 		em.getTransaction().begin();

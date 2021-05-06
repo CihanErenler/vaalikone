@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.Admin;
 import model.Answer;
 import model.Candidate;
 import model.Question;
@@ -175,7 +176,7 @@ public class DaoC {
 	}
 	
 	public Question readQuestionByAnswerID(int id) {
-		String url = "http://localhost:8080/rest/questionservice/readbyanswerid";
+		String url = root+"/questionservice/readbyanswerid";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url).path(String.valueOf(id));
 		Builder b = wt.request();
@@ -184,6 +185,17 @@ public class DaoC {
 		return res.readEntity(Question.class);
 	}
 
+//	Auth Start
+	public Response login(Admin adm) {
+		String url = root+"/auth/login";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url);
+		Builder b = wt.request();
+		return b.post(Entity.json(adm));
+	}
+	
+//	Auth end
+	
 //	Answer Start
 	public boolean addAnswer(Answer a) {
 		String url = root+"/answerservice/add";
