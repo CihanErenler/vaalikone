@@ -67,20 +67,40 @@ public class UpdateAnswer extends HttpServlet {
 			response.sendRedirect("/index.jsp");
 		} else {
 			String ref = request.getParameter("ref");
+			String id = request.getParameter("id");
 			int size = Integer.parseInt(request.getParameter("size"));
 			
-			List<Answer> answer = new ArrayList<Answer>();
+			List<Answer> answer = null;
 			
-			Candidate c = dao.readCandidateByRef(ref);
-			
-			for (int i=0; i<size; i++) {
-				Answer ans = new Answer();
-				Question q = dao.readQuestion(Integer.parseInt(request.getParameter("questionID".concat(String.valueOf(i)))));
+			Candidate c = null;
+			if (id != null) {
+				System.out.println("Exists ID : "+ id);
+				c = dao.readCandidate(id);
+				answer = c.getAnswers();
 				
-				ans.setAnswer(request.getParameter(String.valueOf(i)));
-				ans.setQuestion(q);
-				answer.add(ans);
+				for (int i=0; i<answer.size(); i++) {
+					Answer ans = answer.get(i);
+					ans.setAnswer(request.getParameter(String.valueOf(i)));
+					
+					answer.set(i, ans);
+				}
 			}
+			else {
+				System.out.println("Exists refNum : "+ ref);
+				c = dao.readCandidateByRef(ref);
+				answer = new ArrayList<Answer>();
+
+				for (int i=0; i<size; i++) {
+					Answer ans = new Answer();
+					Question q = dao.readQuestion(Integer.parseInt(request.getParameter("questionID".concat(String.valueOf(i)))));
+					
+					ans.setAnswer(request.getParameter(String.valueOf(i)));
+					ans.setQuestion(q);
+					answer.add(ans);
+				}
+			}
+			
+			
 			c.setAnswers(answer);
 			
 			dao.updateCandidate(c);

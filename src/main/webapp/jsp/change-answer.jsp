@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.Question" %>   
+<%@ page import="model.Candidate" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../jsp/session.jsp" %>
 
@@ -27,16 +27,16 @@
 			</a>
 			<h1 class="title">Candidate's answers</h1>
 			<div class="underline"></div>
-			<form method="post" action="ChangeAnswer" class="question-form">
+			<form method="post" action="/jsp/UpdateAnswer" class="question-form">
 			<input type="hidden" name="size" value="${requestScope.answer.size()}" />
 			<input type="hidden" name="id" value="${requestScope.id}" />
 			
 			<c:forEach var="ans" items="${requestScope.answer}" varStatus="counter">
 				<section>
 					<div class="question">
-						<input type="hidden" name="questionID${counter.index}" value="${ans.question_id}" />
+						<input type="hidden" name="questionID${counter.index}" value="${ans.getQuestion().getId()}" />
 						<h2 class="index">${counter.index+1}</h2>
-						<p class="question-text">${ans.answer_text}</p>
+						<p class="question-text">${ans.getQuestion().getQuestion()}</p>
 					</div>
 					<div class="answer">
 						<ul> 
