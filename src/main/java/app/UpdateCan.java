@@ -33,109 +33,78 @@ import model.Candidate;
  *
  */
 public class UpdateCan extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 	DaoC dao;
-	
+
 	@Override
-	public void init () {		
+	public void init() {
 		dao = new DaoC();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
 
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		String img = "";
 
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
+		// get the file chosen by the user
+		Part filePart = request.getPart("profile_pic");
 
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
+		boolean isthereafile = false;
+		if (request.getPart("profile_pic").getSize() > 0) {
+			isthereafile = true;
 		}
 
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
+		if (isthereafile) {
+			// get the InputStream to store the file somewhere
+			InputStream fileInputStream = filePart.getInputStream();
+
+			// for example, you can copy the uploaded file to the server
+			// note that you probably don't want to do this in real life!
+			// upload it to a file host like S3 or GCS instead
+
+			File fileToSave = new File(dao.getUploadPath() + filePart.getSubmittedFileName());
+			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+			System.out.println(request.getParameter("profile_pic"));
 		} else {
-			String img = "";
+			img = request.getParameter("img");
+		}
 
-			// get the file chosen by the user
-			Part filePart = request.getPart("profile_pic");
+		String imgVal = isthereafile ? filePart.getSubmittedFileName() : img;
+		System.out.println(imgVal);
 
-			boolean isthereafile = false;
-			if (request.getPart("profile_pic").getSize() > 0) {
-				isthereafile = true;
-			}
+		String id = request.getParameter("id");
+		String fname = request.getParameter("fname");
+		String lname = request.getParameter("lname");
+		String city = request.getParameter("city");
+		String age = request.getParameter("age");
+		String profession = request.getParameter("profession");
+		String politicalParty = request.getParameter("political_party");
+		String why_candidate = request.getParameter("why_candidate");
+		String about = request.getParameter("about");
+		String profile_pic = imgVal;
 
-			if (isthereafile) {
-				// get the InputStream to store the file somewhere
-				InputStream fileInputStream = filePart.getInputStream();
+		Candidate c = dao.readCandidate(id);
+		c.setFname(fname);
+		c.setLname(lname);
+		c.setCity(city);
+		c.setAge(Integer.parseInt(age));
+		c.setProfession(profession);
+		c.setPoliticalParty(politicalParty);
+		c.setWhyCandidate(why_candidate);
+		c.setAbout(about);
+		c.setProfilePic(profile_pic);
 
-				// for example, you can copy the uploaded file to the server
-				// note that you probably don't want to do this in real life!
-				// upload it to a file host like S3 or GCS instead
-
-				File fileToSave = new File(
-						dao.getUploadPath() + filePart.getSubmittedFileName());
-				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-				System.out.println(request.getParameter("profile_pic"));
-			} else {
-				img = request.getParameter("img");
-			}
-
-			String imgVal = isthereafile ? filePart.getSubmittedFileName() : img;
-			System.out.println(imgVal);
-
-			String id = request.getParameter("id");
-			String fname = request.getParameter("fname");
-			String lname = request.getParameter("lname");
-			String city = request.getParameter("city");
-			String age = request.getParameter("age");
-			String profession = request.getParameter("profession");
-			String politicalParty = request.getParameter("political_party");
-			String why_candidate = request.getParameter("why_candidate");
-			String about = request.getParameter("about");
-			String profile_pic = imgVal;
-
-			Candidate c = dao.readCandidate(id);
-			c.setFname(fname);
-			c.setLname(lname);
-			c.setCity(city);
-			c.setAge(Integer.parseInt(age));
-			c.setProfession(profession);
-			c.setPoliticalParty(politicalParty);
-			c.setWhyCandidate(why_candidate);
-			c.setAbout(about);
-			c.setProfilePic(profile_pic);
-			 
-			if (dao.updateCandidate(c)) {
-				System.out.println("candidate details updated");
-				response.sendRedirect("/readallcandidatesadmin");
-			}
+		if (dao.updateCandidate(c)) {
+			System.out.println("candidate details updated");
 			response.sendRedirect("/readallcandidatesadmin");
 		}
+		response.sendRedirect("/readallcandidatesadmin");
 	}
 }

@@ -43,37 +43,14 @@ public class DeleteCan extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
+		Candidate c = new Candidate();
+		String id = request.getParameter("id");
+		c.setId(Integer.parseInt(id));
+		if(dao.deleteCandidate(c)) 
+		{
+			System.out.println("candidate deleted");
 		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
-
-		else {
-			Candidate c = new Candidate();
-			String id = request.getParameter("id");
-			c.setId(Integer.parseInt(id));
-			if(dao.deleteCandidate(c)) 
-			{
-				System.out.println("candidate deleted");
-			}
-			response.sendRedirect("/readallcandidatesadmin");
-		}
+		response.sendRedirect("/readallcandidatesadmin");
 	}
 	
-	
-	
-	
-	
-
 }

@@ -46,30 +46,10 @@ public class DeleteQue extends HttpServlet {
 		// TODO Auto-generated method stub
 		Question q = new Question();
 
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
-
-		else {
-			String id = request.getParameter("id");
-			q.setId(Integer.parseInt(id));
-			if (dao.deleteQuestion(q)) {
-				response.sendRedirect("/jsp/admin-questions");
-			}
+		String id = request.getParameter("id");
+		q.setId(Integer.parseInt(id));
+		if (dao.deleteQuestion(q)) {
+			response.sendRedirect("/jsp/admin-questions");
 		}
 	}
-
-
 }
