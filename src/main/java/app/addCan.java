@@ -47,7 +47,6 @@ public class addCan extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -55,66 +54,46 @@ public class addCan extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		String img = "";
 
-		boolean isLoggedIn = false;
-		if (session == null) {
+		// get the file chosen by the user
+		Part filePart = request.getPart("profile_pic");
+
+		boolean isthereafile = false;
+		if (request.getPart("profile_pic").getSize() > 0) {
+			isthereafile = true;
+		}
+
+		if (isthereafile) {
+			// get the InputStream to store the file somewhere
+			InputStream fileInputStream = filePart.getInputStream();
+
+			// for example, you can copy the uploaded file to the server
+			// note that you probably don't want to do this in real life!
+			// upload it to a file host like S3 or GCS instead
+			File fileToSave = new File(
+					dao.getUploadPath() + filePart.getSubmittedFileName());
+			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+			System.out.println(request.getParameter("profile_pic"));
 		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
+			img = "placeholder.jpg";
 		}
 
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
+		String fname = request.getParameter("fname");
+		String lname = request.getParameter("lname");
+		String city = request.getParameter("city");
+		int age = Integer.parseInt(request.getParameter("age"));
+		String profession = request.getParameter("profession");
+		String political_party = request.getParameter("political_party");
+		String why_candidate = request.getParameter("why_candidate");
+		String about = request.getParameter("about");
+		String profile_pic = isthereafile ? filePart.getSubmittedFileName() : img;
 
-		else {
+		Candidate c = new Candidate(about, age, city, fname, lname, political_party, profession, profile_pic, why_candidate);
 
-			String img = "";
-
-			// get the file chosen by the user
-			Part filePart = request.getPart("profile_pic");
-
-			boolean isthereafile = false;
-			if (request.getPart("profile_pic").getSize() > 0) {
-				isthereafile = true;
-			}
-
-			if (isthereafile) {
-				// get the InputStream to store the file somewhere
-				InputStream fileInputStream = filePart.getInputStream();
-
-				// for example, you can copy the uploaded file to the server
-				// note that you probably don't want to do this in real life!
-				// upload it to a file host like S3 or GCS instead
-				File fileToSave = new File(
-						dao.getUploadPath() + filePart.getSubmittedFileName());
-				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-				System.out.println(request.getParameter("profile_pic"));
-			} else {
-				img = "placeholder.jpg";
-			}
-
-			String fname = request.getParameter("fname");
-			String lname = request.getParameter("lname");
-			String city = request.getParameter("city");
-			int age = Integer.parseInt(request.getParameter("age"));
-			String profession = request.getParameter("profession");
-			String political_party = request.getParameter("political_party");
-			String why_candidate = request.getParameter("why_candidate");
-			String about = request.getParameter("about");
-			String profile_pic = isthereafile ? filePart.getSubmittedFileName() : img;
-
-			Candidate c = new Candidate(about, age, city, fname, lname, political_party, profession, profile_pic, why_candidate);
-
-			if (dao.addCandidate(c)) {
-				response.sendRedirect("/jsp/candidate-question?ref=" + c.getRefNum());
-			}
-
+		if (dao.addCandidate(c)) {
+			response.sendRedirect("/jsp/candidate-question?ref=" + c.getRefNum());
 		}
 	}
 }

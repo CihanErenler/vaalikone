@@ -72,6 +72,9 @@ public class Login extends HttpServlet {
 
 		if (dao.login(adm).getStatus() == 200) {
 			session.setAttribute("isLoggedIn", true);
+			
+//			if it reaches the timeout the session will invalidate itself (45 Minutes)
+			session.setMaxInactiveInterval(45*60);
 		}
 
 		if ((boolean) session.getAttribute("isLoggedIn")) {
