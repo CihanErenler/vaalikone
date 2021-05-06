@@ -29,7 +29,7 @@
 			<h1 class="title">Update Candidate</h1>
 			<div class="underline"></div>
 			<div class="add-img">
-				<img class="output-img" src="/img/${requestScope.profile.profile_pic}"
+				<img class="output-img" src="/img/${requestScope.profile.profilePic}"
 					alt="candidate" />
 			</div>
 			<form action="updateCan" method="POST" enctype="multipart/form-data"
@@ -38,7 +38,7 @@
 					type="file" name="profile_pic" id="img-file"> <input
 					type="hidden" name="id" value="${requestScope.profile.getId()}" />
 				<input type="hidden" name="img"
-					value="${requestScope.profile.getProfile_pic()}" /> <input
+					value="${requestScope.profile.getProfilePic()}" /> <input
 					type="text" name="fname" id="fname" placeholder="First Name"
 					value="${requestScope.profile.fname}" /> <input type="text"
 					name="lname" id="lname" placeholder="Last Name"
@@ -50,9 +50,9 @@
 					name="profession" id="profession" placeholder="Profession"
 					value="${requestScope.profile.profession}" /> <input type="text"
 					name="political_party" id="party" placeholder="Political party"
-					value="${requestScope.profile.political_party}" />
+					value="${requestScope.profile.politicalParty}" />
 				<textarea name="why_candidate" id="why-can"
-					placeholder="Why did you become a candidate?">${requestScope.profile.why_candidate}</textarea>
+					placeholder="Why did you become a candidate?">${requestScope.profile.whyCandidate}</textarea>
 				<textarea name="about" id="about" placeholder="About">${requestScope.profile.about}</textarea>
 				<button name="submit" type="submit" class="btn btn-thin">Update
 					Candidate</button>

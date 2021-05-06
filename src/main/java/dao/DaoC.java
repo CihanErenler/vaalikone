@@ -25,7 +25,7 @@ public class DaoC {
 	private final String root;
 
 	public DaoC() {
-		this.uploadPath = "C:\\Users\\kota\\git\\vaalikone\\src\\main\\webapp\\img\\";
+		this.uploadPath = "C:\\Users\\rhexa\\git\\vaalikone\\src\\main\\webapp\\img\\";
 		root = "http://localhost:8080/rest";
 	}
 	

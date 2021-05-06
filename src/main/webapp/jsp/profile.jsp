@@ -75,21 +75,14 @@
         <div class="underline"></div>
 
 		<div class="questions">
-		<%-- <c:forEach var="answer" items="${requestScope.profile.getAnwers()}" varStatus="ind">
-		<div class='question'> <h2 class='index'>${ind.index}</h2>
-			<p class = 'question-text' >${answer.getAnswer()}</p>
-			<div class='question-answer'>${answer.getAnswer_value(answer.getAnswer())}</div>
-		</div>
-		</c:forEach> --%>
 		<%
 		Candidate person = (Candidate)request.getAttribute("profile");
 		List<Answer> list= person.getAnswers();
-		DaoC dao = new DaoC();
 		
 		for (int i = 0; list != null && i < list.size(); i++){
 			int number = i+1;  
 			Answer a = list.get(i);
-			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + dao.readQuestionByAnswerID(a.getId()).getQuestion() +"</p> <div class='question-answer'>" + a.getAnswer_value(a.getAnswer()) +"</div> </div>");
+			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getQuestion().getQuestion() +"</p> <div class='question-answer'>" + a.getAnswer_value(a.getAnswer()) +"</div> </div>");
 		}
 		%>
  		</div>

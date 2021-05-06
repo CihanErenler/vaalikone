@@ -120,8 +120,7 @@ public class UpdateCan extends HttpServlet {
 			String about = request.getParameter("about");
 			String profile_pic = imgVal;
 
-			Candidate c = new Candidate();
-			c.setId(Integer.parseInt(id));
+			Candidate c = dao.readCandidate(id);
 			c.setFname(fname);
 			c.setLname(lname);
 			c.setCity(city);
