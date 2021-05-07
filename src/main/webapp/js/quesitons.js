@@ -39,7 +39,7 @@ function update(e) {
 		}
 	}
 	
-	console.log(questions.join("%"));
+	console.log(answers);
 		answersArr.value = answers.join("%");
 	
 

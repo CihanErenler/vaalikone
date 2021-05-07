@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@ page import="data.Question"%>
+<%@ page import="model.Question"%>
 <%@ page import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -27,9 +27,9 @@ ArrayList<Question> questions = (ArrayList<Question>) request.getAttribute("ques
 
 for (int i = 0; i < questions.size(); i++) {
 	if (i == questions.size() - 1) {
-		qtext += questions.get(i).getText();
+		qtext += questions.get(i).getQuestion();
 	} else {
-		qtext += questions.get(i).getText() + "%";
+		qtext += questions.get(i).getQuestion() + "%";
 	}
 }
 
@@ -46,7 +46,7 @@ out.println(qtext);%>">
             amet egestas leo, et condimentum tortor? -->
 				</div>
 				<form action="/calculate" method="post" id="qustions-form">
-				<input class="answersArr" type="hidden" name="answersArr">
+				<input class="answersArr" type="text" name="answersArr">
 					<div class="wrapper-answer">
 						<div class="answer">
 							<ul>
