@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
@@ -126,20 +127,13 @@ public class DaoC {
 		}
 	}
 	
-	public boolean addQuestion(Question q) {
+	public Response addQuestion(Question q) {
 		String url = root+"/questionservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
 		Builder b = wt.request();
 		Entity e = Entity.entity(q, MediaType.APPLICATION_JSON);
-		Response res = b.post(e);
-		
-		if (res.getStatus() == 200) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return b.post(e);
 	}
 	
 	public boolean deleteQuestion(Question q) {
@@ -173,6 +167,16 @@ public class DaoC {
 		Response res = b.get();
 		
 		return res.readEntity(Question.class);
+	}
+	
+	public List<Answer> readQuestionAnswers(int id) {
+		String url = root+"/questionservice/read";
+		Client c = ClientBuilder.newClient();
+		WebTarget wt = c.target(url).path(String.valueOf(id)).path("answers");
+		Builder b = wt.request();
+		Response res = b.get();
+		
+		return res.readEntity(new GenericType<List<Answer>>(){});
 	}
 	
 	public Question readQuestionByAnswerID(int id) {

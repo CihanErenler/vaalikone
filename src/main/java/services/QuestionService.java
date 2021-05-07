@@ -63,6 +63,16 @@ public class QuestionService {
 	
 //	public
 	@GET
+	@Path("/read/{id}/answers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response readQuestionAnswers(@PathParam("id") int id) {
+//		Question q = dao.readQuestion(id).readEntity(Question.class);
+		
+		return dao.readQuestionAnswers(id);
+	}
+	
+//	public
+	@GET
 	@Path("/readbyanswerid/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response readQuestionByAnswerID(@PathParam("id") int id) {

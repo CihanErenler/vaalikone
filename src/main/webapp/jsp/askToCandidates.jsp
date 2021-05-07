@@ -25,7 +25,7 @@
         <div class="ask-question">
           <h2 class="question-title">Question:</h2>
           <p class="ask-question-text">
-            ${requestScope.question.getText()}
+            ${requestScope.question.getQuestion()}
           </p>
           <form action="/jsp/admin-questions" class="ask-candidate-form">
           <button type="submit" class="btn btn-blue btn-thin ask-candidate-btn btn-disabled" disabled>
@@ -36,9 +36,9 @@
         <section class="ask-answers">
         
         <c:forEach var="can" items="${requestScope.cans}">
-        	<div class="ask-answer" data-answer="${can.getAnswer()}">
+        	<div class="ask-answer" data-answer="${can.answer}">
             <div class="ask-answer-img-wrap">
-              <img src="/img/${can.getPic()}" alt="candidate" />
+              <img src="/img/${can.pic}" alt="candidate" />
             </div>
             <div class="thinking-part">
               <div>
