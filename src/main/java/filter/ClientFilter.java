@@ -116,10 +116,10 @@ public class ClientFilter implements Filter {
 			session.invalidate();
 		}
 		
-		System.out.println("lasttime : " + new Date(creationTime));
-		System.out.println("creationtime : " + new Date(lastTime));
-		System.out.println("Age : " + age);
-		System.out.println("maxAge : " + maxAge);
+//		System.out.println("lasttime : " + new Date(creationTime));
+//		System.out.println("creationtime : " + new Date(lastTime));
+//		System.out.println("Age : " + age);
+//		System.out.println("maxAge : " + maxAge);
 	}
 	
 }
