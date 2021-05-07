@@ -15,6 +15,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.GenericType;
 
+import dao.Dao;
+import dao.DaoC;
 import model.Candidate;
 
 /**
@@ -23,6 +25,7 @@ import model.Candidate;
 @WebServlet("/readallcandidates")
 public class ReadAllCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DaoC dao = new DaoC();
     
     public ReadAllCandidates() 
     {
@@ -32,12 +35,7 @@ public class ReadAllCandidates extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String url = "http://localhost:8080/rest/candidateservice/readall";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url);
-		Builder b = wt.request();
-		
-		List<Candidate> candidateList = b.get(new GenericType<List<Candidate>>() {});
+		List<Candidate> candidateList = dao.readAllCandidate();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/candidates.jsp");
 		request.setAttribute("candidateList", candidateList);

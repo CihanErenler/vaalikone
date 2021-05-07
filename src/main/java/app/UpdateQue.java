@@ -63,9 +63,12 @@ public class UpdateQue extends HttpServlet {
 			q.setQuestion(text);
 			q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
 
-			if (dao.addQuestion(q)) {
-				String qid = q.getQuestionRef();
+			Response addQuestion = dao.addQuestion(q);
+			int qid = addQuestion.readEntity(Question.class).getId();
+			
+			if (addQuestion.getStatus() == 200) {
 				response.sendRedirect("/randomAnswers?qid=" + qid);
+				return;
 			}
 		} else {
 			Question q = new Question();

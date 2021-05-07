@@ -31,7 +31,7 @@ public class DaoS {
 		em.persist(q);// The actual insertion line
 		em.getTransaction().commit();
 		if (q.equals(em.find(Question.class, q.getId()))) {
-			return Response.ok().build();
+			return Response.ok(q).build();
 		} else {
 			return Response.status(409).build();
 		}
@@ -77,6 +77,17 @@ public class DaoS {
 		em.getTransaction().commit();
 		if (q != null) {
 			return Response.ok(q).build();
+		}
+		return Response.status(409).build();
+	}
+
+	public Response readQuestionAnswers(int id) {
+		em.getTransaction().begin();
+		Question q = em.find(Question.class, id);
+		em.getTransaction().commit();
+		if (q != null) {
+			List<Answer> a = q.getAnswers();
+			return Response.ok(a).build();
 		}
 		return Response.status(409).build();
 	}
@@ -186,5 +197,13 @@ public class DaoS {
 			return Response.status(409).build();
 		}
 	}
+
+//	public Response readAnswersByQuestionId(int id) {
+//		List<Answer> answers = null;
+//		em.getTransaction().begin();
+//		answers = em.createQuery("select a from Answer a join Question q on a.question.id ='"+id+"'", Answer.class).getResultList();
+//		em.getTransaction().commit();
+//		return Response.ok(answers).build();
+//	}
 	
 }

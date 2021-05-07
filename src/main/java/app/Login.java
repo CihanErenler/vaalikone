@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -70,21 +71,22 @@ public class Login extends HttpServlet {
 			session.setAttribute("isLoggedIn", false);
 		}
 
+		if ((boolean) session.getAttribute("isLoggedIn")) {
+			response.sendRedirect("/jsp/admin-dashboard.jsp");
+			return;
+		}
+
 		if (dao.login(adm).getStatus() == 200) {
 			session.setAttribute("isLoggedIn", true);
-			
-//			if it reaches the timeout the session will invalidate itself (45 Minutes)
-			session.setMaxInactiveInterval(45*60);
-		}
-
-		if ((boolean) session.getAttribute("isLoggedIn")) {
+			session.setAttribute("creationTime", String.valueOf(session.getCreationTime()));
 			System.out.println("logged in");
 			response.sendRedirect("/jsp/admin-dashboard.jsp");
-		} else {
-			System.out.println("not logged in");
-
-			response.sendRedirect("/jsp/login.jsp?loginError=true");
+			return;
 		}
+	
+		System.out.println("not logged in");
+		response.sendRedirect("/jsp/login.jsp?loginError=true");
+		
 	}
 
 	private static String crypt(String str) {
