@@ -3,7 +3,6 @@
 <%@ page import="java.util.ArrayList" %>   
 <%@ page import="model.Candidate" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../jsp/session.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +14,7 @@
 	href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
 	integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
 	crossorigin="anonymous">
-<title>Add Question</title>
+<title>Change answers</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>

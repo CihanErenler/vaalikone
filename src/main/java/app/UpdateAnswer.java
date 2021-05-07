@@ -26,88 +26,58 @@ import model.Candidate;
 @WebServlet("/jsp/UpdateAnswer")
 public class UpdateAnswer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	DaoC dao = new DaoC();  
- 
-    public UpdateAnswer() {
-        super();
-    }
+	DaoC dao = new DaoC();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
+	public UpdateAnswer() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		boolean isLoggedIn = false;
-		if (session == null) {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String ref = request.getParameter("ref");
+		String id = request.getParameter("id");
+		int size = Integer.parseInt(request.getParameter("size"));
+
+		List<Answer> answer = null;
+
+		Candidate c = null;
+		if (id != null) {
+			System.out.println("Exists ID : " + id);
+			c = dao.readCandidate(id);
+			answer = c.getAnswers();
+
+			for (int i = 0; i < answer.size(); i++) {
+				Answer ans = answer.get(i);
+				ans.setAnswer(request.getParameter(String.valueOf(i)));
+
+				answer.set(i, ans);
+			}
 		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
+			System.out.println("Exists refNum : " + ref);
+			c = dao.readCandidateByRef(ref);
+			answer = new ArrayList<Answer>();
 
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
+			for (int i = 0; i < size; i++) {
+				Answer ans = new Answer();
+				Question q = dao
+						.readQuestion(Integer.parseInt(request.getParameter("questionID".concat(String.valueOf(i)))));
+
+				ans.setAnswer(request.getParameter(String.valueOf(i)));
+				ans.setQuestion(q);
+				answer.add(ans);
 			}
 		}
 
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		} else {
-			String ref = request.getParameter("ref");
-			String id = request.getParameter("id");
-			int size = Integer.parseInt(request.getParameter("size"));
-			
-			List<Answer> answer = null;
-			
-			Candidate c = null;
-			if (id != null) {
-				System.out.println("Exists ID : "+ id);
-				c = dao.readCandidate(id);
-				answer = c.getAnswers();
-				
-				for (int i=0; i<answer.size(); i++) {
-					Answer ans = answer.get(i);
-					ans.setAnswer(request.getParameter(String.valueOf(i)));
-					
-					answer.set(i, ans);
-				}
-			}
-			else {
-				System.out.println("Exists refNum : "+ ref);
-				c = dao.readCandidateByRef(ref);
-				answer = new ArrayList<Answer>();
+		c.setAnswers(answer);
 
-				for (int i=0; i<size; i++) {
-					Answer ans = new Answer();
-					Question q = dao.readQuestion(Integer.parseInt(request.getParameter("questionID".concat(String.valueOf(i)))));
-					
-					ans.setAnswer(request.getParameter(String.valueOf(i)));
-					ans.setQuestion(q);
-					answer.add(ans);
-				}
-			}
-			
-			
-			c.setAnswers(answer);
-			
-			dao.updateCandidate(c);
-			
-			response.sendRedirect("/readallcandidatesadmin");
-			
-		}
+		dao.updateCandidate(c);
+
+		response.sendRedirect("/readallcandidatesadmin");
 	}
 
 }

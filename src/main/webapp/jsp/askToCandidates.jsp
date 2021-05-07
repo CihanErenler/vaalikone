@@ -3,7 +3,6 @@
 
 <%@ page import="data.RandomAnswer"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="../jsp/session.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,7 @@
           <p class="ask-question-text">
             ${requestScope.question.getText()}
           </p>
-          <form action="/jsp/admin-dashboard.jsp" class="ask-candidate-form">
+          <form action="/jsp/admin-questions" class="ask-candidate-form">
           <button type="submit" class="btn btn-blue btn-thin ask-candidate-btn btn-disabled" disabled>
             Submit Answers
           </button>

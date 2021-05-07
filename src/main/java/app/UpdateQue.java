@@ -28,8 +28,8 @@ import model.Question;
 
 /**
  * 
- * Servlet allowing logged in admin to change a question text
- * or add a new question
+ * Servlet allowing logged in admin to change a question text or add a new
+ * question
  *
  */
 @WebServlet("/jsp/updateque")
@@ -41,7 +41,7 @@ public class UpdateQue extends HttpServlet {
 		super();
 
 	}
-	
+
 	@Override
 	public void init() {
 		dao = new DaoC();
@@ -49,67 +49,34 @@ public class UpdateQue extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
+		String id = request.getParameter("id");
+		String text = request.getParameter("question");
 
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
+		if (request.getParameter("addNew") != null) {
+			Question q = new Question();
+			q.setQuestion(text);
+			q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
 
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
+			if (dao.addQuestion(q)) {
+				String qid = q.getQuestionRef();
+				response.sendRedirect("/randomAnswers?qid=" + qid);
 			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
 		} else {
-			String id = request.getParameter("id");
-			String text = request.getParameter("question");
+			Question q = new Question();
+			q.setId(Integer.parseInt(id));
+			q.setQuestion(text);
 
-			if (request.getParameter("addNew") != null) {
-				Question q = new Question();
-				q.setQuestion(text);
-				q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
-				
-				if (dao.addQuestion(q)) {
-					String qid = q.getQuestionRef();
-					response.sendRedirect("/randomAnswers?qid="+qid);
-				}
-			} else {
-				Question q = new Question();
-				q.setId(Integer.parseInt(id));
-				q.setQuestion(text);
-
-				if (dao.updateQuestion(q)) {
-					response.sendRedirect("/jsp/admin-questions");
-				}
+			if (dao.updateQuestion(q)) {
+				response.sendRedirect("/jsp/admin-questions");
 			}
 		}
 
 	}
-
-	
 
 }

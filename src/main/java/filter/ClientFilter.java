@@ -27,7 +27,28 @@ import javax.servlet.http.HttpSession;
 		DispatcherType.ERROR
 }
 , urlPatterns = {
-		"/jsp/addCan"
+		"/jsp/addCan",
+		"/jsp/candidate-question",
+		"/deleteCan",
+		"/DeleteQue",
+		"/randomAnswers",
+		"/readallcandidatesadmin",
+		"/jsp/ReadToUpdateAnswer",
+		"/readToUpdateCan",
+		"/jsp/ReadToUpdateQue",
+		"/jsp/admin-questions",
+		"/jsp/UpdateAnswer",
+		"/updateCan",
+		"/jsp/updateque",
+		"/jsp/admin-dashboard.jsp",
+		"/jsp/add-candidate.jsp",
+		"/jsp/add-question.jsp",
+		"/jsp/admin-candidate.jsp",
+		"/jsp/admin-questions.jsp",
+		"/jsp/askToCandidates.jsp",
+		"/jsp/candidate-question.jsp",
+		"/jsp/change-answer.jsp",
+		"/jsp/update-candidate.jsp"
 		})
 
 public class ClientFilter implements Filter {
