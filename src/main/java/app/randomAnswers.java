@@ -56,7 +56,7 @@ public class randomAnswers extends HttpServlet {
 				a.setAnswer(randomAnswer());
 				c.addAnswer(a);
 				
-				can.put("answer", a.getAnswer_value(a.getAnswer()));			
+				can.put("answer", a.getAnswer());			
 				can.put("pic", c.getProfilePic());
 				cans.add(can);
 				if(dao.updateCandidate(c)) {
