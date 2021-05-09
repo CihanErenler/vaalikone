@@ -1,4 +1,9 @@
 const circle = document.querySelectorAll(".circle");
+const card = document.querySelector(".card");
+
+const values = card.getAttribute("data-json");
+console.log(values);
+
 
 circle.forEach((item) => {
   const all = item.children;

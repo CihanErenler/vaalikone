@@ -333,7 +333,7 @@ function showWarning(type, text) {
 
 //if the user clicks the submit button without answering all the questions show an error
 submit.addEventListener("click", (e) => {
-	answersArr.value = answerArr.value+"%";
+	answersArr.value = answersArr.value+"%";
 	
 	console.log(answersArr)
 	const err = [];

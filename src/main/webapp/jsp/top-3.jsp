@@ -18,11 +18,11 @@
   <body>
     <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container full-container">
-      <div class="card">
+      <div class="card" data-json="">
         <div class="title">Top 3 Candidates</div>
         <div class="underline"></div>
         <div class="top-3">
-          <div class="top-wrap">
+          <div class="top-wrap" data-name="${requestScope.top.get(1).getFname()} ${requestScope.top.get(1).getLname()}">
             <div class="rank">2</div>
             <div class="circle" data-val="${requestScope.per.get(1)}">
               <div class="circle-half second"></div>
@@ -38,7 +38,7 @@
             <h2>${requestScope.top.get(1).getFname()} ${requestScope.top.get(1).getLname()}</h2>
             <div class="party">${requestScope.top.get(1).getPoliticalParty()}</div>
           </div>
-          <div class="top-wrap">
+          <div class="top-wrap" data-name="${requestScope.top.get(0).getFname()} ${requestScope.top.get(0).getLname()}">
             <div class="rank">1</div>
             <div class="circle" data-val="${requestScope.per.get(0)}">
               <div class="circle-half"></div>
@@ -54,7 +54,7 @@
             <h2 class="top-name">${requestScope.top.get(0).getFname()} ${requestScope.top.get(0).getLname()}</h2>
             <div class="party">${requestScope.top.get(0).getPoliticalParty()}</div>
           </div>
-          <div class="top-wrap">
+          <div class="top-wrap" data-name="${requestScope.top.get(2).getFname()} ${requestScope.top.get(2).getLname()}">
             <div class="rank">3</div>
             <div class="circle" data-val="${requestScope.per.get(2)}">
               <div class="circle-half third"></div>
