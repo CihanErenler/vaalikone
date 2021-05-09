@@ -244,7 +244,7 @@ smallQ.forEach(s => {
 			})
 
 			const getName = document.getElementsByName("score");
-			smallQ[VALUE].classList.add("btn-disabled")
+			
 
 			for (let i = 0; i < getName.length; i++) {
 				getName[i].disabled = false;
@@ -265,6 +265,16 @@ smallQ.forEach(s => {
 
 		const index = +s.getAttribute("data-small");
 		VALUE = index - 1;
+		
+		smallQ[VALUE].classList.add("btn-disabled")
+		
+		for (let i = 0; i < getCurName.length; i++) {
+			if (getCurName[i].checked) {
+				answers.splice(VALUE, 1, getCurName[i].value)
+			}
+		}
+		
+		answersArr.value = answers.join("%");
 
 		questionIndex.textContent = VALUE + 1;
 		bar.style.width = (VALUE + 1) * amount + "%";
