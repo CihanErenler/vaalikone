@@ -52,6 +52,9 @@ public class calculate extends HttpServlet {
 		// Users answers collected from the js (questions.js) seprated by a % sign
 		// splits the answers using the % sign and creates an array storing them
 		String[] voterAnswers = request.getParameter("answersArr").split("%");
+		for(int i = 0; i < voterAnswers.length; i++) {
+			System.out.println(voterAnswers+"index : "+i);
+		}
 
 		// array storing all candidates as objects (it has all the candidates info
 		// including picture, collection of answers etc

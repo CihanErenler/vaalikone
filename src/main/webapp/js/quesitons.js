@@ -55,6 +55,12 @@ window.addEventListener("load", () => {
 
 
 let answers = questions.map(q => "");
+
+/*let answers = [];
+
+for(let i = 0; i < questions.length - 1; i++){
+answers.push("");
+}*/
 console.log(answers)
 
 // this function is called when the user click next button
@@ -93,7 +99,8 @@ function nextUpdate(e) {
 		for (let i = 0; i < getName.length; i++) {
 			getName[i].disabled = true;
 		}
-
+		smallQ[VALUE].classList.add("btn-disabled")
+			answersArr.value = answers.join("%");
 		console.log(answers)
 		return;
 	}
@@ -315,7 +322,9 @@ function showWarning(type, text) {
 
 //if the user clicks the submit button without answering all the questions show an error
 submit.addEventListener("click", (e) => {
-	console.log("girdi")
+	answersArr.value = answerArr.value+"%";
+	
+	console.log(answersArr)
 	const err = [];
 
 	smallQ.forEach(i => {
