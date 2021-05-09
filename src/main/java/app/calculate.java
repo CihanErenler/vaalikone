@@ -80,18 +80,21 @@ public class calculate extends HttpServlet {
 			forSorting.add(answerComparison);
 		}
 		
-		System.out.println("456 : "+customSort(forSorting));
-		System.out.println("456 size : "+customSort(forSorting).size());
-		request.setAttribute("top", customSort(forSorting).subList(0, 3));
+		
+		List<HashMap<String, Integer>> sortingTop3 = customSort(forSorting).subList(0, 3);
+		ArrayList<Candidate> top3 = new ArrayList<Candidate>();
+		ArrayList<String> top3Percentages = new ArrayList<String>();
+
+		for (HashMap<String, Integer> t:sortingTop3) {
+			top3.add(dao.readCandidate(String.valueOf(t.get("candidateId"))));
+			top3Percentages.add(String.valueOf(t.get("answerPercentage")));
+		}
+		
+		request.setAttribute("top", top3);
+		request.setAttribute("per", top3Percentages);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/top-3.jsp");
 		rd.forward(request, response);
 	}
-
-	// function returns an array of arrays that stores list of answers per each
-	// candidate
-	// returns a % value of a match between voter's answer and each candidate's
-	// answer
-
 	
 	// method that calculates the average of a percent values of a match
 	protected int getResult(ArrayList<Integer> x) {
