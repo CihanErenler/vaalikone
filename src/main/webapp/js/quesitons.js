@@ -244,6 +244,7 @@ smallQ.forEach(s => {
 			})
 
 			const getName = document.getElementsByName("score");
+			smallQ[VALUE].classList.add("btn-disabled")
 
 			for (let i = 0; i < getName.length; i++) {
 				getName[i].disabled = false;
