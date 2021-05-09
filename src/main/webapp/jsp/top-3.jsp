@@ -18,11 +18,11 @@
   <body>
     <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container full-container">
-      <div class="card" data-json="">
+      <div class="card">
         <div class="title">Top 3 Candidates</div>
         <div class="underline"></div>
         <div class="top-3">
-          <div class="top-wrap" data-name="${requestScope.top.get(1).getFname()} ${requestScope.top.get(1).getLname()}">
+          <div class="top-wrap" data-name="${requestScope.top.get(1).getFname()} ${requestScope.top.get(1).getLname()}" data-list="${requestScope.list[0]}">
             <div class="rank">2</div>
             <div class="circle" data-val="${requestScope.per.get(1)}">
               <div class="circle-half second"></div>

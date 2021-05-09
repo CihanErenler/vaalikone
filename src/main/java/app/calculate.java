@@ -93,6 +93,26 @@ public class calculate extends HttpServlet {
 			top3Percentages.add(String.valueOf(t.get("answerPercentage")));
 		}
 		
+//		Top3 Candidate Answers, passed for the voter candidate answer comparison
+		String[] ans = new String[top3.size()];
+		int j = 0;
+		for (Candidate c:top3) {
+			for (int i=0; i<qIds.size(); i++) {
+				for (Answer a:c.getAnswers()) {
+					if (a.getQuestion().getId() == qIds.get(i)) {
+						if(i!=0) {						
+							ans[j] += a.getAnswer()+"%";
+						} else {							
+							ans[j] = a.getAnswer()+"%";
+						}
+						break;
+					}
+				}
+			}
+			j++;
+		}
+		
+		request.setAttribute("list", ans);
 		request.setAttribute("top", top3);
 		request.setAttribute("per", top3Percentages);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/top-3.jsp");
