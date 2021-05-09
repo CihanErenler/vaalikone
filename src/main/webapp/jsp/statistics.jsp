@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/jsp/style.css" />
 </head>
 <body>
-	<%@ include file="/html/navbar.html"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="container">
 		<div class="card statistics-card">
 			<h1 class="title">Statistics of the questions</h1>
@@ -27,7 +27,11 @@
 				<div class="question-card"
 					data-val="${requestScope.statistics.get(loop.index)}">
 					<div class="question-card-q">
-						<h2 class="index"><a href="/respondents?index=${loop.index+1}?id=${requestScope.questions.get(loop.index).getId()}">Question ${loop.index + 1}</a></h2>
+						<h2 class="index">
+							<a
+								href="/respondents?index=${loop.index+1}?id=${requestScope.questions.get(loop.index).getId()}">Question
+								${loop.index + 1}</a>
+						</h2>
 						<p class="question-text">${s.getText()}</p>
 					</div>
 					<div class="chart">
@@ -36,42 +40,109 @@
 							<div class="progress">
 								<div id="strongly-disagree" class="p-bar"></div>
 							</div>
-							<div class="last-part">23</div>
+							<div class="last-part">
+								<span class="num">23</span>
+								<div class="cans">
+								<c:forEach var="cann" items="${requestScope.cans.get(loop.index).get(0)}">
+									<div class="can">
+										<div class="img-wrap">
+											<img alt="can" src="${cann.getProfile_pic()}">
+										</div>
+										<h3>${cann.getFname()} ${cann.getLname()}</h3>
+									</div>
+								</c:forEach>
+								</div>
+
+							</div>
 						</div>
 						<div class="chart-wrap">
 							<div class="first-part">Disagree</div>
 							<div class="progress">
 								<div id="disagree" class="p-bar"></div>
 							</div>
-							<div class="last-part">23</div>
+							<div class="last-part">
+								<span class="num">23</span>
+								<div class="cans">
+									<c:forEach var="cann" items="${requestScope.cans.get(loop.index).get(1)}">
+									<div class="can">
+										<div class="img-wrap">
+											<img alt="can" src="${cann.getProfile_pic()}">
+										</div>
+										<h3>${cann.getFname()} ${cann.getLname()}</h3>
+									</div>
+								</c:forEach>
+								</div>
+
+							</div>
 						</div>
 						<div class="chart-wrap">
 							<div class="first-part">Neutral</div>
 							<div class="progress">
 								<div id="neutral" class="p-bar"></div>
 							</div>
-							<div class="last-part">23</div>
+							<div class="last-part">
+								<span class="num">23</span>
+								<div class="cans">
+									<c:forEach var="cann" items="${requestScope.cans.get(loop.index).get(2)}">
+									<div class="can">
+										<div class="img-wrap">
+											<img alt="can" src="${cann.getProfile_pic()}">
+										</div>
+										<h3>${cann.getFname()} ${cann.getLname()}</h3>
+									</div>
+								</c:forEach>
+								</div>
+
+							</div>
 						</div>
 						<div class="chart-wrap">
 							<div class="first-part">Agree</div>
 							<div class="progress">
 								<div id="agree" class="p-bar"></div>
 							</div>
-							<div class="last-part">23</div>
+							<div class="last-part">
+								<span class="num">23</span>
+								<div class="cans">
+									<c:forEach var="cann" items="${requestScope.cans.get(loop.index).get(3)}">
+									<div class="can">
+										<div class="img-wrap">
+											<img alt="can" src="${cann.getProfile_pic()}">
+										</div>
+										<h3>${cann.getFname()} ${cann.getLname()}</h3>
+									</div>
+								</c:forEach>
+								</div>
+
+							</div>
 						</div>
 						<div class="chart-wrap">
 							<div class="first-part">Strongly Agree</div>
 							<div class="progress">
 								<div id="strongly-agree" class="p-bar"></div>
 							</div>
-							<div class="last-part">23</div>
+							<div class="last-part">
+								<span class="num">23</span>
+								<div class="cans">
+									<c:forEach var="cann" items="${requestScope.cans.get(loop.index).get(4)}">
+									<div class="can">
+										<div class="img-wrap">
+											<img alt="can" src="${cann.getProfile_pic()}">
+										</div>
+										<h3>${cann.getFname()} ${cann.getLname()}</h3>
+									</div>
+								</c:forEach>
+								</div>
+
+							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
 	</div>
-	<div class="scroll"><i class="fas fa-arrow-up"></i></div>
+	<div class="scroll">
+		<i class="fas fa-arrow-up"></i>
+	</div>
 	<script src="/js/statistics.js"></script>
 	<script src="/js/scrollUp.js"></script>
 </body>

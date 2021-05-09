@@ -3,7 +3,7 @@
 
 <%@ page import="java.util.ArrayList" %>   
 <%@ page import="data.Question" %>   
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
     
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@
     <title>Admin Questions</title>
   </head>
   <body>
-    <%@ include file="../html/navbar.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="admin-pages container flex-container">
       <div class="card">
         <div class="admin-header">
@@ -37,13 +37,13 @@
           <div class="question question-ad">
             <h2 class="index">${counter.index+1}</h2> 
             <p class="question-text">
-              ${question.text}
+              ${question.getQuestion()}
             </p>
             <div class="edit-buttons">
-              <a href="/jsp/ReadToUpdateQue?id=${question.id}" class="edit-btn question-btn">
+              <a href="/jsp/ReadToUpdateQue?id=${question.getId()}" class="edit-btn question-btn">
                 <i class="fas fa-pen"></i>
               </a>
-              <a href="/DeleteQue?id=<c:out value='${question.id}' />" class="delete-btn question-btn">
+              <a href="/DeleteQue?id=<c:out value='${question.getId()}' />" class="delete-btn question-btn">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>

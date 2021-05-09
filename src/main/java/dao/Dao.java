@@ -12,23 +12,49 @@ import data.Answer;
 import data.Candidate;
 import data.Question;
 import data.RandomAnswer;
-import data.Voter;
 
 import java.sql.Connection;
-
+/**
+ * 
+ * Dao class
+ *
+ */
 public class Dao {
 	private String url;
 	private String user;
 	private String pass;
 	private Connection conn;
+	private String uploadPath;
 
-	public Dao(String url, String user, String pass) {
-		this.url = url;
-		this.user = user;
-		this.pass = pass;
+/**
+ * Dao constructor
+ * To be changed if info is different	
+ */
+	public Dao() {
+		this.url = "jdbc:mysql://localhost:3306/vaalikone";
+		this.user = "root";
+		this.pass = "Password1";
+		this.uploadPath = "C:\\Users\\kota\\git\\vaalikone\\src\\main\\webapp\\img\\";
 	}
 
-	// Connection method
+//	public Dao(String url, String user, String pass) {
+//		this.url = url;
+//		this.user = user;
+//		this.pass = pass;
+//	}
+
+/**
+ * Getter for the upload path
+ * @return
+ */
+	public String getUploadPath() {
+		return uploadPath;
+	}
+
+/**
+ * Establishing Connection method
+ * @return
+ */
 	public boolean getConnection() {
 		try {
 			if (conn == null || conn.isClosed()) {
@@ -48,7 +74,10 @@ public class Dao {
 		}
 	}
 
-	// Candidate - related
+/**
+ * Method returning all candidate objects stored in the database
+ * @return
+ */
 	public ArrayList<Candidate> readAllCandidate() {
 		ArrayList<Candidate> list = new ArrayList<>();
 		try {
@@ -66,14 +95,24 @@ public class Dao {
 				c.setWhy_candidate(RS.getString("why_candidate"));
 				c.setAbout(RS.getString("about"));
 				c.setProfile_pic(RS.getString("profile_pic"));
-				list.add(c);
+				if (checkCanAnswer(c.getId())) {
+					list.add(c);
+				} else {
+					deleteCandidate(c.getId());
+				}
+
 			}
 			return list;
 		} catch (SQLException e) {
 			return null;
 		}
 	}
-
+/**
+ * Methods updating all information regarding a specific candidate in the database
+ * @param c
+ * @param dao
+ * @return
+ */
 	public ArrayList<Candidate> updateCandidate(Candidate c, Dao dao) {
 		try {
 			String sql = "update candidate set fname=?, lname=?, city=?, age=?, profession=?, political_party=?, why_candidate=?, about=?, profile_pic=? where id=?";
@@ -97,7 +136,11 @@ public class Dao {
 		}
 	}
 
-	// Get img
+/**
+ * Method returning a candidate's profile picture based on his id in the database
+ * @param id
+ * @return
+ */
 	public String getPic(String id) {
 		String img = "";
 
@@ -116,7 +159,11 @@ public class Dao {
 
 	}
 
-	// Get Candidate
+/**
+ * Method returning single candidate's info based on his id
+ * @param id
+ * @return
+ */
 	public Candidate getCandidate(String id) {
 		Candidate c = null;
 		try {
@@ -141,7 +188,11 @@ public class Dao {
 		}
 	}
 
-	// Get candidate id by reference
+	/**
+	 *Method returning single candidate's info based on his reference number
+	 * @param ref
+	 * @return
+	 */
 	public int getIdByRef(String ref) {
 
 		System.out.println("ref >>" + ref);
@@ -163,7 +214,11 @@ public class Dao {
 
 	}
 
-	// Add Candidate
+/**
+ * Method inserting candidate object into database
+ * @param c
+ * @return
+ */
 	public boolean addCandidate(Candidate c) {
 		String sql = "INSERT INTO candidate (fname, lname, city, age, profession, political_party, why_candidate, about, profile_pic, ref_num) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
@@ -215,6 +270,12 @@ public class Dao {
 //		return a;
 //	}
 
+	/**
+	 * Boolean method deleting a candidate based on his id and returning true of false
+	 * @param id
+	 * @return
+	 */
+	
 	public boolean deleteCandidate(String id) {
 		try {
 			String sql = "delete from candidate where id=?";
@@ -229,7 +290,11 @@ public class Dao {
 			return false;
 		}
 	}
-
+/**
+ * Method creating an arraylist of answers for a specific candidate, fetching based on candidate's id stored in answer table
+ * @param id
+ * @return
+ */
 	public ArrayList<Answer> getCanAnswerList(String id) {
 		ArrayList<Answer> list = new ArrayList<>();
 
@@ -252,7 +317,11 @@ public class Dao {
 			return null;
 		}
 	}
-
+/**
+ * Method returning an arraylist of answers for a specific questions based on question id stored in table answer
+ * @param id
+ * @return
+ */
 	public ArrayList<Answer> getAnsersByQuestionId(String id) {
 		ArrayList<Answer> list = new ArrayList<>();
 
@@ -267,15 +336,19 @@ public class Dao {
 				System.out.println(rs.getString("answer"));
 				list.add(new Answer(rs.getString("can_id"), rs.getString("answer")));
 			}
-			
+
 			return list;
 		} catch (SQLException e) {
 			return null;
 		}
-		
+
 	}
 
-	// Questions related
+/**
+ * Method returning question object with specific id
+ * @param id
+ * @return
+ */
 
 	public Question getQuestions(String id) {
 		Question q = null;
@@ -297,7 +370,11 @@ public class Dao {
 		}
 	}
 
-	// get question id by ref
+/**
+ * Method returning id of a question stored with a specific reference number
+ * @param ref
+ * @return
+ */
 	public int getQuestionByRef(String ref) {
 		int id = 0;
 		try {
@@ -315,7 +392,10 @@ public class Dao {
 		}
 		return id;
 	}
-
+/**
+ * Method returning an arraylist of all questions stored in the database
+ * @return
+ */
 	public ArrayList<Question> readAllQuestions() {
 		ArrayList<Question> listQuestion = new ArrayList<>();
 		try {
@@ -335,6 +415,11 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method inserting a new question object to database
+	 * @param q
+	 * @return
+	 */
 	public boolean addQuestion(Question q) {
 		String sql = "INSERT INTO question (question, question_ref) VALUES (?,?)";
 		try {
@@ -353,7 +438,11 @@ public class Dao {
 		}
 
 	}
-	
+/**
+ * Boolean method checking if a question with specific id exists, returns true or false
+ * @param id
+ * @return
+ */
 	public boolean checkQuestion(String id) {
 		boolean check = true;
 		String sql = "select count(answer) from answer where question_id=?";
@@ -362,19 +451,49 @@ public class Dao {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getInt("count(answer)") == 0) {
-					check = false;	
+			if (rs.next()) {
+				if (rs.getInt("count(answer)") == 0) {
+					check = false;
 				}
 			}
 		} catch (SQLException e) {
 			return false;
 		}
-		
+
 		System.out.println(check);
 		return check;
 	}
 
+	/**
+	 * Method checking if answers for a candidate with a given id exist, returns true or false
+	 * @param id
+	 * @return
+	 */
+	public boolean checkCanAnswer(String id) {
+		boolean check = true;
+		String sql = "select count(answer) from answer where can_id=?";
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				if (rs.getInt("count(answer)") == 0) {
+					check = false;
+				}
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+
+		System.out.println(check);
+		return check;
+	}
+
+	/**
+	 * Method adding random answers for existing candidates to the newly added question
+	 * @param r
+	 */
 	public void addAnswersForNewQuestion(ArrayList<RandomAnswer> r) {
 		try {
 			String sql = "insert into answer (can_id, question_id, answer) VALUES (?, ?, ?)";
@@ -393,6 +512,11 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method updating a question based on its id
+	 * @param q
+	 * @return
+	 */
 	public boolean updateQuestion(Question q) {
 		try {
 			String sql = "update question set question=? where id=?";
@@ -409,6 +533,11 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method deleting a question object based on its id
+	 * @param q
+	 * @return
+	 */
 	public boolean deleteQuestion(Question q) {
 		try {
 			String sql = "delete from question where id=?";
@@ -425,7 +554,12 @@ public class Dao {
 		}
 	}
 
-	// Get question statistics
+	/**
+	 * Get question statistics
+	 * Method selecing count of a certain value answers for a question with specific id
+	 * @param a
+	 * @return
+	 */
 	public ArrayList<String> getStatistics(ArrayList<Integer> a) {
 		ArrayList<String> s = new ArrayList<>();
 		try {
@@ -457,7 +591,11 @@ public class Dao {
 		return s;
 	}
 
-	// Login/admin related
+	/**
+	 * Log in method selecting an admin with specific email and password from database
+	 * @param adm
+	 * @return
+	 */
 	public boolean adminLogin(Admin adm) {
 		try {
 			int c = 0;
@@ -480,6 +618,11 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method that verifies and returns a list of admin objects that match data in the database
+	 * @param adm
+	 * @return
+	 */
 	public ArrayList<Admin> matchedAdmin(Admin adm) {
 		ArrayList<Admin> list = new ArrayList<>();
 		try {
@@ -501,6 +644,11 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method that returns a count of admin objects that match certain data in the database
+	 * @param adm
+	 * @return
+	 */
 	public int matchedAdminInt(Admin adm) {
 		try {
 			int c = 0;
@@ -519,6 +667,10 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method that inserts an answer for a candidate into answer table
+	 * @param answer
+	 */
 	public void addAnswerCandidate(ArrayList<Answer> answer) {
 		try {
 			String sql = "insert into answer (can_id, question_id, answer) VALUES (?, ?, ?)";
@@ -537,6 +689,10 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Method that updates an answer for a candidate in the answer table
+	 * @param answer
+	 */
 	public void updateAnswerCandidate(ArrayList<Answer> answer) {
 		try {
 			String sql = "update answer set answer=? where can_id=? and question_id=?";

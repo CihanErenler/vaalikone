@@ -3,18 +3,70 @@ package data;
 import java.util.ArrayList;
 import java.sql.Timestamp;
 
+/**
+ * Candidate class
+ *
+ */
 public class Candidate {
+	
+	/**
+	 * Candidate id
+	 */
 	String id;
+	
+	/**
+	 * Candidate first name
+	 */
 	String fname;
+	
+	/**
+	 * Candidate last name
+	 */
 	String lname;
+	
+	/**
+	 * Candidate city
+	 */
 	String city;
+	
+	/**
+	 * Candidate age
+	 */
 	String age;
+	
+	/**
+	 * Candidate profession/occupation
+	 */
 	String profession;
+	
+	/**
+	 * Candidate political party
+	 */
 	String political_party;
+	
+	/**
+	 * Short text: Why did you become a candidate
+	 */
 	String why_candidate;
+	
+	/**
+	 * Short text: about the candidate
+	 */
 	String about;
+	
+	/**
+	 * Profile picture name with extension
+	 */
 	String profile_pic;
+	
+	/**
+	 * Picture folder/path
+	 */
 	String pic_path = "/img/";
+	
+	/**
+	 * Reference number (time of creation down to miliseconds
+	 */
 	String ref_num = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
 	public String getRef_num() {
 		return ref_num;

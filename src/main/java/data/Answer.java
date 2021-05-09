@@ -1,16 +1,57 @@
 package data;
 
+/**
+ * Answer class
+ *
+ */
 public class Answer {
 	
+	/**
+	 * answers id
+	 */
 	String id;
+	
+	/**
+	 * candidate's id 
+	 * foreign key in the candidate table
+	 */
 	String can_id;
+	
+	/**
+	 * question's id
+	 * foreign key in the question tab,e
+	 */
 	String question_id;
 	String answer;
+	
+	/**
+	 * answer's text
+	 */
 	String answer_text;
+	
+	/**
+	 * answer value
+	 */
 	String answer_value;
+	
+	/**
+	 * profile image of a candidate who has given a specific answer
+	 */
 	String img;
+	
+	/**
+	 *  party of a candidate who has given a specific answer
+	 */
 	String party;
+	
+	/**
+	 * first name of a candidate who has given a specific answer
+	 */
 	String fname;
+	
+	/**
+	 * last name of a candidate who has given a specific answer
+	 */
 	String lname;
 	
 	public Answer(String can_id, String question_id, String answer, String img, String party, String fname, String lname) {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.Question" %>   
+<%@ page import="model.Candidate" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -14,11 +14,11 @@
 	href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
 	integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
 	crossorigin="anonymous">
-<title>Add Question</title>
+<title>Change answers</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<%@ include file="../html/navbar.html"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="can-question container flex-container">
 		<div class="card">
 			<a href="#" class="btn btn-back"> <i
@@ -26,16 +26,16 @@
 			</a>
 			<h1 class="title">Candidate's answers</h1>
 			<div class="underline"></div>
-			<form method="post" action="ChangeAnswer" class="question-form">
+			<form method="post" action="/jsp/UpdateAnswer" class="question-form">
 			<input type="hidden" name="size" value="${requestScope.answer.size()}" />
-			<input type="text" name="id" value="${requestScope.id}" />
+			<input type="hidden" name="id" value="${requestScope.id}" />
 			
 			<c:forEach var="ans" items="${requestScope.answer}" varStatus="counter">
 				<section>
 					<div class="question">
-						<input type="hidden" name="questionID${counter.index}" value="${ans.question_id}" />
+						<input type="hidden" name="questionID${counter.index}" value="${ans.getQuestion().getId()}" />
 						<h2 class="index">${counter.index+1}</h2>
-						<p class="question-text">${ans.answer_text}</p>
+						<p class="question-text">${ans.getQuestion().getQuestion()}</p>
 					</div>
 					<div class="answer">
 						<ul> 

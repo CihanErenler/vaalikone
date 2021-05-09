@@ -13,9 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/jsp/style.css" />
     <title>Top 3 Candidates</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   </head>
   <body>
-    <%@ include file="../html/navbar.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container full-container">
       <div class="card">
         <div class="title">Top 3 Candidates</div>
@@ -71,7 +72,7 @@
           </div>
         </div>
         <div class="btn-container">
-          <a href="../index.html" class="btn">Homepage</a>
+          <a href="../index.jsp" class="btn">Homepage</a>
           <a href="/voterQuestions" class="btn">Retake Test</a>
         </div>
       </div>

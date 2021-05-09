@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@ page import="data.Candidate" %> 
-     <%@ page import="data.Answer" %> 
-    <%@ page import="java.util.*" %> 
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@page import="dao.DaoC"%>
+<%@ page import="model.Candidate" %> 
+<%@ page import="model.Answer" %>
+<%@ page import="model.Question" %>
+     
+<%@ page import="java.util.*" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +25,7 @@
     <link rel="stylesheet" href="/jsp/style.css" />
   </head>
   <body>
-    <%@ include file="/html/navbar.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="container flex-container">
       <div class="card profile p-x-11">
 
@@ -33,7 +36,7 @@
         >
         <div class="profile-info">
           <div class="profile-img-wrapper">
-            <img src="${requestScope.profile.profile_pic}" alt="prfile-img" />
+            <img src="/img/${requestScope.profile.profilePic}" alt="prfile-img" />
           </div>
           <div class="profile-name-info">
             <div class="first-line">
@@ -48,7 +51,7 @@
                 <i class="fas fa-map-marker"></i>
                 ${requestScope.profile.city}
               </h4>
-              <div class="party">${requestScope.profile.political_party}</div>
+              <div class="party">${requestScope.profile.politicalParty}</div>
             </div>
           </div>
         </div>
@@ -63,7 +66,7 @@
           <div class="why-text">
             <h2>Why did you became a candidate?</h2>
             <p>
-              ${requestScope.profile.why_candidate}
+              ${requestScope.profile.whyCandidate}
             </p>
           </div>
         </div>
@@ -74,14 +77,12 @@
 		<div class="questions">
 		<%
 		Candidate person = (Candidate)request.getAttribute("profile");
-		ArrayList<Answer> list= person.getAnswers();	
-		
-		
+		List<Answer> list= person.getAnswers();
 		
 		for (int i = 0; list != null && i < list.size(); i++){
 			int number = i+1;  
 			Answer a = list.get(i);
-			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getAnswer_text() +"</p> <div class='question-answer'>" + a.getAnswer_value() +"</div> </div>");
+			out.println("<div class='question'> <h2 class='index'>"+ number + "</h2> <p class = 'question-text' >" + a.getQuestion().getQuestion() +"</p> <div class='question-answer'>" + a.getAnswer_value(a.getAnswer()) +"</div> </div>");
 		}
 		%>
  		</div>

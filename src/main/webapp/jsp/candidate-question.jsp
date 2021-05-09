@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.Question" %>   
+<%@ page import="model.Question" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<%@ include file="../html/navbar.html"%>
+	<%@ include file="/jsp/dynamic-nav.jsp"%>
 	<div class="can-question container flex-container">
 		<div class="card">
 			<a href="add-candidate.jsp" class="btn btn-back"> <i
@@ -35,13 +35,12 @@
 					<div class="question">
 						<input type="hidden" name="questionID${counter.index}" value="${que.id}" />
 						<h2 class="index">${counter.index+1}</h2>
-						<p class="question-text">${que.text}</p>
+						<p class="question-text">${que.question}</p>
 					</div>
 					<div class="answer">
 						<ul> 
 							<li><input type="radio" name="${counter.index}" id="strongly-disagree"
-								value="1" /> <label for="strongly-disagree">Strongly
-									Disagree</label></li>
+								value="1" /> <label for="strongly-disagree">Strongly Disagree</label></li>
 							<li><input type="radio" name="${counter.index}" id="disagree" value="2" />
 								<label for="disagree">Disagree</label></li>
 							<li><input type="radio" name="${counter.index}" id="neutral" value="3"

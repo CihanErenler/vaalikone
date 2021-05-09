@@ -14,6 +14,11 @@ import dao.Dao;
 import data.Question;
 import data.Candidate;
 
+/**
+ * 
+ * Servlet responsible for displaying questions to the voter
+ *
+ */
 @WebServlet("/voterQuestions")
 public class voterQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +27,7 @@ public class voterQuestions extends HttpServlet {
 
 	@Override
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+		dao = new Dao();
 	}
 
 	public voterQuestions() {

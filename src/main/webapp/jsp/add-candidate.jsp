@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <title>Add Candidate</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="/js/add-candidateform.js"></script>
   </head>
   <body>
-    <%@ include file="../html/navbar.html" %>
+    <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="add-can container flex-container">
       <div class="card">
-        <a href="admin-candidate" class="btn btn-back">
+        <a href="#" class="btn btn-back">
           <i class="fas fa-chevron-left"></i>
           Back</a>
         <h1 class="title">Add Candidate</h1>
@@ -31,14 +32,14 @@
                 <input type="number" name="age" id="age" placeholder="Age"/>
                 <input type="text" name="profession" id="profession" placeholder="Profession"/>
                 <input type="text" name="political_party" id="party" placeholder="Political party"/>
-                <textarea name="why_candidate" id="" placeholder="Why did you become a candidate?"></textarea>
-                <textarea name="about" id="" placeholder="About"></textarea>
+                <textarea name="why_candidate" id="why-can" placeholder="Why did you become a candidate?"></textarea>
+                <textarea name="about" id="about" placeholder="About"></textarea>
                 <button name = "submit" type="submit" class="btn btn-thin">Add Candidate</button>
             </form>
       </div>
     </div>
 
     <script src="/js/add-candidate.js"></script>
-<!--     <script src="/js/goBack.js"></script> -->
+ <script src="/js/goBack.js"></script>
   </body>
 </html>

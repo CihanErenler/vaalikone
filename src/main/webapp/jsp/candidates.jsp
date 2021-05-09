@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     
  <%@ page import="data.Candidate" %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,35 +19,36 @@
     />
     
     <title>Candidates</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/jsp/style.css" />
   </head>
 	<body>
 	
-	    <%@ include file="../html/navbar.html" %>
+	    <%@ include file="/jsp/dynamic-nav.jsp" %>
 	     <div class="candidates container">
 	      	<div class="card">
 	      <h1 class="title">Candidates</h1>
 	      <div class="underline"></div>
-			  <c:forEach var="candidate" items="${requestScope.candidatelist}" >
+			  <c:forEach var="candidate" items="${requestScope.candidateList}" >
 			      <div class="candidates-wrapper">
-				   <a href="/ShowProfile?id=${candidate.id}">
+				   <a href="/ShowProfile?id=${candidate.getId()}">
 				          <div class="can-card">
 				            <div class="img-wrap">
-				              <img src="${candidate.profile_pic}" alt="candidate" />
+				              <img src="/img/${candidate.getProfilePic()}" alt="candidate" />
 				            </div>
 				            
 				            <div class="can-content">
 				              <div class="can-name-info">
-				                <h3>${candidate.fname} ${candidate.lname}</h3>
-				                <h4><span class="age">Age :</span> ${candidate.age}</h4>
+				                <h3>${candidate.getFname()} ${candidate.getLname()}</h3>
+				                <h4><span class="age">Age :</span> ${candidate.getAge()}</h4>
 				                <h4>
 				                  <i class="fas fa-map-marker"></i>
-				                  ${candidate.city}
+				                  ${candidate.getCity()}
 				                </h4>
 				              </div>
-				              <div class="party admin-can-party">${candidate.political_party}</div>
+				              <div class="party admin-can-party">${candidate.getPoliticalParty()}</div>
 				              <div class="short-about">
-								${candidate.about}
+				              <c:set var = "string2" value = "${fn:substring(candidate.getAbout(), 0, 201)}" />
+								${string2}...
 				              </div>
 				            </div>
 				          </div>

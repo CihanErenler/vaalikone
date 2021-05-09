@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Dao;
-import data.Answer;
-import data.Question;
+import dao.DaoC;
+import model.Answer;
 
 /**
  * Servlet implementation class ReadToUpdateAnswer
+ * Displays candidates answers that can be later changed
  */
 @WebServlet("/jsp/ReadToUpdateAnswer")
 public class ReadToUpdateAnswer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	Dao dao = null;
+	DaoC dao = null;
 	
 	public void init() 
 	{
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Password1");
+		dao = new DaoC();
 	}
        
     /**
@@ -44,11 +44,8 @@ public class ReadToUpdateAnswer extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		
-		ArrayList<Answer> a = null;
-		
-		if (dao.getConnection()) {
- 			a = dao.getCanAnswerList(id);
- 		}
+		List<Answer> a = dao.readCandidate(id).getAnswers();
+
 		request.setAttribute("id", id);
 		request.setAttribute("answer", a);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/change-answer.jsp");
