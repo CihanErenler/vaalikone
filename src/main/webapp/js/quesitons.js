@@ -18,6 +18,19 @@ const smallSubmit = document.querySelector(".small-submit");
 //get all the questions 
 const questions = [...wrapperContent.getAttribute("data-questions").split("%")];
 
+let ques;
+	
+	if(sessionStorage.getItem("ques") === null){
+		ques = [];
+	}else{
+		ques = JSON.parse(sessionStorage.getItem("ques"));
+	}
+	
+	ques.push(questions);
+	sessionStorage.setItem("ques", JSON.stringify(ques))
+	
+	
+
 //Global variables
 let TOTAL = questions.length;
 let VALUE = 0;
@@ -100,7 +113,7 @@ function nextUpdate(e) {
 			getName[i].disabled = true;
 		}
 		smallQ[VALUE].classList.add("btn-disabled")
-			answersArr.value = answers.join("%");
+		answersArr.value = answers.join("%");
 		console.log(answers)
 		return;
 	}
@@ -176,7 +189,7 @@ function prevUpdate() {
 					answers.splice(VALUE, 1, getCurName[i].value)
 				}
 			}
-			
+
 			smallQ[VALUE].classList.add("btn-disabled")
 
 			console.log(answers)
@@ -186,9 +199,9 @@ function prevUpdate() {
 
 			const getName = document.getElementsByName("score");
 
-			if(answers[VALUE] !== ""){
+			if (answers[VALUE] !== "") {
 				var num = parseInt(answers[VALUE]);
-			getName[parseInt(num) - 1].checked = true;
+				getName[parseInt(num) - 1].checked = true;
 			}
 
 
@@ -244,7 +257,7 @@ smallQ.forEach(s => {
 			})
 
 			const getName = document.getElementsByName("score");
-			
+
 
 			for (let i = 0; i < getName.length; i++) {
 				getName[i].disabled = false;
@@ -265,15 +278,15 @@ smallQ.forEach(s => {
 
 		const index = +s.getAttribute("data-small");
 		VALUE = index - 1;
-		
+
 		smallQ[VALUE].classList.add("btn-disabled")
-		
+
 		for (let i = 0; i < getCurName.length; i++) {
 			if (getCurName[i].checked) {
 				answers.splice(VALUE, 1, getCurName[i].value)
 			}
 		}
-		
+
 		answersArr.value = answers.join("%");
 
 		questionIndex.textContent = VALUE + 1;
@@ -296,7 +309,7 @@ smallQ.forEach(s => {
 
 		if (VALUE !== 0 && prev.classList.contains("btn-disabled")) {
 			const oldList =
-			prev.disabled = false;
+				prev.disabled = false;
 			prev.classList.remove("btn-disabled")
 		}
 
@@ -333,8 +346,8 @@ function showWarning(type, text) {
 
 //if the user clicks the submit button without answering all the questions show an error
 submit.addEventListener("click", (e) => {
-	answersArr.value = answersArr.value+"%";
-	
+	answersArr.value = answersArr.value + "%";
+
 	console.log(answersArr)
 	const err = [];
 
@@ -348,24 +361,47 @@ submit.addEventListener("click", (e) => {
 		e.preventDefault();
 
 		showWarning("normal", "Please answer all questions...")
+	}else{
+		let ans;
+
+		if (sessionStorage.getItem("ans") === null) {
+			ans = [];
+		} else {
+			cans = JSON.parse(sessionStorage.getItem("ans"));
+		}
+
+		ans.push(answers);
+		sessionStorage.setItem("ans", JSON.stringify(ans))
 	}
 })
 
 
 smallSubmit.addEventListener("click", () => {
 	const err = [];
-	
+
 	smallQ.forEach(i => {
-		if(!i.classList.contains("btn-disabled")){
+		if (!i.classList.contains("btn-disabled")) {
 			err.push("err");
 		}
 	})
-	
-	if(err.length > 0){
+
+	if (err.length > 0) {
 		showWarning("normal", "Please answer all questions...")
-	}else{
+	} else {
+
+		let ans;
+
+		if (sessionStorage.getItem("ans") === null) {
+			ans = [];
+		} else {
+			cans = JSON.parse(sessionStorage.getItem("ans"));
+		}
+
+		ans.push(answers);
+		sessionStorage.setItem("ans", JSON.stringify(ans))
+
 		document.getElementById("qustions-form").submit();
 	}
-	
+
 })
 
