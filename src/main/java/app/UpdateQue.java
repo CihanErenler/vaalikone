@@ -63,7 +63,7 @@ public class UpdateQue extends HttpServlet {
 			q.setQuestion(text);
 			q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
 
-			Response addQuestion = dao.addQuestion(q);
+			Response addQuestion = dao.addQuestion(q, request.getSession());
 			int qid = addQuestion.readEntity(Question.class).getId();
 			
 			if (addQuestion.getStatus() == 200) {
@@ -75,7 +75,7 @@ public class UpdateQue extends HttpServlet {
 			q.setId(Integer.parseInt(id));
 			q.setQuestion(text);
 
-			if (dao.updateQuestion(q)) {
+			if (dao.updateQuestion(q, request.getSession())) {
 				response.sendRedirect("/jsp/admin-questions");
 			}
 		}

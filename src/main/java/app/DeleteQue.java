@@ -48,7 +48,7 @@ public class DeleteQue extends HttpServlet {
 
 		String id = request.getParameter("id");
 		q.setId(Integer.parseInt(id));
-		if (dao.deleteQuestion(q)) {
+		if (dao.deleteQuestion(q, request.getSession())) {
 			response.sendRedirect("/jsp/admin-questions");
 		}
 	}

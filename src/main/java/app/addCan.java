@@ -92,7 +92,7 @@ public class addCan extends HttpServlet {
 
 		Candidate c = new Candidate(about, age, city, fname, lname, political_party, profession, profile_pic, why_candidate);
 
-		if (dao.addCandidate(c)) {
+		if (dao.addCandidate(c, request.getSession())) {
 			response.sendRedirect("/jsp/candidate-question?ref=" + c.getRefNum());
 		}
 	}

@@ -46,7 +46,7 @@ public class DeleteCan extends HttpServlet {
 		Candidate c = new Candidate();
 		String id = request.getParameter("id");
 		c.setId(Integer.parseInt(id));
-		if(dao.deleteCandidate(c)) 
+		if(dao.deleteCandidate(c, request.getSession())) 
 		{
 			System.out.println("candidate deleted");
 		}

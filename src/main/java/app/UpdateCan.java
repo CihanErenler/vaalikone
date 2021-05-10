@@ -101,7 +101,7 @@ public class UpdateCan extends HttpServlet {
 		c.setAbout(about);
 		c.setProfilePic(profile_pic);
 
-		if (dao.updateCandidate(c)) {
+		if (dao.updateCandidate(c, request.getSession())) {
 			System.out.println("candidate details updated");
 			response.sendRedirect("/readallcandidatesadmin");
 		}

@@ -59,7 +59,7 @@ public class randomAnswers extends HttpServlet {
 				can.put("answer", a.getAnswer());			
 				can.put("pic", c.getProfilePic());
 				cans.add(can);
-				if(dao.updateCandidate(c)) {
+				if(dao.updateCandidate(c, request.getSession())) {
 				}
 			}			
 		} else {

@@ -75,7 +75,7 @@ public class UpdateAnswer extends HttpServlet {
 
 		c.setAnswers(answer);
 
-		dao.updateCandidate(c);
+		dao.updateCandidate(c, request.getSession());
 
 		response.sendRedirect("/readallcandidatesadmin");
 	}

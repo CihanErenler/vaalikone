@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
@@ -37,11 +38,11 @@ public class DaoC {
 	
 //	Candidate Start
 	
-	public boolean addCandidate(Candidate can) {
+	public boolean addCandidate(Candidate can, HttpSession session) {
 		String url = root+"/candidateservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 		
 		Response res = b.post(Entity.entity(can, MediaType.APPLICATION_JSON));
 		if (res.getStatus() == 200) {
@@ -50,11 +51,11 @@ public class DaoC {
 		return false;
 	}
 	
-	public boolean updateCandidate(Candidate can) {
+	public boolean updateCandidate(Candidate can, HttpSession session) {
 		String url = root+"/candidateservice/update";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 		
 		Response res = b.put(Entity.entity(can, MediaType.APPLICATION_JSON));
 		if (res.getStatus() == 200) {
@@ -63,12 +64,12 @@ public class DaoC {
 		return false;
 	}
 	
-	public boolean deleteCandidate(Candidate c) 
+	public boolean deleteCandidate(Candidate c, HttpSession session) 
 	{
 		String url = root+"/candidateservice/delete";
 		Client cl = ClientBuilder.newClient();
 		WebTarget wt = cl.target(url).path(String.valueOf(c.getId()));
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 		Response res = b.delete();
 
 		if (res.getStatus() == 200) 
@@ -113,11 +114,11 @@ public class DaoC {
 	
 	// Question Start
 	
-	public boolean updateQuestion(Question q) {
+	public boolean updateQuestion(Question q, HttpSession session) {
 		String url = root+"/questionservice/update";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 
 		Response res = b.put(Entity.entity(q, MediaType.APPLICATION_JSON));
 		if (res.getStatus() == 200) {
@@ -127,20 +128,20 @@ public class DaoC {
 		}
 	}
 	
-	public Response addQuestion(Question q) {
+	public Response addQuestion(Question q, HttpSession session) {
 		String url = root+"/questionservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 		Entity e = Entity.entity(q, MediaType.APPLICATION_JSON);
 		return b.post(e);
 	}
 	
-	public boolean deleteQuestion(Question q) {
+	public boolean deleteQuestion(Question q, HttpSession session) {
 		String url = root+"/questionservice/delete";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url).path(String.valueOf(q.getId()));
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 		Response res = b.delete();
 
 		if (res.getStatus() == 200) {
@@ -201,11 +202,11 @@ public class DaoC {
 //	Auth end
 	
 //	Answer Start
-	public boolean addAnswer(Answer a) {
+	public boolean addAnswer(Answer a, HttpSession session) {
 		String url = root+"/answerservice/add";
 		Client c = ClientBuilder.newClient();
 		WebTarget wt = c.target(url);
-		Builder b = wt.request();
+		Builder b = wt.request().cookie("JSESSIONID", session.getId());
 		
 		Response res = b.post(Entity.entity(a, MediaType.APPLICATION_JSON));
 		if (res.getStatus() == 200) {
