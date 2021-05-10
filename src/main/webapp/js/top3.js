@@ -1,5 +1,6 @@
 const circle = document.querySelectorAll(".circle");
 const wrap = document.querySelectorAll(".top-wrap");
+const takeAgain = document.querySelector(".take-again");
 
 getAllData()
 .then(res => console.log(res))
@@ -94,5 +95,9 @@ function getAllData() {
 		reject("something went wrong")
 	})
 }
+
+takeAgain.addEventListener("click", () => {
+	sessionStorage.clear();
+})
 
 

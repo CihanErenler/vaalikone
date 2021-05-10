@@ -73,7 +73,7 @@
         </div>
         <div class="btn-container">
           <a href="/jsp/compare.jsp" class="btn">Compare Answers</a>
-          <a href="/voterQuestions" class="btn">Retake Test</a>
+          <a href="/voterQuestions" class="btn take-again">Retake Test</a>
         </div>
         <!-- <a href="" class="see-compare">Compare Answers</a> -->
       </div>
