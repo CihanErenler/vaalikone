@@ -1,6 +1,7 @@
 package app;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
-import dao.Dao;
-import data.Question;
+import dao.DaoC;
+
+import javax.ws.rs.client.Invocation.Builder;
+
+import model.Question;
 
 /**
  * Servlet implementation class ReadToUpdateQue
+ * Displays question for the admin, possible edition
  */
 @WebServlet("/jsp/ReadToUpdateQue")
 public class ReadToUpdateQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DaoC dao;
 	
-	private Dao dao;
 	public void init() {
-		dao=new Dao();
+		dao = new DaoC();
 	}
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,14 +53,13 @@ public class ReadToUpdateQue extends HttpServlet {
 		}
 		else {
 			Question q= null;
-			if (dao.getConnection()) {
-				q=dao.getQuestions(id);
-			}
+			q=dao.readQuestion(Integer.parseInt(id));
+			
 			request.setAttribute("question", q);
 			
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/add-question.jsp");
 			rd.forward(request, response);
-		}
-		
+		}	
 	}
+	
 }

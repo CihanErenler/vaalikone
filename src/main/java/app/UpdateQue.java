@@ -22,107 +22,64 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import dao.Dao;
+
+import dao.DaoC;
 import model.Question;
 
+/**
+ * 
+ * Servlet allowing logged in admin to change a question text or add a new
+ * question
+ *
+ */
 @WebServlet("/jsp/updateque")
 public class UpdateQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DaoC dao;
 
 	public UpdateQue() {
 		super();
 
 	}
 
+	@Override
+	public void init() {
+		dao = new DaoC();
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
+		String id = request.getParameter("id");
+		String text = request.getParameter("question");
 
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
+		if (request.getParameter("addNew") != null) {
+			Question q = new Question();
+			q.setQuestion(text);
+			q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
 
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
+			Response addQuestion = dao.addQuestion(q, request.getSession());
+			int qid = addQuestion.readEntity(Question.class).getId();
+			
+			if (addQuestion.getStatus() == 200) {
+				response.sendRedirect("/randomAnswers?qid=" + qid);
+				return;
 			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
 		} else {
-			String id = request.getParameter("id");
-			String text = request.getParameter("question");
+			Question q = new Question();
+			q.setId(Integer.parseInt(id));
+			q.setQuestion(text);
 
-			if (request.getParameter("addNew") != null) {
-				Question q = new Question();
-				q.setQuestion(text);
-				q.setQuestionRef(String.valueOf(new Timestamp(System.currentTimeMillis()).getTime()));
-				
-				if (addQuestion(q)) {
-					String qid = q.getQuestionRef();
-					response.sendRedirect("/randomAnswers?qid="+qid);
-				}
-			} else {
-				Question q = new Question();
-				q.setId(Integer.parseInt(id));
-				q.setQuestion(text);
-
-				if (updateQuestion(q)) {
-					response.sendRedirect("/jsp/admin-questions");
-				}
+			if (dao.updateQuestion(q, request.getSession())) {
+				response.sendRedirect("/jsp/admin-questions");
 			}
 		}
 
 	}
 
-	private boolean updateQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/update";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url);
-		Builder b = wt.request();
-
-		Response res = b.put(Entity.entity(q, MediaType.APPLICATION_JSON));
-		if (res.getStatus() == 200) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	private boolean addQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/add";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url);
-		Builder b = wt.request();
-		Entity e = Entity.entity(q, MediaType.APPLICATION_JSON);
-		Response res = b.post(e);
-		
-		if (res.getStatus() == 200) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 }

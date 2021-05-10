@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="data.Candidate"%>
+<%@ page import="model.Candidate"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-<%@ include file="../jsp/session.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +40,7 @@
 					<div class="can-card">
 						<a href="/ShowProfile?id=${candidate.getId()}">
 							<div class="img-wrap">
-								<img src="${candidate.getProfilePic()}" alt="candidate" />
+								<img src="/img/${candidate.getProfilePic()}" alt="candidate" />
 							</div>
 						</a>
 						<div class="can-content">

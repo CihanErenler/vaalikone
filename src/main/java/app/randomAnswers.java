@@ -2,6 +2,9 @@ package app;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +13,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Dao;
-import data.Question;
-import data.Answer;
-import data.Candidate;
-import data.RandomAnswer;
+import dao.DaoC;
+import model.Answer;
+import model.Candidate;
+import model.Question;
 
+/**
+ * 
+ * Adding random answers to newly created question for existing candidates
+ *
+ */
 @WebServlet("/randomAnswers")
 public class randomAnswers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Dao dao = null;
+	private DaoC dao = null;
 
 	@Override
 	public void init() {
-		dao = new Dao();
+		dao = new DaoC();
 	}
 
 	public randomAnswers() {
@@ -34,31 +41,44 @@ public class randomAnswers extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("qid");
-		System.out.println("id is=" + id);
-		ArrayList<Candidate> candidates = new ArrayList<>();
-		ArrayList<RandomAnswer> randoms = new ArrayList<>();
-		ArrayList<Answer> answers = new ArrayList<>();
+		int id =Integer.parseInt(request.getParameter("qid"));
+		Question q = dao.readQuestion(id);
+		ArrayList<Candidate> candidates = dao.readAllCandidate();
+		List<Answer> answers = dao.readQuestionAnswers(id);
+		ArrayList<HashMap<String,String>> cans = new ArrayList<HashMap<String,String>>();
 
-		Question q = null;
-
-		if (dao.getConnection()) {
-			if (!dao.checkQuestion(id)) {
-				q = dao.getQuestions(id);
-				candidates = dao.readAllCandidate();
-				randoms = assignAnswers(candidates, id);
-				dao.addAnswersForNewQuestion(randoms);
-			} else {
-				q = dao.getQuestions(id);
-				candidates = dao.readAllCandidate();
-				answers = dao.getAnsersByQuestionId(id);
-				randoms = assignAnswersElse(candidates, answers, id);
-			}
-
+//		if the newly added question does not have any answers
+		if (answers.size() == 0) {
+			for (Candidate c : candidates) {
+				HashMap<String,String> can = new HashMap<String, String>();
+				Answer a = new Answer();
+				a.setQuestion(q);
+				a.setAnswer(randomAnswer());
+				c.addAnswer(a);
+				
+				can.put("answer", a.getAnswer());			
+				can.put("pic", c.getProfilePic());
+				cans.add(can);
+				if(dao.updateCandidate(c, request.getSession())) {
+				}
+			}			
+		} else {
+			for (Candidate c : candidates) {
+				HashMap<String,String> can = new HashMap<String, String>();
+				
+				for (Answer a : c.getAnswers()) {
+					if(a.getQuestion().getId() == id) {
+						can.put("answer", a.getAnswer());			
+						break;
+					}
+				}
+				
+				can.put("pic", c.getProfilePic());
+				cans.add(can);
+			}		
 		}
-
 		request.setAttribute("question", q);
-		request.setAttribute("cans", randoms);
+		request.setAttribute("cans", cans);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/askToCandidates.jsp");
 		rd.forward(request, response);
 	}
@@ -69,27 +89,9 @@ public class randomAnswers extends HttpServlet {
 		doGet(request, response);
 	}
 
-	protected ArrayList<RandomAnswer> assignAnswers(ArrayList<Candidate> c, String qid) {
-		ArrayList<RandomAnswer> answers = new ArrayList<>();
-
-		for (Candidate can : c) {
-			String randomAnswer = String.valueOf((int) Math.floor(Math.random() * 5 + 1));
-			answers.add(new RandomAnswer(can.getId(), qid, randomAnswer, can.getProfile_pic()));
-		}
-
-		return answers;
-	}
-
-	protected ArrayList<RandomAnswer> assignAnswersElse(ArrayList<Candidate> c, ArrayList<Answer> a, String qid) {
-		ArrayList<RandomAnswer> answers = new ArrayList<>();
-
-		for (int i = 0; i < c.size(); i++) {
-			String randomAnswer = a.get(i).getAnswer();
-			answers.add(new RandomAnswer(c.get(i).getId(), qid, randomAnswer, c.get(i).getProfile_pic()));
-
-		}
-
-		return answers;
+	private static String randomAnswer() {
+		String randomAnswer = String.valueOf((int) Math.floor(Math.random() * 5 + 1));
+		return randomAnswer;
 	}
 
 }

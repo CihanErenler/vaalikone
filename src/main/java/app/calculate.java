@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,21 +14,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Dao;
-import data.Answer;
-import data.Candidate;
-import data.Question;
+import dao.DaoC;
+import model.Answer;
+import model.Candidate;
+import model.Question;
 
+/**
+ * 
+ * Servlet responsible for calculating a match between voters and candidates answers
+ * Sends result to top 3 page which displays result to a voter
+ */
 @WebServlet("/calculate")
 public class calculate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Dao dao = null;
+	private DaoC dao = null;
 
 	@Override
 	// connection
 	public void init() {
-		dao = new Dao();
+		dao = new DaoC();
 	}
 
 	public calculate() {
@@ -43,117 +50,75 @@ public class calculate extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Users answers collected from the js (questions.js) seprated by a % sign
-		String[] str = new String[request.getParameter("answersArr").length()];
 		// splits the answers using the % sign and creates an array storing them
-		str = request.getParameter("answersArr").split("%");
-
-		// declaring arrays
+		String[] voterAnswers = request.getParameter("answersArr").split("%");
+		for(int i = 0; i < voterAnswers.length; i++) {
+			System.out.println(voterAnswers+"index : "+i);
+		}
 
 		// array storing all candidates as objects (it has all the candidates info
 		// including picture, collection of answers etc
-		ArrayList<Candidate> c = new ArrayList<>();
+		ArrayList<Candidate> candidates = dao.readAllCandidate();
 
-		// arraylist of arraylists storing answer objects per each candidate
-		ArrayList<ArrayList<Answer>> list = new ArrayList<>();
-
-		// array list storing candidate id, calculated percent, candidate picture,
-		// first/last name, party name
-		ArrayList<Answer> candi = new ArrayList<>();
-
-		if (dao.getConnection()) {
-			// adds candidate objects into a c array
-			for (Candidate i : dao.readAllCandidate()) {
-				c.add(dao.getCandidate(i.getId()));
-			}
-		}
-
-		// passing parameters: candidate array and the voter answer into the getPer
-		// method to get the % match
-		list = getPer(c, str);
-
-		// iterating through a "list" arraylist (as many times as there's candidates)
-		for (int i = 0; i < list.size(); i++) {
-			// for each candidate we store in "nums" array list the % value of match with
-			// voter's aswers for each question
-			ArrayList<Integer> nums = new ArrayList<>();
-
-			// itering through "list" array for each arraylist item contained within
-			// [a = [[123] [123]] - 3 times (for each candidate we iterate as many times as
-			// there are answers)
-			for (int j = 0; j < list.get(i).size(); j++) {
-				// for each candidate we store % value of match
-				nums.add(Integer.parseInt(list.get(i).get(j).getAnswer()));
-			}
-			
-			String can_id = list.get(i).get(1).getCan_id();
-			String que_id = list.get(i).get(1).getQuestion_id();
-			String img = list.get(i).get(1).getImg();
-			String party = list.get(i).get(1).getParty();
-			String fname = list.get(i).get(1).getFname();
-			String lname = list.get(i).get(1).getLname();
-			String answer = String.valueOf(getResult(nums));
-			// to each candidate we ad an answer object with candidate id and final average
-			// of a % match with a voter
-			candi.add(new Answer(can_id, que_id, answer, img, party, fname, lname ));
-		}
-
-	
+		ArrayList<HashMap<String, Integer>> forSorting = new ArrayList<HashMap<String,Integer>>();
+		ArrayList<Question> questions = dao.readAllQuestion();
+		ArrayList<Integer> qIds = new ArrayList<Integer>();
+		questions.forEach((q) -> qIds.add(q.getId()));
 		
-		/*
-		 * for (Answer x : customSort(candi)) { System.out.println("Name : " +
-		 * x.getFname() + " " + x.getLname() + " / " + "Percentage : " + x.getAnswer() +
-		 * "%"); }
-		 */
-		request.setAttribute("top", customSort(candi).subList(0, 3));
+		for (Candidate c : candidates) {
+			HashMap<String, Integer> answerComparison = new HashMap<String, Integer>();
+			List<Answer> answers = c.getAnswers();
+			ArrayList<Integer> percentage = new ArrayList<Integer>();
+			for (int i=0; i<qIds.size(); i++) {
+				for (Answer a:answers) {
+					if(a.getQuestion().getId() == qIds.get(i)) {
+						percentage.add(calculatePer(a.getAnswer(), String.valueOf(voterAnswers[i])));
+						break;
+					}
+				}
+				i++;
+			}
+			answerComparison.put("candidateId", c.getId());
+			answerComparison.put("answerPercentage", getResult(percentage));
+			forSorting.add(answerComparison);
+		}
+		
+		
+		List<HashMap<String, Integer>> sortingTop3 = customSort(forSorting).subList(0, 3);
+		ArrayList<Candidate> top3 = new ArrayList<Candidate>();
+		ArrayList<String> top3Percentages = new ArrayList<String>();
+
+		for (HashMap<String, Integer> t:sortingTop3) {
+			top3.add(dao.readCandidate(String.valueOf(t.get("candidateId"))));
+			top3Percentages.add(String.valueOf(t.get("answerPercentage")));
+		}
+		
+//		Top3 Candidate Answers, passed for the voter candidate answer comparison
+		String[] ans = new String[top3.size()];
+		int j = 0;
+		for (Candidate c:top3) {
+			for (int i=0; i<qIds.size(); i++) {
+				for (Answer a:c.getAnswers()) {
+					if (a.getQuestion().getId() == qIds.get(i)) {
+						if(i!=0) {						
+							ans[j] += a.getAnswer()+"%";
+						} else {							
+							ans[j] = a.getAnswer()+"%";
+						}
+						break;
+					}
+				}
+			}
+			j++;
+		}
+		
+		request.setAttribute("list", ans);
+		request.setAttribute("top", top3);
+		request.setAttribute("per", top3Percentages);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/top-3.jsp");
 		rd.forward(request, response);
 	}
-
-	// function returns an array of arrays that stores list of answers per each
-	// candidate
-	// returns a % value of a match between voter's answer and each candidate's
-	// answer
-
-	// in the function we are passing an arraylist of candidate objects which
-	// include all the candidate's answers
-	// and 2nd parameter is an array of the voter answers
-	protected ArrayList<ArrayList<Answer>> getPer(ArrayList<Candidate> x, String[] y) {
-		
-		// declaring a new array of arrays of answer objects
-		ArrayList<ArrayList<Answer>> list = new ArrayList<>();
-		int count = 0;
-		
-		// looping as many times as there is registered candidates
-		// per array stores calculated % for each answer of each candidate
-		for (int i = 0; i < x.size(); i++) {
-			ArrayList<Answer> per = new ArrayList<>();
-			
-			// looping through the amount of answers per each candidate
-			// in short we are looping as many times as there are questions
-			for (int j = 0; j < x.get(i).getAnswers().size(); j++) {
-				
-				//creating a new answer object per each iteration and adding it to the "per" arraylist
-				// Answer object parameters: candidate id, question id and a % of a match between one specific answer
-				// and voter answer
-				String can_id = x.get(i).getAnswers().get(j).getCan_id();
-				String que_id = x.get(i).getAnswers().get(j).getQuestion_id();
-				String percent = String.valueOf(calculatePer(x.get(i).getAnswers().get(j).getAnswer(), y[j]));
-				String img = x.get(i).getProfile_pic();
-				String party = x.get(i).getPolitical_party();
-				String fname = x.get(i).getFname();
-				String lname = x.get(i).getLname();
-				
-				per.add(new Answer(can_id, que_id, percent, img, party, fname, lname));
-
-			}
-			// arraylist of arraylists storing answer objects per each candidate
-			// for each candidate we are creating a "per" array list and then store all of them for all candidates
-			// in the "list" arraylist
-			list.add(per);
-		}
-		return list;
-	}
-
+	
 	// method that calculates the average of a percent values of a match
 	protected int getResult(ArrayList<Integer> x) {
 		int sum = 0;
@@ -193,13 +158,13 @@ public class calculate extends HttpServlet {
 	}
 	
 	// sorting the percentage average values in order
-	public ArrayList<Answer> customSort(ArrayList<Answer> a) {
+	public ArrayList<HashMap<String, Integer>> customSort(ArrayList<HashMap<String, Integer>> a) {
 		boolean sorted = false;
-		Answer temp;
+		HashMap<String, Integer> temp;
 		while (!sorted) {
 			sorted = true;
 			for (int i = 0; i < a.size() - 1; i++) {
-				if (Integer.parseInt(a.get(i).getAnswer()) < Integer.parseInt(a.get(i + 1).getAnswer())) {
+				if (a.get(i).get("answerPercentage") < a.get(i + 1).get("answerPercentage")) {
 					temp = a.get(i);
 					a.set(i, a.get(i + 1));
 					a.set(i + 1, temp);

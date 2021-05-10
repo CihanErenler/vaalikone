@@ -15,14 +15,17 @@ import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import dao.DaoC;
 import model.Question;
 
 /**
  * Servlet implementation class DeleteQue
+ * Responsible for deleting question
  */
 @WebServlet("/DeleteQue")
 public class DeleteQue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DaoC dao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -31,49 +34,22 @@ public class DeleteQue extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public void init() {
+		dao = new DaoC();
+	}
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Question q = new Question();
 
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
-		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
-
-		else {
-			String id = request.getParameter("id");
-			q.setId(Integer.parseInt(id));
-			if (deleteQuestion(q)) {
-				response.sendRedirect("/jsp/admin-questions");
-			}
-		}
-	}
-
-	private boolean deleteQuestion(Question q) {
-		String url = "http://localhost:8080/rest/questionservice/delete";
-		Client c = ClientBuilder.newClient();
-		WebTarget wt = c.target(url).path(String.valueOf(q.getId()));
-		System.out.println("Out thingy" + wt);
-		Builder b = wt.request();
-		Response res = b.delete();
-
-		if (res.getStatus() == 200) {
-			return true;
-		} else {
-			return false;
+		String id = request.getParameter("id");
+		q.setId(Integer.parseInt(id));
+		if (dao.deleteQuestion(q, request.getSession())) {
+			response.sendRedirect("/jsp/admin-questions");
 		}
 	}
 }

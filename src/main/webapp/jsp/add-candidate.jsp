@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../jsp/session.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +15,7 @@
     <%@ include file="/jsp/dynamic-nav.jsp" %>
     <div class="add-can container flex-container">
       <div class="card">
-        <a href="admin-candidate" class="btn btn-back">
+        <a href="#" class="btn btn-back">
           <i class="fas fa-chevron-left"></i>
           Back</a>
         <h1 class="title">Add Candidate</h1>
@@ -41,6 +40,6 @@
     </div>
 
     <script src="/js/add-candidate.js"></script>
-<!--     <script src="/js/goBack.js"></script> -->
+ <script src="/js/goBack.js"></script>
   </body>
 </html>

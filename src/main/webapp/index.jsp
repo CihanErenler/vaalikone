@@ -23,5 +23,9 @@
 			</div>
 		</div>
 	</header>
+	
+	<script type="text/javascript">
+		sessionStorage.clear();
+	</script>
 </body>
 </html>

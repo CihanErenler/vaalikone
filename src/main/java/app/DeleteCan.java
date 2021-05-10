@@ -16,15 +16,24 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Response;
 
+import dao.DaoC;
 import model.Candidate;
 
 /**
  * Servlet implementation class DeleteCan
+ * Responsible for deleting candidate
  */
 @WebServlet("/deleteCan")
 public class DeleteCan extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	DaoC dao;
+	
+	@Override
+	public void init() {
+		dao = new DaoC();
+	}
 
 	public DeleteCan() 
 	{
@@ -35,51 +44,13 @@ public class DeleteCan extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Candidate c = new Candidate();
-		
-		HttpSession session = request.getSession(false);
-
-		boolean isLoggedIn = false;
-		if (session == null) {
-		} else {
-			if (session.getAttribute("isLoggedIn") == null) {
-
-			} else {
-				isLoggedIn = (boolean) session.getAttribute("isLoggedIn");
-			}
+		String id = request.getParameter("id");
+		c.setId(Integer.parseInt(id));
+		if(dao.deleteCandidate(c, request.getSession())) 
+		{
+			System.out.println("candidate deleted");
 		}
-
-		if (!isLoggedIn) {
-			response.sendRedirect("/index.jsp");
-		}
-
-		else {
-			String id = request.getParameter("id");
-			c.setId(Integer.parseInt(id));
-			if(deleteCandidate(c)) 
-			{
-				response.sendRedirect("/readallcandidates");
-			}
-		}
+		response.sendRedirect("/readallcandidatesadmin");
 	}
 	
-	private boolean deleteCandidate(Candidate c) 
-	{
-		String url = "http://localhost:8080/rest/candidateservice/delete";
-		Client cl = ClientBuilder.newClient();
-		WebTarget wt = cl.target(url).path(String.valueOf(c.getId()));
-		Builder b = wt.request();
-		Response res = b.delete();
-
-		if (res.getStatus() == 200) 
-		{
-			return true;
-		} else 
-		{
-			return false;
-		}
-	}
-	
-	
-	
-
 }
