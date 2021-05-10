@@ -94,3 +94,5 @@ function getAllData() {
 		reject("something went wrong")
 	})
 }
+
+

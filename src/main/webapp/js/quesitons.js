@@ -386,7 +386,7 @@ smallSubmit.addEventListener("click", function(){handleSmallSubmit(answers)})
 
 function handleSmallSubmit(answers){
 	
-	smallQ[VALUE].classList.add("btn-disabled")
+	const getName = document.getElementsByName("score");
 	
 	for (let i = 0; i < getName.length; i++) {
 		if (getName[i].checked) {
