@@ -376,7 +376,9 @@ submit.addEventListener("click", (e) => {
 })
 
 
-smallSubmit.addEventListener("click", () => {
+smallSubmit.addEventListener("click", function(){handleSmallSubmit(answers)})
+
+function handleSmallSubmit(answers){
 	const err = [];
 
 	smallQ.forEach(i => {
@@ -403,5 +405,5 @@ smallSubmit.addEventListener("click", () => {
 		document.getElementById("qustions-form").submit();
 	}
 
-})
+}
 
