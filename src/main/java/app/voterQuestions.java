@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Dao;
-import data.Question;
-import data.Candidate;
+import dao.DaoC;
+import model.Question;
+import model.Candidate;
 
 /**
  * 
@@ -23,11 +23,11 @@ import data.Candidate;
 public class voterQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Dao dao = null;
+	private DaoC dao = null;
 
 	@Override
 	public void init() {
-		dao = new Dao();
+		dao = new DaoC();
 	}
 
 	public voterQuestions() {
@@ -39,9 +39,9 @@ public class voterQuestions extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<Question> q = new ArrayList<>();
 		
-		if(dao.getConnection()) {
-			q = dao.readAllQuestions();
-		}
+		
+		q = dao.readAllQuestion();
+		
 		
 		request.setAttribute("size", q.size());
 		request.setAttribute("questions", q);

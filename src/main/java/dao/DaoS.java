@@ -27,6 +27,7 @@ public class DaoS {
 
 //	Question Start
 	public Response addQuestion(Question q) {
+		em.clear();
 		em.getTransaction().begin();
 		em.persist(q);// The actual insertion line
 		em.getTransaction().commit();
@@ -38,6 +39,7 @@ public class DaoS {
 	}
 
 	public Response updateQuestion(Question q) {
+		em.clear();
 		Question que = em.find(Question.class, q.getId());
 		if (que != null) {
 			em.getTransaction().begin();
@@ -49,6 +51,7 @@ public class DaoS {
 	}
 
 	public Response deleteQuestion(int id) {
+		em.clear();
 		em.getTransaction().begin();
 		Question q = em.find(Question.class, id);
 		if (q != null) {
@@ -61,6 +64,7 @@ public class DaoS {
 	}
 
 	public Response readQuestion(int id) {
+		em.clear();
 		em.getTransaction().begin();
 		Question q = em.find(Question.class, id);
 		em.getTransaction().commit();
@@ -71,6 +75,7 @@ public class DaoS {
 	}
 	
 	public Response readQuestionByAnswerID(int id) {
+		em.clear();
 		em.getTransaction().begin();
 		Answer a = em.find(Answer.class, id);
 		Question q = em.find(Question.class, a.getQuestion().getId());
@@ -82,6 +87,7 @@ public class DaoS {
 	}
 
 	public Response readQuestionAnswers(int id) {
+		em.clear();
 		em.getTransaction().begin();
 		Question q = em.find(Question.class, id);
 		em.getTransaction().commit();
@@ -107,6 +113,7 @@ public class DaoS {
 //	Candidate Start
 	
 	public Response addCandidate(Candidate c) {
+		em.clear();
 		em.getTransaction().begin();
 		em.persist(c);// The actual insertion line
 		em.getTransaction().commit();
@@ -118,6 +125,7 @@ public class DaoS {
 	}
 	
 	public Response updateCandidate(Candidate c) {
+		em.clear();
 		Candidate can = em.find(Candidate.class, c.getId());
 		if (can != null) {
 			em.getTransaction().begin();
@@ -129,6 +137,7 @@ public class DaoS {
 	}
 
 	public Response deleteCandidate(int id) {
+		em.clear();
 		em.getTransaction().begin();
 		Candidate c = em.find(Candidate.class, id);
 		if (c != null) {
@@ -141,6 +150,7 @@ public class DaoS {
 	}
 
 	public Response readCandidate(int id) {
+		em.clear();
 		em.getTransaction().begin();
 		Candidate c = em.find(Candidate.class, id);
 		em.getTransaction().commit();
@@ -188,6 +198,7 @@ public class DaoS {
 	
 //	Answer start
 	public Response addAnswer(Answer a) {
+		em.clear();
 		em.getTransaction().begin();
 		em.persist(a);// The actual insertion line
 		em.getTransaction().commit();

@@ -15,7 +15,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.GenericType;
 
-import dao.Dao;
 import dao.DaoC;
 import model.Candidate;
 
