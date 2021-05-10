@@ -14,6 +14,11 @@ const label = document.querySelectorAll(".answer label");
 const smallQWrap = document.querySelector(".small-q-wrap");
 const smallSubmit = document.querySelector(".small-submit");
 
+if(JSON.parse(sessionStorage.getItem("list")) !== null){
+	sessionStorage.removeItem("list");
+	sessionStorage.removeItem("ans");
+}
+
 
 //get all the questions 
 const questions = [...wrapperContent.getAttribute("data-questions").split("%")];
