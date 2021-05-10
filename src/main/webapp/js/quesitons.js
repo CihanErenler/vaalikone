@@ -385,6 +385,15 @@ submit.addEventListener("click", (e) => {
 smallSubmit.addEventListener("click", function(){handleSmallSubmit(answers)})
 
 function handleSmallSubmit(answers){
+	
+	smallQ[VALUE].classList.add("btn-disabled")
+	
+	for (let i = 0; i < getName.length; i++) {
+		if (getName[i].checked) {
+			answers.splice(VALUE, 1, getName[i].value)
+		}
+	}
+	
 	const err = [];
 
 	smallQ.forEach(i => {
