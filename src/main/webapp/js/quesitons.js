@@ -396,7 +396,7 @@ function handleSmallSubmit(answers){
 		if (sessionStorage.getItem("ans") === null) {
 			ans = [];
 		} else {
-			cans = JSON.parse(sessionStorage.getItem("ans"));
+			ans = JSON.parse(sessionStorage.getItem("ans"));
 		}
 
 		ans.push(answers);
