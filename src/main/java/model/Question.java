@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -17,7 +18,8 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Question.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Question.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,8 +36,7 @@ public class Question implements Serializable {
 
 	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="question", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
-//	@JsonManagedReference(value="question-obj")
-	@JsonIgnore
+	@JsonIgnoreProperties("question")
 	private List<Answer> answers;
 
 	public Question() {

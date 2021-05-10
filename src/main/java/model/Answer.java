@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @NamedQuery(name="Answer.findAll", query="SELECT a FROM Answer a")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Answer.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Answer.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,13 +29,13 @@ public class Answer implements Serializable {
 
 	//bi-directional many-to-one association to Candidate
 	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JsonBackReference(value="candidate-obj")
 	@JoinColumn(name="can_id")
+	@JsonIgnoreProperties("answers")
 	private Candidate candidate;
 
 	//bi-directional many-to-one association to Question
 	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//	@JsonBackReference(value="question-obj")
+	@JsonIgnoreProperties("answers")
 	@JoinColumn(name="question_id")
 	private Question question;
 	

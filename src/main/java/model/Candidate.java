@@ -5,7 +5,10 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
 
@@ -16,6 +19,8 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Candidate.findAll", query="SELECT c FROM Candidate c")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Answer.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Candidate implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -52,7 +57,7 @@ public class Candidate implements Serializable {
 
 	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="candidate", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonManagedReference(value="candidate-obj")
+	@JsonIgnoreProperties("candidate")
 	private List<Answer> answers;
 
 	public Candidate() {
