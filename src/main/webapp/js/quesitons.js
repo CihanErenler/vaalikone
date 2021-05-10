@@ -121,6 +121,14 @@ function nextUpdate(e) {
 	smallQ[VALUE].classList.add("btn-disabled")
 
 	VALUE++;
+	
+	smallQ[VALUE].classList.add("btn-disabled")
+	
+	for (let i = 0; i < getName.length; i++) {
+		if (getName[i].checked) {
+			answers.splice(VALUE, 1, getName[i].value)
+		}
+	}
 
 	//after increasing value delete border class from previous one and then add it to the current one
 	updateBorder(smallQ);
@@ -215,8 +223,6 @@ function prevUpdate() {
 				prev.disabled = true;
 				prev.classList.add("btn-disabled")
 			}
-
-
 		}
 	}
 }
@@ -396,7 +402,7 @@ function handleSmallSubmit(answers){
 		if (sessionStorage.getItem("ans") === null) {
 			ans = [];
 		} else {
-			cans = JSON.parse(sessionStorage.getItem("ans"));
+			ans = JSON.parse(sessionStorage.getItem("ans"));
 		}
 
 		ans.push(answers);
