@@ -172,9 +172,16 @@ public class DaoS {
 
 	public Response readAllCandidate() {
 		List<Candidate> list = em.createQuery("select a from Candidate a").getResultList();
-
 		if (list == null) {
 			return Response.status(404).build();
+		}
+		for (Candidate c : list) {
+			if (c.getAnswers().isEmpty()) {
+				System.out.println("no answers:" + c.getFname());
+				list.remove(c);
+				deleteCandidate(c.getId());
+				break;
+			}
 		}
 		return Response.ok(list).build();
 	}
